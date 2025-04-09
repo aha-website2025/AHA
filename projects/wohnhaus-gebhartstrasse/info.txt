@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 Wohnhaus Gebhartstrasse
+=======
+Wohnhaus Gebhartstrasse
+>>>>>>> 77c798948e655e0a4adb28835c42fc7e64ae1e15
 Liebefeld, Switzerland

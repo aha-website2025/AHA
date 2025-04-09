@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 New Gourna
+=======
+New Gourna
+>>>>>>> 77c798948e655e0a4adb28835c42fc7e64ae1e15
 Luxor, Egypt

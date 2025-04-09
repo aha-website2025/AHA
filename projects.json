@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [
   {
     "title": "Genossenschaft Kalkbreite",
@@ -9,4 +10,17 @@
     "location": "Barcelona, Spain",
     "image": "https://junothecat.github.io/housing-catalogue/projects/la-borda/image.jpg"
   }
+=======
+[
+  {
+    "title": "Genossenschaft Kalkbreite",
+    "location": "Zurich, Switzerland",
+    "image": "projects/genossenschaft-kalkbreite/image.jpg"
+  },
+  {
+    "title": "La Borda",
+    "location": "Barcelona, Spain",
+    "image": "projects/la-borda/image.jpg"
+  }
+>>>>>>> 77c798948e655e0a4adb28835c42fc7e64ae1e15
 ]
