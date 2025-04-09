@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Affordable Housing Grid</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <a href="index.html">
+            <img src="Logo.png" alt="Affordable Housing Atlas Logo" class="logo">
+          </a>
+    </header>
+    <nav class="menu">
+        <div class="hamburger" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <ul class="menu-items" id="menuItems">
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="models.html">Models</a></li>
+          <li><a href="map.html">Map</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </nav>
+  <div class="housing-grid">
+    <!-- grid items will go here -->
+    <div id="grid-container" class="grid"></div>
+
+    <script src="renderGrid.js"></script>
+    
+  </div>
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menuItems");
+      const isVisible = menu.style.display === "block";
+      menu.style.display = isVisible ? "none" : "block";
+    }
+    const layout = [
+      "blank", "data", "data", "hatch", "blank",
+     "data", "data", "hatch", "data",  "data",
+      "blank", "data", "data", "data", "hatch",
+      "data", "hatch", "data", "data", "blank"
+  // add more rows in sets of 5
+];
+
+fetch("https://junothecat.github.io/housing-catalogue/projects.json")
+  .then(res => res.json())
+  .then(data => {
+    const container = document.getElementById("grid-container");
+    let dataIndex = 0;
+
+    layout.forEach(cell => {
+      const div = document.createElement("div");
+
+      if (cell === "data" && dataIndex < data.length) {
+        const item = data[dataIndex++];
+        div.classList.add("tile");
+        div.innerHTML = `
+          <img src="${item.image}" alt="${item.title}" />
+          <div class="info">
+            <h4>${item.title}</h4>
+            <p>${item.location}</p>
+          </div>
+        `;
+      } else {
+        div.classList.add("tile", cell);
+      }
+
+      container.appendChild(div);
+    });
+  });
+
+
+    
+  </script>
+
+</body>
+</html>

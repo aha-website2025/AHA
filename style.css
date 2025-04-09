@@ -1,0 +1,114 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #ebebe4;
+    font-family: sans-serif;
+  }
+  
+  .housing-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    padding: 40px;
+  }
+
+  .site-header {
+    padding: 20px;
+  }
+  
+  .logo {
+    height: 100px; /* adjust as needed */
+  }
+  .menu {
+    position: absolute;
+    top: 100px;
+    right: 40px;
+    z-index: 1000;
+  }
+  
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 16px;
+    cursor: pointer;
+  }
+  
+  .hamburger span {
+    display: block;
+    height: 2px;
+    background-color: #555;
+    border-radius: 1px;
+  }
+  
+  .menu-items {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 50px;
+    list-style: none;
+    padding: 0;
+    margin: 10;
+    background: none;
+    border: none;
+
+    transform: translateY(-90px);
+
+  }
+ 
+
+  
+  .menu-items li {
+    padding: 8px 0;
+    text-align: right;
+  }
+  
+  .menu-items li a {
+    text-decoration: none;
+    color: #111;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+  }
+  
+  .menu-items li a:hover {
+    color: #666;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin: 60px;
+  }
+  
+  .tile {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    background: #111;
+    color: white;
+    padding: 10px;
+    font-family: sans-serif;
+    text-align: center;
+  }
+  
+  .tile img {
+    height: 100px;
+  }
+  
+  
+  /* Placeholder styles */
+  .blank { background: transparent; }
+  .hatch {
+    background-image: repeating-linear-gradient(
+      45deg,
+      #aaa 0,
+      #aaa 1px,
+      transparent 1px,
+      transparent 5px
+    );
+  }
+  
