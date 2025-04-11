@@ -85,18 +85,30 @@ body {
   
   .tile {
     aspect-ratio: 1;
-  background: #111;
-  color: white;
-  padding: 10px;
-  font-family: sans-serif;
-  text-align: center;
-  position: relative;
-
-  /* Dashed border except on outer edges */
-  outline: 1px dashed #aaa;
-  outline-offset: -0.5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    background: #111;
+    color: white;
+    padding: 10px;
+    font-family: sans-serif;
+    text-align: center;
+    outline: 1px dashed #aaa;
+    outline-offset: -0.5px;
   }
   
+  /* Remove right border on every 5th tile */
+.tile:nth-child(5n) {
+  outline: none;
+  border-left: 1px dashed #aaa;
+}
+
+/* Remove bottom border for the last row if you know how many rows you have */
+.tile:last-child,
+.tile:nth-last-child(-n+5) {
+  outline: none;
+}
+
   .tile img {
     height: 100px;
   }
