@@ -77,42 +77,10 @@ body {
   }
 
   .grid {
-    position: relative;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 20px;
     margin: 60px auto;
-    max-width: 1200px;
-  }
-  
-  .grid::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    background-image:
-      repeating-linear-gradient(
-        to right,
-        transparent,
-        transparent calc(20% - 12px),
-        #aaa calc(20% - 12px),
-        #aaa calc(20% - 11px),
-        transparent calc(20% - 11px),
-        transparent 20%
-      ),
-      repeating-linear-gradient(
-        to bottom,
-        transparent,
-        transparent calc(20% - 12px),
-        #aaa calc(20% - 12px),
-        #aaa calc(20% - 11px),
-        transparent calc(20% - 11px),
-        transparent 20%
-      );
-    z-index: 1;
   }
   
   .tile {
