@@ -6,7 +6,7 @@ function toggleMenu() {
   
   const layout = [
     "blank", "data", "data", "hatch", "blank",
-    "data", "data", "hatch", "data", "data",
+    "data", "data", "hatch", "blank", "data",
     "blank", "data", "data", "data", "hatch",
     "data", "hatch", "data", "data", "blank"
   ];
