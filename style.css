@@ -76,11 +76,86 @@ body {
     color: #666;
   }
 
+  .grid-wrapper {
+    position: relative;
+    padding: 60px;
+  }
+  
   .grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-    margin: 60px auto;
+    gap: 24px;
+    position: relative;
+  }
+  
+  /* Vertical lines */
+  .grid-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 60px;
+    bottom: 60px;
+    left: 0;
+    right: 0;
+    background-image: 
+      linear-gradient(to right, 
+        transparent calc(20% - 12px), 
+        #aaa calc(20% - 12px), 
+        #aaa calc(20% - 11px),
+        transparent calc(20% - 11px),
+  
+        transparent calc(40% - 12px), 
+        #aaa calc(40% - 12px), 
+        #aaa calc(40% - 11px),
+        transparent calc(40% - 11px),
+  
+        transparent calc(60% - 12px), 
+        #aaa calc(60% - 12px), 
+        #aaa calc(60% - 11px),
+        transparent calc(60% - 11px),
+  
+        transparent calc(80% - 12px), 
+        #aaa calc(80% - 12px), 
+        #aaa calc(80% - 11px),
+        transparent calc(80% - 11px)
+      );
+    background-size: 100% 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  /* Horizontal lines */
+  .grid-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 60px;
+    bottom: 60px;
+    left: 0;
+    right: 0;
+    background-image: 
+      linear-gradient(to bottom, 
+        transparent calc(20% - 12px), 
+        #aaa calc(20% - 12px), 
+        #aaa calc(20% - 11px),
+        transparent calc(20% - 11px),
+  
+        transparent calc(40% - 12px), 
+        #aaa calc(40% - 12px), 
+        #aaa calc(40% - 11px),
+        transparent calc(40% - 11px),
+  
+        transparent calc(60% - 12px), 
+        #aaa calc(60% - 12px), 
+        #aaa calc(60% - 11px),
+        transparent calc(60% - 11px),
+  
+        transparent calc(80% - 12px), 
+        #aaa calc(80% - 12px), 
+        #aaa calc(80% - 11px),
+        transparent calc(80% - 11px)
+      );
+    background-size: 100% 100%;
+    pointer-events: none;
+    z-index: 1;
   }
   
   .tile {
