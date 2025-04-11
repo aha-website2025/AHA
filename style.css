@@ -85,16 +85,16 @@ body {
   
   .tile {
     aspect-ratio: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    background: #111;
-    color: white;
-    padding: 10px;
-    font-family: sans-serif;
-    text-align: center;
-    outline: 1px dashed #aaa;
-    outline-offset: -0.5px;
+  background: #111;
+  color: white;
+  padding: 10px;
+  font-family: sans-serif;
+  text-align: center;
+  position: relative;
+
+  /* Dashed border except on outer edges */
+  outline: 1px dashed #aaa;
+  outline-offset: -0.5px;
   }
   
   .tile img {
