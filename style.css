@@ -1,190 +1,270 @@
 body {
-    margin: 0;
-    padding: 0;
-    background-color: #ebebe4;
-    font-family: sans-serif;
-  }
-  
-  .housing-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-    padding: 40px;
-  }
+  margin: 0;
+  padding: 0;
+  background-color: #edede8;
+  font-family: sans-serif;
+}
 
-  .site-header {
-    padding: 20px;
-  }
-  
-  .logo {
-    height: 100px; /* adjust as needed */
-  }
-  .menu {
-    position: absolute;
-    top: 100px;
-    right: 40px;
-    z-index: 1000;
-  }
-  
-  .hamburger {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 16px;
-    cursor: pointer;
-  }
-  
-  .hamburger span {
-    display: block;
-    height: 2px;
-    background-color: #555;
-    border-radius: 1px;
-  }
-  
-  .menu-items {
-    display: none;
-    position: absolute;
-    top: 0;
-    right: 50px;
-    list-style: none;
-    padding: 0;
-    margin: 10;
-    background: none;
-    border: none;
+.site-header {
+  padding: 20px;
+}
 
-    transform: translateY(-90px);
+.logo {
+  height: 100px; /* adjust as needed */
+}
 
-  }
- 
+.menu {
+  position: absolute;
+  top: 100px;
+  right: 40px;
+  z-index: 1000;
+}
 
-  
-  .menu-items li {
-    padding: 8px 0;
-    text-align: right;
-  }
-  
-  .menu-items li a {
-    text-decoration: none;
-    color: #111;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 400;
-    font-size: 14px;
-  }
-  
-  .menu-items li a:hover {
-    color: #666;
-  }
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 16px;
+  cursor: pointer;
+}
 
-  .grid-wrapper {
-    position: relative;
-    padding: 60px;
-  }
-  
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 24px;
-    position: relative;
-  }
-  
-  /* Vertical lines */
-  .grid-wrapper::before {
-    content: "";
-    position: absolute;
-    top: 60px;
-    bottom: 60px;
-    left: 0;
-    right: 0;
-    background-image: 
-      linear-gradient(to right, 
-        transparent calc(20% - 12px), 
-        #aaa calc(20% - 12px), 
-        #aaa calc(20% - 11px),
-        transparent calc(20% - 11px),
-  
-        transparent calc(40% - 12px), 
-        #aaa calc(40% - 12px), 
-        #aaa calc(40% - 11px),
-        transparent calc(40% - 11px),
-  
-        transparent calc(60% - 12px), 
-        #aaa calc(60% - 12px), 
-        #aaa calc(60% - 11px),
-        transparent calc(60% - 11px),
-  
-        transparent calc(80% - 12px), 
-        #aaa calc(80% - 12px), 
-        #aaa calc(80% - 11px),
-        transparent calc(80% - 11px)
-      );
-    background-size: 100% 100%;
-    pointer-events: none;
-    z-index: 1;
-  }
-  
-  /* Horizontal lines */
-  .grid-wrapper::after {
-    content: "";
-    position: absolute;
-    top: 60px;
-    bottom: 60px;
-    left: 0;
-    right: 0;
-    background-image: 
-      linear-gradient(to bottom, 
-        transparent calc(20% - 12px), 
-        #aaa calc(20% - 12px), 
-        #aaa calc(20% - 11px),
-        transparent calc(20% - 11px),
-  
-        transparent calc(40% - 12px), 
-        #aaa calc(40% - 12px), 
-        #aaa calc(40% - 11px),
-        transparent calc(40% - 11px),
-  
-        transparent calc(60% - 12px), 
-        #aaa calc(60% - 12px), 
-        #aaa calc(60% - 11px),
-        transparent calc(60% - 11px),
-  
-        transparent calc(80% - 12px), 
-        #aaa calc(80% - 12px), 
-        #aaa calc(80% - 11px),
-        transparent calc(80% - 11px)
-      );
-    background-size: 100% 100%;
-    pointer-events: none;
-    z-index: 1;
-  }
-  
-  .tile {
-    aspect-ratio: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    background: #111;
-    color: white;
-    padding: 10px;
-    font-family: sans-serif;
-    text-align: center;
-    
-  }
-  
-  .tile img {
-    height: 100px;
-  }
-  
-  
-  /* Placeholder styles */
-  .blank { background: transparent; }
-  .hatch {
-    background-image: repeating-linear-gradient(
-      45deg,
-      #aaa 0,
-      #aaa 1px,
-      transparent 1px,
-      transparent 5px
+.hamburger span {
+  display: block;
+  height: 2px;
+  background-color: #555;
+  border-radius: 1px;
+}
+
+.menu-items {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 50px;
+  list-style: none;
+  padding: 0;
+  margin: 10;
+  background: none;
+  border: none;
+  transform: translateY(-90px);
+}
+
+.menu-items li {
+  padding: 8px 0;
+  text-align: right;
+}
+
+.menu-items li a {
+  text-decoration: none;
+  color: #111;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.menu-items li a:hover {
+  color: #666;
+}
+
+/* ========================
+   HOMEPAGE-SPECIFIC STYLES
+   ======================== */
+
+.home-page .housing-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  padding: 40px;
+}
+
+.home-page .grid-wrapper {
+  position: relative;
+  padding: 60px;
+}
+
+.home-page .grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+  position: relative;
+}
+
+/* Vertical lines */
+.home-page .grid-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 60px;
+  bottom: 60px;
+  left: 0;
+  right: 0;
+  background-image: 
+    linear-gradient(to right, 
+      transparent calc(20% - 12px), 
+      #aaa calc(20% - 12px), 
+      #aaa calc(20% - 11px),
+      transparent calc(20% - 11px),
+
+      transparent calc(40% - 12px), 
+      #aaa calc(40% - 12px), 
+      #aaa calc(40% - 11px),
+      transparent calc(40% - 11px),
+
+      transparent calc(60% - 12px), 
+      #aaa calc(60% - 12px), 
+      #aaa calc(60% - 11px),
+      transparent calc(60% - 11px),
+
+      transparent calc(80% - 12px), 
+      #aaa calc(80% - 12px), 
+      #aaa calc(80% - 11px),
+      transparent calc(80% - 11px)
     );
+  background-size: 100% 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Horizontal lines */
+.home-page .grid-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 60px;
+  bottom: 60px;
+  left: 0;
+  right: 0;
+  background-image: 
+    linear-gradient(to bottom, 
+      transparent calc(20% - 12px), 
+      #aaa calc(20% - 12px), 
+      #aaa calc(20% - 11px),
+      transparent calc(20% - 11px),
+
+      transparent calc(40% - 12px), 
+      #aaa calc(40% - 12px), 
+      #aaa calc(40% - 11px),
+      transparent calc(40% - 11px),
+
+      transparent calc(60% - 12px), 
+      #aaa calc(60% - 12px), 
+      #aaa calc(60% - 11px),
+      transparent calc(60% - 11px),
+
+      transparent calc(80% - 12px), 
+      #aaa calc(80% - 12px), 
+      #aaa calc(80% - 11px),
+      transparent calc(80% - 11px)
+    );
+  background-size: 100% 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.home-page .tile {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  background: #111;
+  color: white;
+  padding: 10px;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.home-page .tile img {
+  height: 100px;
+}
+
+/* Placeholder styles */
+.home-page .blank {
+  background: transparent;
+}
+
+.home-page .hatch {
+  background-image: repeating-linear-gradient(
+    45deg,
+    #aaa 0,
+    #aaa 1px,
+    transparent 1px,
+    transparent 5px
+  );
+}
+
+
+/* ============================
+   PROJECT PAGE-SPECIFIC STYLES
+   ============================ */
+
+   .project-page {
+    background-color: #f3f3ef;
+    color: #111;
+    font-family: sans-serif;
+    padding: 2rem;
+  }
+  
+  
+  .project-page .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 2fr;
+    gap: 1px;
+    background: #ccc;
+    align-items: stretch;
+  }
+  
+  .project-page .tile {
+    background-color: #111;
+    color: white;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  
+  .project-page .tile img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    margin-bottom: 0.5rem;
+  }
+  
+  .project-page .tile h2 {
+    margin: 0.5rem 0 0.25rem;
+    font-size: 1rem;
+  }
+  
+  .project-page .tile p {
+    margin: 0;
+    font-size: 0.85rem;
+  }
+  
+  .project-page .white-tile {
+    background-color: white;
+    color: #111;
+    padding: 1rem;
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  
+  .project-page .description {
+    grid-column: 4 / 5;
+    grid-row: 1 / span 3; /* span vertically */
+    background-color: white;
+    color: #111;
+    padding: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  
+  
+  .project-page .back {
+    margin-bottom: 2rem;
+  }
+  
+  .project-page .back a {
+    color: #111;
+    text-decoration: underline;
   }
   

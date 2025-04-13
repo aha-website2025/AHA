@@ -1,0 +1,78 @@
+async function loadProject() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const slug = urlParams.get("slug");
+  
+    const res = await fetch("projects.json");
+    const projects = await res.json();
+    const project = projects.find(p => p.slug === slug);
+  
+    if (!project) {
+      document.body.innerHTML = "<h1>Project not found</h1>";
+      return;
+    }
+  
+    const grid = document.getElementById("projectGrid");
+  
+    const tiles = [
+      {
+        class: "tile",
+        style: "grid-column: 1 / 2;",
+        html: `
+          <img src="${project.image}" alt="${project.title}" />
+          <h2>${project.title.toUpperCase()}</h2>
+          <p>${project.location}</p>
+        `
+      },
+      {
+        class: "tile",
+        style: "grid-column: 2 / 3;",
+        html: `<img src="projects/${slug}/1.jpg" alt="Photo 1" />`
+      },
+      {
+        class: "tile",
+        style: "grid-column: 3 / 4;",
+        html: `<img src="projects/${slug}/2.jpg" alt="Photo 2" />`
+      },
+      {
+        class: "description",
+        style: "", // handled in CSS: spans col 4 & rows
+        html: `<p>${project.description}</p>`
+      },
+      {
+        class: "tile",
+        style: "grid-column: 1 / 2;",
+        html: `<img src="projects/${slug}/3.jpg" alt="Photo 3" />`
+      },
+      {
+        class: "white-tile",
+        style: "grid-column: 2 / 3;",
+        html: `
+          <strong>Year completed:</strong> ${project.year_completed}<br>
+          <strong>Owner:</strong> ${project.owner}<br>
+          <strong>Architect:</strong> ${project.architect}<br>
+          <strong>Lot size:</strong> ${project.lot_size_sqft} sqft
+        `
+      },
+      {
+        class: "white-tile",
+        style: "grid-column: 3 / 4;",
+        html: `
+          <strong>Total floor space:</strong> ${project.floor_space_sqft} sqft<br>
+          <strong># of units:</strong> ${project.units}<br>
+          <strong>Unit distribution:</strong> ${project.unit_distribution}<br>
+          <strong># of inhabitants:</strong> ${project.inhabitants_per_unit} people/unit
+        `
+      }
+    ];
+  
+    tiles.forEach(tile => {
+      const div = document.createElement("div");
+      div.className = tile.class;
+      if (tile.style) div.style = tile.style;
+      div.innerHTML = tile.html;
+      grid.appendChild(div);
+    });
+  }
+  
+  window.onload = loadProject;
+  

@@ -1,12 +1,17 @@
 [
   {
-    "title": "Genossenschaft Kalkbreite",
-    "location": "Zurich, Switzerland",
-    "image": "https://junothecat.github.io/housing-catalogue/projects/genossenschaft-kalkbreite/image.jpg"
-  },
-  {
     "title": "La Borda",
     "location": "Barcelona, Spain",
-    "image": "https://junothecat.github.io/housing-catalogue/projects/la-borda/image.jpg"
+    "description": "La Borda is a cooperative housing project in Barcelona developed in response to the region's housing shortage. The cooperative is built on land owned by the City Council, granted for 75 years for state-subsidized housing. This arrangement allowed local residents to collaborate with architects from Lacol and other consultants to establish a 28-unit sustainable housing complex. The community prioritized three core principles in its development: economic and environmental sustainability, cooperation through community participation, and the advancement of communal living.",
+    "year_completed": "2018",
+    "owner": "The City Council of Barcelona",
+    "architect": "LACOL",
+    "lot_size_sqft": "7300",
+    "floor_space_sqft": "9842.52",
+    "units": "28",
+    "unit_distribution": "3 different sizes (131/164/249 sqft)",
+    "inhabitants_per_unit": "1-5",
+    "image": "https://junothecat.github.io/housing-catalogue/projects/la-borda/image.jpg",
+    "slug": "la-borda"
   }
 ]

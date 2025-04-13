@@ -24,12 +24,14 @@ function toggleMenu() {
           const item = data[dataIndex++];
           div.classList.add("tile");
           div.innerHTML = `
+          <a href="project.html?slug=${item.slug}" class="project-card">
             <img src="${item.image}" alt="${item.title}" />
             <div class="info">
               <h4>${item.title}</h4>
               <p>${item.location}</p>
             </div>
-          `;
+          </a>
+        `;
         } else {
           div.classList.add("tile", cell);
         }
