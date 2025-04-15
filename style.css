@@ -228,6 +228,25 @@ body {
     height: 480px; /* 230 x 2 */
   }
 
+  .project-page .tile.full-bleed.double {
+    height: 480px; /* for tall full-bleed tiles */
+  }
+
+  .project-page .tile.full-bleed {
+    padding: 0;
+    margin: 0;
+    height: 210px;
+    overflow: hidden;
+  }
+  
+  .project-page .tile.full-bleed img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
   .project-page .tile img {
     width: 100%;
     height: 210px;

@@ -29,8 +29,8 @@ async function loadProject() {
         html: ""
       },
       {
-        class: "tile",
-        style: "grid-column: 3 / 4;",
+        class: "tile full-bleed",
+        style: "grid-column: 3 / 4; grid-row: 1 / 2;",
         html: `<img src="projects/${slug}/1.jpg" alt="Photo 1" />`
       },
       {
@@ -39,8 +39,8 @@ async function loadProject() {
         html: `<img src="projects/${slug}/big1.jpg" alt="Photo 2" />`
       },
       {
-        class: "tile",
-        style: "grid-column: 1 / 2;",
+        class: "tile full-bleed",
+        style: "grid-column: 1 / 2; grid-row: 2 / 3;",
         html: `<img src="projects/${slug}/2.jpg" alt="Photo 3" />`
       },
       {
