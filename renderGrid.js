@@ -65,46 +65,36 @@ function handleSearch() {
   renderGrid(filtered);
 }
 
-// Load data and initialize grid
+// Load data and initialize grid + flip animation
 fetch("https://junothecat.github.io/housing-catalogue/projects.json")
   .then(res => res.json())
   .then(data => {
     allProjects = data;
     renderGrid(allProjects);
+    setTimeout(sequentialFlipProjects, 300); // 👈 trigger animation after render
   });
 
-  function sequentialFlipByRow() {
-    const tiles = Array.from(document.querySelectorAll(".tile"));
-    const gridCols = 5; // Set to your actual column count
-    const rowMap = new Map();
+  function sequentialFlipProjects() {
+    const allTiles = Array.from(document.querySelectorAll(".tile"));
+    const columns = 5;
   
-    // Group tiles by row
-    tiles.forEach((tile, i) => {
-      const row = Math.floor(i / gridCols);
-      if (!rowMap.has(row)) rowMap.set(row, []);
-      rowMap.get(row).push({ tile, index: i });
-    });
+    const rows = [];
+    for (let i = 0; i < allTiles.length; i += columns) {
+      rows.push(allTiles.slice(i, i + columns));
+    }
   
-    // Pick one tile per row to flip, stagger timing
-    Array.from(rowMap.entries()).forEach(([row, rowTiles], i) => {
-      // Pick a random tile in this row
-      const blackTiles = rowTiles.filter(obj =>
-        obj.tile.classList.contains("blank") ||
-        obj.tile.classList.contains("tile") &&
-        !obj.tile.querySelector("img") // no image = filler
+    rows.forEach((row, i) => {
+      const projectTile = row.find(tile =>
+        !tile.classList.contains("blank") &&
+        !tile.classList.contains("hatch")
       );
   
-      if (blackTiles.length > 0) {
-        const pick = blackTiles[Math.floor(Math.random() * blackTiles.length)].tile;
+      if (projectTile) {
         setTimeout(() => {
-          pick.classList.add("flip-in");
-        }, i * 400); // stagger delay
+          projectTile.classList.add("flip-in");
+        }, i * 400); // staggered delay per row
       }
     });
   }
   
-  // Call this after grid has been created
-  window.addEventListener("load", () => {
-    setTimeout(sequentialFlipByRow, 500); // short delay after render
-  });
   
