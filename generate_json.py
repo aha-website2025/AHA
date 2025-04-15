@@ -26,9 +26,9 @@ def read_project_data(project_path, folder_name):
     with open(info_path, 'r', encoding='utf-8') as f:
         for line in f:
             # New key:value pair
-            if ':' in line and not line.startswith(' '):
+            if ':' in line and not line.startswith(' ') and not line.strip().startswith('\t') and line.index(':') < 30:
                 if current_key and multiline_buffer:
-                    project_data[current_key] = '\n'.join(multiline_buffer).strip()
+                    project_data[current_key] = ''.join(multiline_buffer).strip('\n')
                     multiline_buffer = []
 
                 key, value = line.strip().split(':', 1)
@@ -40,11 +40,12 @@ def read_project_data(project_path, folder_name):
                     current_key = None
                 else:
                     current_key = key
+                    multiline_buffer = []
             elif current_key:
-                multiline_buffer.append(line.rstrip())
+                multiline_buffer.append(line)
 
     if current_key and multiline_buffer:
-        project_data[current_key] = '\n'.join(multiline_buffer).strip()
+        project_data[current_key] = ''.join(multiline_buffer).strip('\n')
 
     if 'title' not in project_data or 'location' not in project_data:
         return None
