@@ -284,6 +284,11 @@ pointer-events: none;
     font-size: 0.9rem;
     line-height: 1.6;
   }
+
+  .project-page .description p {
+    margin-bottom: 1em;
+    line-height: 1.6;
+  }
   
   
 .project-page .back {
