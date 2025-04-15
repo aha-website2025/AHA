@@ -74,12 +74,11 @@ body {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 10px;
-  padding: 40px;
+  padding: 80px 350px;
 }
 
 .home-page .grid-wrapper {
   position: relative;
-  max-width: 1400px;
   padding: 60px;
 }
 
@@ -136,8 +135,9 @@ pointer-events: none;
 .search-bar {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  margin: 1rem 240px 0; /* adjust to match grid padding */
+  margin: 40px auto 0; /* adjust to match grid padding */
 }
 
 .filter-btn {
