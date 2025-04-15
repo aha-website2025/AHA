@@ -218,6 +218,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     font-size: 0.9rem;
     text-align: center;
     height: 210px;
@@ -235,8 +236,11 @@ body {
   .project-page .tile.full-bleed {
     padding: 0;
     margin: 0;
-    height: 210px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
+    height: 210px;
   }
   
   .project-page .tile.full-bleed img {

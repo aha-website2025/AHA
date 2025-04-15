@@ -1,3 +1,24 @@
+function resizeImageToFitTile(img, tileWidth, tileHeight) {
+    const imgRatio = img.naturalWidth / img.naturalHeight;
+    const tileRatio = tileWidth / tileHeight;
+  
+    if (imgRatio > tileRatio) {
+      img.style.height = tileHeight + "px";
+      img.style.width = "auto";
+      img.style.marginLeft = `-${(img.offsetWidth - tileWidth) / 2}px`;
+      img.style.marginTop = "0";
+    } else {
+      img.style.width = tileWidth + "px";
+      img.style.height = "auto";
+      img.style.marginTop = `-${(img.offsetHeight - tileHeight) / 2}px`;
+      img.style.marginLeft = "0";
+    }
+  
+    img.style.position = "relative";
+    img.style.objectFit = "unset"; // ensures it doesn't interfere
+    img.style.display = "block";
+  }
+
 async function loadProject() {
     const urlParams = new URLSearchParams(window.location.search);
     const slug = urlParams.get("slug");
@@ -34,7 +55,7 @@ async function loadProject() {
         html: `<img src="projects/${slug}/1.jpg" alt="Photo 1" />`
       },
       {
-        class: "tile double",
+        class: "tile full-bleed double",
         style: "grid-column: 4 / 5; grid-row: 1 / span 2;",
         html: `<img src="projects/${slug}/big1.jpg" alt="Photo 2" />`
       },
@@ -91,6 +112,15 @@ async function loadProject() {
       if (tile.style) div.style = tile.style;
       div.innerHTML = tile.html;
       grid.appendChild(div);
+
+        // ✅ Resize image inside tile
+    const img = div.querySelector("img");
+    if (img) {
+      img.addEventListener("load", () => {
+        const tileRect = div.getBoundingClientRect();
+        resizeImageToFitTile(img, tileRect.width, tileRect.height);
+      });
+     }
     });
   }
   
