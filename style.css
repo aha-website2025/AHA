@@ -198,7 +198,6 @@ pointer-events: none;
     text-align: left;
     height: 210px;
     overflow: hidden; /* Avoid image overflow */
-    border: 1px solid #aaa;
   }
 
   .project-page .tile.title-tile {
@@ -220,6 +219,11 @@ pointer-events: none;
   text-align: center;
   line-height: 1.2;
   font-size: 0.85rem;
+}
+
+.project-page .tile.text-left,
+.project-page .tile.description {
+  box-shadow: inset 0 0 0 1px #ccc;
 }
 
 .project-page .tile.text-left {
