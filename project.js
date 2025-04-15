@@ -72,8 +72,8 @@ async function loadProject() {
       html: ""
     },
     {
-      class: "tile",
-      style: "grid-column: 1 / 2;",
+      class: "tile full-bleed",
+      style: "grid-column: 2 / 3; grid-row: 3",
       html: `<img src="projects/${slug}/3.jpg" alt="Photo 3" />`
     },
     {
@@ -84,8 +84,37 @@ async function loadProject() {
     {
       class: "description",
       style: "grid-column: 4 / 5; grid-row: 3 / span 2;",
-      html: `<p>${project.description}</p>`
+      html: `${project.description
+        .split(/\n\s*\n/)
+        .map(p => `<p>${p.trim()}</p>`)
+        .join("")}`
+    },
+    {
+      class: "tile full-bleed double",
+      style: "grid-column: 2 / 4; grid-row: 4 / span 2;",
+      html: `<img src="projects/${slug}/big2.jpg" alt="Photo 2" />`
+    },
+    {
+      class: "tile full-bleed",
+      style: "grid-column: 1 / 2; grid-row: 5",
+      html: `<img src="projects/${slug}/4.jpg" alt="Photo 4" />`
+    },
+    {
+      class: "tile full-bleed",
+      style: "grid-column: 4 / 5; grid-row: 5",
+      html: `<img src="projects/${slug}/5.jpg" alt="Photo 5" />`
+    },
+    {
+      class: "tile hatch",
+      style: "grid-column: 2 / 3; grid-row: 6",
+      html: ""
+    },
+    {
+      class: "tile full-bleed double",
+      style: "grid-column: 3 / 5; grid-row: 6 / span 2;",
+      html: `<img src="projects/${slug}/big3.jpg" alt="Photo 2" />`
     }
+
   ];
 
   // Render each tile
