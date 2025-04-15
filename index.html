@@ -11,6 +11,17 @@
             <img src="Logo.png" alt="Affordable Housing Atlas Logo" class="logo">
           </a>
     </header>
+
+    <div class="search-bar">
+      <button class="filter-btn">FILTER <span class="arrow">▼</span></button>
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search..."
+        oninput="handleSearch()"
+      />
+    </div>
+    
     <nav class="menu">
         <div class="hamburger" onclick="toggleMenu()">
           <span></span>

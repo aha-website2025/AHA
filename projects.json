@@ -1,5 +1,20 @@
 [
   {
+    "title": "Genossenschaft Kalkbreite",
+    "location": "Zurich, Switzerland",
+    "description": "",
+    "year_completed": "2014",
+    "owner": "City of Zurich",
+    "architect": "Muller Sigrist Architekten, Dr. Luchingerund Meyer",
+    "lot_size_sqft": "n/a",
+    "floor_space_sqft": "246,494 sqft",
+    "units": "97",
+    "number of inhabitants": "",
+    "density": "1 habitant per 540 sqft",
+    "image": "https://junothecat.github.io/housing-catalogue/projects/genossenschaft-kalkbreite/image.jpg",
+    "slug": "genossenschaft-kalkbreite"
+  },
+  {
     "title": "La Borda",
     "location": "Barcelona, Spain",
     "description": "La Borda is a cooperative housing project in Barcelona developed in response to the region's housing shortage. The cooperative is built on land owned by the City Council, granted for 75 years for state-subsidized housing. This arrangement allowed local residents to collaborate with architects from Lacol and other consultants to establish a 28-unit sustainable housing complex. The community prioritized three core principles in its development: economic and environmental sustainability, cooperation through community participation, and the advancement of communal living.",

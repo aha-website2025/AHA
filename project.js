@@ -1,3 +1,8 @@
+function toggleMenu() {
+  const menu = document.getElementById("menuItems");
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
 async function loadProject() {
   const urlParams = new URLSearchParams(window.location.search);
   const slug = urlParams.get("slug");
@@ -15,7 +20,7 @@ async function loadProject() {
 
   const tiles = [
     {
-      class: "tile",
+      class: "tile title-tile",
       style: "grid-column: 1 / 2;",
       html: `
         <img src="${project.image}" alt="${project.title}" />
@@ -44,24 +49,22 @@ async function loadProject() {
       html: `<img src="projects/${slug}/2.jpg" alt="Photo 3" />`
     },
     {
-      class: "tile",
+      class: "tile text-left",
       style: "grid-column: 2 / 3;",
       html: `
-        <strong>Year completed:</strong> ${project.year_completed}<br>
-        <strong>Owner:</strong> ${project.owner}<br>
-        <strong>Architect:</strong> ${project.architect}<br>
-        <strong>Lot size:</strong> ${project.lot_size_sqft} sqft
-      `
+          <p><strong>Year completed: </strong>${project.year_completed}</p>
+          <p><strong>Owner: </strong>${project.owner}</p>
+          <p><strong>Architect: </strong>${project.architect}</p>
+          <p><strong>Lot size: </strong>${project.lot_size_sqft} sqft</p>`
     },
     {
-      class: "tile",
+      class: "tile text-left",
       style: "grid-column: 3 / 4;",
       html: `
-        <strong>Total floor space:</strong> ${project.floor_space_sqft} sqft<br>
-        <strong># of units:</strong> ${project.units}<br>
-        <strong>Unit distribution:</strong> ${project.unit_distribution}<br>
-        <strong># of inhabitants:</strong> ${project.inhabitants_per_unit} people/unit
-      `
+        <p><strong>Total floor space: </strong>${project.floor_space_sqft} sqft</p>
+        <p><strong># of units: </strong>${project.units}</p>
+        <p><strong>Unit distribution: </strong>${project.unit_distribution}</p>
+        <p><strong># of inhabitants: </strong>${project.inhabitants_per_unit} people/unit</p>`
     },
     {
       class: "tile hatch",

@@ -182,13 +182,19 @@ body {
 
 .home-page .hatch {
   background-image: repeating-linear-gradient(
-    45deg,
-    #aaa 0,
-    #aaa 1px,
-    transparent 1px,
-    transparent 5px
-  );
+  45deg,
+  #aaa 0,
+  #aaa 1px,
+  transparent 1px,
+  transparent 5px
+);
+background-color: transparent;
+border: none;
+box-shadow: none;
+pointer-events: none;
 }
+
+
 
 
 /* ============================
@@ -220,20 +226,54 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 0.9rem;
-    text-align: center;
+    text-align: left;
     height: 210px;
     overflow: hidden; /* Avoid image overflow */
   }
+
+  .project-page .tile.title-tile {
+  text-align: center;
+  padding: 1rem 0.5rem;
+  font-size: 0.9rem;
+}
+
+.project-page .tile.title-tile h2 {
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.2;
+  margin: 0.5rem 0 0.25rem;
+}
+
+.project-page .tile.title-tile p {
+  margin: 0;
+  text-align: center;
+  line-height: 1.2;
+  font-size: 0.85rem;
+}
+
+.project-page .tile.text-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start; /* align content to left */
+  text-align: left;
+}
+
+.project-page .tile.text-left p {
+  margin: 0 0 0.4rem 0;
+  line-height: 2.0;
+}
   
-  .project-page .tile.double {
+.project-page .tile.double {
     height: 480px; /* 230 x 2 */
   }
 
-  .project-page .tile.full-bleed.double {
+.project-page .tile.full-bleed.double {
     height: 480px; /* for tall full-bleed tiles */
   }
 
-  .project-page .tile.full-bleed {
+.project-page .tile.full-bleed {
     padding: 0;
     margin: 0;
     display: flex;
@@ -243,7 +283,7 @@ body {
     height: 210px;
   }
   
-  .project-page .tile.full-bleed img {
+.project-page .tile.full-bleed img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -251,24 +291,24 @@ body {
     display: block;
   }
 
-  .project-page .tile img {
+.project-page .tile img {
     width: 100%;
     height: 210px;
     object-fit: cover;
     margin-bottom: 0.5rem;
   }
   
-  .project-page .tile h2 {
+.project-page .tile h2 {
     margin: 0.5rem 0 0.25rem;
     font-size: 1rem;
   }
   
-  .project-page .tile p {
+.project-page .tile p {
     margin: 0;
     font-size: 0.85rem;
   }
 
-  .project-page .description {
+.project-page .description {
     background-color: rgb(0, 0, 0);
     color: #ffffff;
     padding: 1rem;
@@ -277,23 +317,23 @@ body {
   }
   
   
-  .project-page .back {
+.project-page .back {
     margin-bottom: 2rem;
   }
   
-  .project-page .back a {
+.project-page .back a {
     color: #111;
     text-decoration: underline;
   }
   
-  .project-page .tile.blank {
+.project-page .tile.blank {
     background: transparent;
     border: none;
     box-shadow: none;
     pointer-events: none;
   }
 
-  .project-page .tile.hatch {
+.project-page .tile.hatch {
     background-image: repeating-linear-gradient(
       45deg,
       #aaa 0,
@@ -308,7 +348,7 @@ body {
   }
   
 
-  .image-popup-overlay {
+.image-popup-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -321,7 +361,7 @@ body {
     z-index: 9999;
   }
   
-  .image-popup {
+.image-popup {
     max-width: 90%;
     max-height: 90%;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
