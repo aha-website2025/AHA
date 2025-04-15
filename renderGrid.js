@@ -72,3 +72,39 @@ fetch("https://junothecat.github.io/housing-catalogue/projects.json")
     allProjects = data;
     renderGrid(allProjects);
   });
+
+  function sequentialFlipByRow() {
+    const tiles = Array.from(document.querySelectorAll(".tile"));
+    const gridCols = 5; // Set to your actual column count
+    const rowMap = new Map();
+  
+    // Group tiles by row
+    tiles.forEach((tile, i) => {
+      const row = Math.floor(i / gridCols);
+      if (!rowMap.has(row)) rowMap.set(row, []);
+      rowMap.get(row).push({ tile, index: i });
+    });
+  
+    // Pick one tile per row to flip, stagger timing
+    Array.from(rowMap.entries()).forEach(([row, rowTiles], i) => {
+      // Pick a random tile in this row
+      const blackTiles = rowTiles.filter(obj =>
+        obj.tile.classList.contains("blank") ||
+        obj.tile.classList.contains("tile") &&
+        !obj.tile.querySelector("img") // no image = filler
+      );
+  
+      if (blackTiles.length > 0) {
+        const pick = blackTiles[Math.floor(Math.random() * blackTiles.length)].tile;
+        setTimeout(() => {
+          pick.classList.add("flip-in");
+        }, i * 400); // stagger delay
+      }
+    });
+  }
+  
+  // Call this after grid has been created
+  window.addEventListener("load", () => {
+    setTimeout(sequentialFlipByRow, 500); // short delay after render
+  });
+  
