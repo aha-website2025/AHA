@@ -4,13 +4,7 @@ function toggleMenu() {
   menu.style.display = isVisible ? "none" : "block";
 }
 
-const layout = [
-  "blank", "data", "data", "hatch", "blank",
-  "data", "data", "hatch", "data", "data",
-  "blank", "data", "data", "data", "hatch",
-  "data", "hatch", "data", "data", "blank"
-];
-
+const layout = ["data", "data"];
 let allProjects = [];
 
 fetch("https://junothecat.github.io/housing-catalogue/projects.json")
