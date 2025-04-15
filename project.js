@@ -34,7 +34,7 @@ async function loadProject() {
         html: `<img src="projects/${slug}/1.jpg" alt="Photo 1" />`
       },
       {
-        class: "tile",
+        class: "tile double",
         style: "grid-column: 4 / 5; grid-row: 1 / span 2;",
         html: `<img src="projects/${slug}/big1.jpg" alt="Photo 2" />`
       },
