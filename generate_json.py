@@ -6,7 +6,6 @@ PROJECTS_DIR = "projects"
 OUTPUT_FILE = "projects.json"
 BASE_URL = "https://junothecat.github.io/housing-catalogue"
 
-
 def slugify(text):
     text = text.lower()
     text = re.sub(r'[^a-z0-9\s-]', '', text)  # remove punctuation
@@ -21,27 +20,42 @@ def read_project_data(project_path, folder_name):
         return None
 
     project_data = {}
+    current_key = None
+    multiline_buffer = []
 
     with open(info_path, 'r', encoding='utf-8') as f:
         for line in f:
-            if ':' in line:
+            # New key:value pair
+            if ':' in line and not line.startswith(' '):
+                if current_key and multiline_buffer:
+                    project_data[current_key] = '\n'.join(multiline_buffer).strip()
+                    multiline_buffer = []
+
                 key, value = line.strip().split(':', 1)
-                project_data[key.strip()] = value.strip()
+                key = key.strip()
+                value = value.strip()
+
+                if value:
+                    project_data[key] = value
+                    current_key = None
+                else:
+                    current_key = key
+            elif current_key:
+                multiline_buffer.append(line.rstrip())
+
+    if current_key and multiline_buffer:
+        project_data[current_key] = '\n'.join(multiline_buffer).strip()
 
     if 'title' not in project_data or 'location' not in project_data:
         return None
 
-    # Add image URL separately
     project_data["image"] = f"{BASE_URL}/{PROJECTS_DIR}/{folder_name}/image.jpg"
-
-    # Add slug
     project_data["slug"] = slugify(project_data["title"])
 
     return project_data
 
 def build_json():
     projects = []
-
     for folder in os.listdir(PROJECTS_DIR):
         path = os.path.join(PROJECTS_DIR, folder)
         if os.path.isdir(path):
