@@ -65,6 +65,27 @@ function handleSearch() {
   renderGrid(filtered);
 }
 
+function handleCategoryFilter(selectedCategory) {
+  const filtered = allProjects.filter(project =>
+    project.categories && project.categories.includes(selectedCategory)
+  );
+
+  renderGrid(filtered);
+  document.getElementById("categoryMenu").style.display = "none"; // close menu
+}
+
+function showAllProjects() {
+  renderGrid(allProjects);
+  document.getElementById("categoryMenu").style.display = "none"; // close the menu
+}
+
+function toggleCategoryMenu() {
+  const menu = document.getElementById("categoryMenu");
+  const isVisible = menu.style.display === "block";
+  menu.style.display = isVisible ? "none" : "block";
+}
+
+
 // Load data and initialize grid + flip animation
 fetch("https://junothecat.github.io/housing-catalogue/projects.json")
   .then(res => res.json())
