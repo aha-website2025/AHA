@@ -70,6 +70,7 @@ body {
    HOMEPAGE-SPECIFIC STYLES
    ======================== */
 
+
 .home-page .housing-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -81,6 +82,25 @@ body {
   position: relative;
   padding: 60px;
 }
+
+#grid-container.filtered {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* 👈 center the tiles horizontally */
+  gap: 20px; /* 👈 optional: space between tiles */
+}
+
+.tile {
+  width: 250px; /* or whatever size you want for the project cards */
+  min-height: 300px;
+  background-color: #111;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
 
 .home-page .grid {
   display: grid;

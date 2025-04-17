@@ -39,22 +39,28 @@ function renderGrid(projects) {
   container.innerHTML = "";
 
   if (projects.length < allProjects.length) {
-    // 🔥 If filtering: simple grid
-    projects.forEach(project => {
-      const tileDiv = createTile("data", project);
-      container.appendChild(tileDiv);
-    });
-  } else {
-    // 🔥 If showing all projects: use full layout
-    let dataIndex = 0;
-    layout.forEach(type => {
-      let tileDiv;
+     // 🔥 Add filtered class
+     container.classList.add('filtered');
 
-      if (type === "data" && dataIndex < projects.length) {
-        tileDiv = createTile("data", projects[dataIndex++]);
-      } else {
-        tileDiv = createTile(type);
-      }
+     // Render filtered projects (simple flex)
+     projects.forEach(project => {
+       const tileDiv = createTile("data", project);
+       container.appendChild(tileDiv);
+     });
+   } else {
+     // 🔥 Remove filtered class
+     container.classList.remove('filtered');
+ 
+     // Full grid layout
+     let dataIndex = 0;
+     layout.forEach(type => {
+       let tileDiv;
+ 
+       if (type === "data" && dataIndex < projects.length) {
+         tileDiv = createTile("data", projects[dataIndex++]);
+       } else {
+         tileDiv = createTile(type);
+       }
 
       container.appendChild(tileDiv);
   });
