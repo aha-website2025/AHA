@@ -66,9 +66,14 @@ function handleSearch() {
 }
 
 function handleCategoryFilter(selectedCategory) {
-  const filtered = allProjects.filter(project =>
-    project.categories && project.categories.includes(selectedCategory)
-  );
+  const filtered = allProjects.filter(project => {
+    if (Array.isArray(project.categories)) {
+      return project.categories.includes(selectedCategory);
+    } else if (typeof project.category === 'string') {
+      return project.category.toLowerCase() === selectedCategory.toLowerCase();
+    }
+    return false;
+  });
 
   renderGrid(filtered);
   document.getElementById("categoryMenu").style.display = "none"; // close menu

@@ -383,15 +383,28 @@ pointer-events: none;
 
   
 /* // filter menu // */
+
+.search-bar {
+  position: relative; /* 👈 Add this line */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
 #categoryMenu {
-  margin-top: 5px;
-  padding: 5px 0;
+  position: absolute;
+  top: 40px; /* Adjust depending on your button height */
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 150px; /* or whatever looks good */
   background: white;
   border: 1px solid #ccc;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  position: absolute;
   display: none;
-  min-width: 150px;
+  z-index: 1000;
+  text-align: left;
 }
 
 #categoryMenu div {
