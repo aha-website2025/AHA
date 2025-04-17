@@ -38,16 +38,23 @@ function renderGrid(projects) {
   const container = document.getElementById("grid-container");
   container.innerHTML = "";
 
-  let dataIndex = 0;
+  if (projects.length < allProjects.length) {
+    // 🔥 If filtering: simple grid
+    projects.forEach(project => {
+      const tileDiv = createTile("data", project);
+      container.appendChild(tileDiv);
+    });
+  } else {
+    // 🔥 If showing all projects: use full layout
+    let dataIndex = 0;
+    layout.forEach(type => {
+      let tileDiv;
 
-  layout.forEach(type => {
-    let tileDiv;
-
-    if (type === "data" && dataIndex < projects.length) {
-      tileDiv = createTile("data", projects[dataIndex++]);
-    } else {
-      tileDiv = createTile(type);
-    }
+      if (type === "data" && dataIndex < projects.length) {
+        tileDiv = createTile("data", projects[dataIndex++]);
+      } else {
+        tileDiv = createTile(type);
+      }
 
     container.appendChild(tileDiv);
   });
