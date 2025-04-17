@@ -6,21 +6,20 @@
   <title>About - Affordable Housing Atlas</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Temporary inline style to make 'About' text BIG */
+    /* Updated style for About page */
+    .about-wrapper {
+      max-width: 800px;
+      margin: 100px 50px; /* Top and left margin */
+      text-align: left; /* Align text to the left */
+    }
     .about-title {
       font-size: 64px;
       font-weight: bold;
-      text-align: center;
-      margin-top: 100px;
       margin-bottom: 20px;
     }
     .about-content {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
       font-size: 18px;
       line-height: 1.6;
-      text-align: center;
     }
   </style>
 </head>
@@ -45,14 +44,14 @@
   </nav>
 
   <main>
-    <div class="about-title">About</div>
-    <div class="about-content">
-      Welcome to the Affordable Housing Atlas.  
-      <br>We are building a global catalogue of housing models that are vernacular, sustainable, cooperative, and utopian.  
-      <br>Browse projects, learn from models, and map the future of living!
+    <div class="about-wrapper">
+      <div class="about-title">About</div>
+      <div class="about-content">
+        Welcome to the Affordable Housing Atlas.<br>
+      </div>
     </div>
   </main>
 
-  <script src="renderGrid.js"></script> <!-- only if you want menu toggling -->
+  <script src="renderGrid.js"></script> <!-- if you want hamburger menu working -->
 </body>
 </html>

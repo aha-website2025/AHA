@@ -230,8 +230,14 @@ pointer-events: none;
 
   .project-page .tile.title-tile {
   text-align: center;
-  padding: 1rem 0.5rem;
+  padding: 1.5rem 1rem;
   font-size: 0.9rem;
+}
+
+  .project-page .tile.title-tile img {
+  margin-top: 1rem; /* add bottom margin for image! */
+  max-width: 100%;
+  height: auto;
 }
 
 .project-page .tile.title-tile h2 {

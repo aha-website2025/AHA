@@ -1,5 +1,5 @@
 title: Dymaxion House
-location: 
+location: unbuilt
 category: utopian
 description:
 The Dymaxion House by Buckminster Fuller was a conceptual project for future housing based on the idea of dynamic, maximum and tension. Fuller is seeking a new method to redesign a dwelling that is adaptable in spaces, and to provide the maximum spaces under the consideration of transportability. The plan of the Dymaxion House is organized with a triangular grid and the furniture is designed based on the triangular form. Besides, the triangle grid is used for dispersing the tension of the structure.
