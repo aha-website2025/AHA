@@ -392,9 +392,13 @@ pointer-events: none;
   gap: 10px;
 }
 
+.filter-wrapper {
+  position: relative; /* 👈 very important */
+}
+
 #categoryMenu {
   position: absolute;
-  top: 40px; /* Adjust depending on your button height */
+  top: 100%; /* Adjust depending on your button height */
   left: 0;
   right: 0;
   margin: auto;
