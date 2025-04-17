@@ -379,7 +379,6 @@ pointer-events: none;
   
   .home-page .tile.flip-in {
     animation: flipIn 0.6s ease-out forwards;
-    background: red !important;
 }
 
   
