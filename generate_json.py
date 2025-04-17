@@ -47,7 +47,7 @@ def read_project_data(project_path, folder_name):
     if current_key and multiline_buffer:
         project_data[current_key] = ''.join(multiline_buffer).strip('\n')
 
-    if 'title' not in project_data or 'location' not in project_data:
+    if 'title' not in project_data:
         return None
 
     project_data["image"] = f"{BASE_URL}/{PROJECTS_DIR}/{folder_name}/image.jpg"

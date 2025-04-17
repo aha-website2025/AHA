@@ -1,5 +1,21 @@
 [
   {
+    "title": "Dymaxion House",
+    "category": "utopian",
+    "description": "The Dymaxion House by Buckminster Fuller was a conceptual project for future housing based on the idea of dynamic, maximum and tension. Fuller is seeking a new method to redesign a dwelling that is adaptable in spaces, and to provide the maximum spaces under the consideration of transportability. The plan of the Dymaxion House is organized with a triangular grid and the furniture is designed based on the triangular form. Besides, the triangle grid is used for dispersing the tension of the structure.\n\n\nThe mechanics of the house involved the use of tension and compression in a web system, which is similar to the idea of suspension bridge. The mast acted as circular support so that all the elements of the building were suspended from above and did not rest upon supports from below. All the mechanical equipment and the supporting system for roof and floor are contained in the mast. By assembling all the fixed elements for the house in the middle, create a maximum occupied space. And the mast avoids the additional supporting system by putting all the heavy equipment in the core. The ventilation is downdraft which reduces the dust in the house. After the air is drawn in from the air inlet to the mast, the central mast circulates the air into the roof and interior by the gaps in the floor panel. Thus the air could ventilate into the rooms from the hole on the floor.\n\n\nThe minimum use of material, the light-weight dwelling, and the self-sufficiency system of ventilation made the Dymaxion House considered also as a sustainable dwelling.",
+    "year_completed": "Prototyped in 1948",
+    "owner": "William Granham",
+    "architect": "Buckminister Fuller",
+    "lot_size_sqft": "1,600 sqft",
+    "floor_space_sqft": "1,600 sqft",
+    "units": "5",
+    "#_of_inhabitants": "1 single family",
+    "density": "~400 sqft",
+    "outdoor_area": "1,600 sqft",
+    "image": "https://junothecat.github.io/housing-catalogue/projects/dymaxion-house/image.jpg",
+    "slug": "dymaxion-house"
+  },
+  {
     "title": "Genossenschaft Kalkbreite",
     "location": "Zurich, Switzerland",
     "category": "co-operative housing",
