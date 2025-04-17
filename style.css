@@ -83,6 +83,12 @@ body {
   padding: 60px;
 }
 
+#grid-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
 #grid-container.filtered {
   display: flex;
   flex-wrap: wrap;
