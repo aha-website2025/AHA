@@ -43,7 +43,7 @@ function renderGrid(projects) {
   layout.forEach(type => {
     let tileDiv;
 
-    if (dataIndex < projects.length) {
+    if (type === "data" && dataIndex < projects.length) {
       tileDiv = createTile("data", projects[dataIndex++]);
     } else {
       tileDiv = createTile(type);
