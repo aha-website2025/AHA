@@ -56,8 +56,9 @@ function renderGrid(projects) {
         tileDiv = createTile(type);
       }
 
-    container.appendChild(tileDiv);
+      container.appendChild(tileDiv);
   });
+  }
 }
 
 function handleSearch() {
