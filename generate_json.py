@@ -12,11 +12,19 @@ def slugify(text):
     text = re.sub(r'[\s-]+', '-', text)       # replace spaces/hyphens with single hyphen
     return text.strip('-')
 
+def find_image_path(project_path):
+    for ext in ['jpg', 'jpeg', 'png']:
+        image_filename = f"image.{ext}"
+        image_path = os.path.join(project_path, image_filename)
+        if os.path.exists(image_path):
+            return image_path
+    return None
+
 def read_project_data(project_path, folder_name):
     info_path = os.path.join(project_path, "info.txt")
-    image_path = os.path.join(project_path, "image.jpg")
+    image_path = find_image_path(project_path)
 
-    if not os.path.exists(info_path) or not os.path.exists(image_path):
+    if not os.path.exists(info_path) or image_path is None:
         return None
 
     project_data = {}
@@ -25,7 +33,6 @@ def read_project_data(project_path, folder_name):
 
     with open(info_path, 'r', encoding='utf-8') as f:
         for line in f:
-            # New key:value pair
             if ':' in line and not line.startswith(' ') and not line.strip().startswith('\t') and line.index(':') < 30:
                 if current_key and multiline_buffer:
                     project_data[current_key] = ''.join(multiline_buffer).strip('\n')
@@ -50,7 +57,8 @@ def read_project_data(project_path, folder_name):
     if 'title' not in project_data:
         return None
 
-    project_data["image"] = f"{BASE_URL}/{PROJECTS_DIR}/{folder_name}/image.jpg"
+    image_filename = os.path.basename(image_path)
+    project_data["image"] = f"{BASE_URL}/{PROJECTS_DIR}/{folder_name}/{image_filename}"
     project_data["slug"] = slugify(project_data["title"])
 
     return project_data

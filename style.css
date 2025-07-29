@@ -66,6 +66,86 @@ body {
   color: #666;
 }
 
+.flip-card {
+  perspective: 1000px;
+  aspect-ratio: 1 / 0.9; /* 👈 maintain aspect ratio */
+  overflow: hidden;
+}
+
+.flip-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.6s ease;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-front,
+.flip-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  top: 0;
+  left: 0;
+}
+
+.flip-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.flip-back {
+  background-color: #111;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: rotateY(180deg);
+  text-align: center;
+  height: 100%;
+  width: 100%;
+}
+
+.flip-back h4 {
+  margin: 0;
+  font-family: sans-serif;
+  font-weight: bold;
+  color: white; /* 👈 project name in white */
+}
+
+.flip-back p {
+  margin: 0;
+  font-family: sans-serif;
+  color: #bbb; /* 👈 location in grey */
+}
+
+.flip-text {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; 
+  padding: 10px;
+}
+
+.project-card {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: white;
+}
+
 /* ========================
    HOMEPAGE-SPECIFIC STYLES
    ======================== */
@@ -86,27 +166,26 @@ body {
 #grid-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
+  gap: 15px;
 }
 
-#grid-container.filtered {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center; /* 👈 center the tiles horizontally */
-  gap: 20px; /* 👈 optional: space between tiles */
-}
 
 .tile {
-  width: 230px; /* or whatever size you want for the project cards */
+  width: 225px; 
   aspect-ratio: 1 / 0.9; 
-  background-color: #111;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
+  background: none;
+  overflow: hidden;
+  padding: 0;
+  display: block;
 }
 
+
+.tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 
 .home-page .grid {
   display: grid;
@@ -116,30 +195,18 @@ body {
 }
 
 .home-page .tile {
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  background: #111;
-  color: white;
-  padding: 10px;
-  font-family: sans-serif;
-  text-align: center;
-  overflow: hidden;
+  background: none;
+  color: inherit;
+  padding: 0;
 }
 
-.home-page .tile a {
-  text-decoration: none;
-  color: white;
-}
 
-.home-page .tile a:hover {
-  color: #ccc;
-}
 
 .home-page .tile img {
   width: 100%;
-  height: 100px;
+  height: 100%;
   object-fit: cover;
+  display: block;
 }
 
 /* Placeholder styles */

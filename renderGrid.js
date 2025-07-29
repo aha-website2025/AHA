@@ -18,16 +18,22 @@ function createTile(type, project = null) {
   const div = document.createElement("div");
 
   if (type === "data" && project) {
-    div.classList.add("tile");
+    div.classList.add("tile", "flip-card");
     div.innerHTML = `
-      <a href="project.html?slug=${project.slug}" class="project-card">
-        <img src="${project.image}" alt="${project.title}" />
-        <div class="info">
-          <h4>${project.title}</h4>
-          <p>${project.location}</p>
-        </div>
+      <a href="project.html?slug=${project.slug}" class="project-card">  
+        <div class="flip-inner">
+            <div class="flip-front">
+              <img src="${project.image}" alt="${project.title}" />
+            </div>
+            <div class="flip-back">
+              <div class="flip-text">
+                <h4>${project.title}</h4>
+                <p>${project.location}</p>
+              </div>
+            </div>
+          </div>
       </a>
-    `;
+        `;
   } else {
     div.classList.add("tile", type); // 'hatch' or 'blank'
   }
@@ -107,35 +113,13 @@ function toggleCategoryMenu() {
 
 
 // Load data and initialize grid + flip animation
-fetch("https://junothecat.github.io/housing-catalogue/projects.json")
+fetch("https://aha-website2025.github.io/AHA/projects.json")
   .then(res => res.json())
   .then(data => {
     allProjects = data;
     renderGrid(allProjects);
-    setTimeout(sequentialFlipProjects, 300); // 👈 trigger animation after render
+    // setTimeout(sequentialFlipProjects, 300); // 👈 trigger animation after render
   });
 
-  function sequentialFlipProjects() {
-    const allTiles = Array.from(document.querySelectorAll(".tile"));
-    const columns = 5;
-  
-    const rows = [];
-    for (let i = 0; i < allTiles.length; i += columns) {
-      rows.push(allTiles.slice(i, i + columns));
-    }
-  
-    rows.forEach((row, i) => {
-      const projectTile = row.find(tile =>
-        !tile.classList.contains("blank") &&
-        !tile.classList.contains("hatch")
-      );
-  
-      if (projectTile) {
-        setTimeout(() => {
-          projectTile.classList.add("flip-in");
-        }, i * 400); // staggered delay per row
-      }
-    });
-  }
   
   
