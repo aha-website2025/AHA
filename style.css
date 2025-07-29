@@ -169,6 +169,10 @@ body {
   gap: 15px;
 }
 
+.grid-line {
+  pointer-events: none;
+  z-index: 0;
+}
 
 .tile {
   width: 225px; 
@@ -217,18 +221,25 @@ body {
 
 .home-page .hatch {
   aspect-ratio: 1 / 0.9;
-  background-image: repeating-linear-gradient(
-  45deg,
-  #aaa 0,
-  #aaa 1px,
-  transparent 1px,
-  transparent 5px
-);
-background-color: transparent;
-border: none;
-box-shadow: none;
-pointer-events: none;
+  background: linear-gradient(
+    45deg,
+    #ccc 10%,
+    transparent 10%,
+    transparent 50%,
+    #ccc 50%,
+    #ccc 60%,
+    transparent 60%,
+    transparent
+  );
+  background-size: 8px 8px;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  pointer-events: none;
 }
+
+
+
 
 
 
