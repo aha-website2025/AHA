@@ -15,7 +15,7 @@
     "outdoor_area": "15,650 sqft",
     "address": "HCMP+78C, Ave Abdelkader Torres, Casablanca 20570, Morocco",
     "coordinates": "33.583000, -7.564000",
-    "image": "https://github.com/aha-website2025/AHA/projects/carrieres-centrales/image.jpg",
+    "image": "https://aha-website2025.github.io/AHA/projects/carrieres-centrales/image.jpg",
     "slug": "carrieres-centrales"
   },
   {
@@ -32,7 +32,7 @@
     "density": "26,270 inhabitant per sqkm",
     "address": "R. Zilá, 23 - Cidade de Deus, Rio de Janeiro - RJ, 22773-180, Brazil",
     "coordinates": "-22.94903, -43.36691",
-    "image": "https://github.com/aha-website2025/AHA/projects/cidade-de-deus/image.png",
+    "image": "https://aha-website2025.github.io/AHA/projects/cidade-de-deus/image.png",
     "slug": "cidade-de-deus"
   },
   {
@@ -49,7 +49,7 @@
     "#_of_inhabitants": "1 single family",
     "density": "~400 sqft",
     "outdoor_area": "1,600 sqft",
-    "image": "https://github.com/aha-website2025/AHA/projects/dymaxion-house/image.jpg",
+    "image": "https://aha-website2025.github.io/AHA/projects/dymaxion-house/image.jpg",
     "slug": "dymaxion-house"
   },
   {
@@ -66,7 +66,7 @@
     "density": "1 habitant per 540 sqft",
     "address": "Kalkbreitestrasse 6, 8003 Zürich, Switzerland",
     "coordinates": "47.37436, 8.52061",
-    "image": "https://github.com/aha-website2025/AHA/projects/genossenschaft-kalkbreite/image.jpg",
+    "image": "https://aha-website2025.github.io/AHA/projects/genossenschaft-kalkbreite/image.jpg",
     "slug": "genossenschaft-kalkbreite"
   },
   {
@@ -84,7 +84,7 @@
     "inhabitants_per_unit": "1-5",
     "address": "Carrer de la Constitucio, 85, 89, Sants-Montjuic, 08014 Barcelona, Spain",
     "coordinates": "41.36961, 2.13478",
-    "image": "https://github.com/aha-website2025/AHA/projects/la-borda/image.jpg",
+    "image": "https://aha-website2025.github.io/AHA/projects/la-borda/image.jpg",
     "slug": "la-borda"
   },
   {
@@ -103,7 +103,7 @@
     "outdoor_area": "15,000 sqft",
     "address": "240 E 6th St, Los Angeles, CA 90014, USA",
     "coordinates": "34.04352, -118.24780",
-    "image": "https://github.com/aha-website2025/AHA/projects/star-apartments/image.jpg",
+    "image": "https://aha-website2025.github.io/AHA/projects/star-apartments/image.jpg",
     "slug": "star-apartments"
   }
 ]

@@ -4,7 +4,7 @@ import re
 
 PROJECTS_DIR = "projects"
 OUTPUT_FILE = "projects.json"
-BASE_URL = "https://github.com/aha-website2025/AHA"
+BASE_URL = "https://aha-website2025.github.io/AHA"
 
 def slugify(text):
     text = text.lower()
