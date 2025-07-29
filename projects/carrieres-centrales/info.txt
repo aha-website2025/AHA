@@ -1,6 +1,22 @@
-<<<<<<< HEAD
-Rolland Curtis Gardens
-=======
-Rolland Curtis Gardens
->>>>>>> 77c798948e655e0a4adb28835c42fc7e64ae1e15
-Los Angeles, USA
+title: Carrieres Centrales
+location: Casablanca, Morocco
+category: vernacular housing
+description:
+Carrières Centrales represents a series of housing located in Casablanca, Morocco designed for factory workers and locals from rural work areas within the city. French architect (and urban planner) Michel Ecochard was brought in to develop emergency housing due to mass displacement caused by local strikes and liberation struggles against French colonialistic occupation during the 1930s through the mid-1950s. Two events, in particular, rapidly escalated the situation into a humanitarian crisis that ultimately left around 130,000 people displaced from their neighborhoods and cities. The first event revolves around French authorities destroying a multitude of shanty towns located near “European quarters” behind the scapegoat of a typhoid epidemic spreading throughout the region. The other critical moment comes in the form of a two-day “mouse strike” organized by the Moroccan Worker Union Confederation (UGSCM) and their respective nationalist party, Istiqlal, where participants simply refused to leave home to go to work. This led to some tension between them and the French police that was attempting to end the strike, ultimately leading to the police shooting anyone who was either defensive or refusing to leave their homes.
+
+
+Many consider the Carrières Centrales project to not be an actual response to major issues happening at the time. Rather, they consider it to be Ecochard’s way of attempting to shut down the anti-colonial movement by appeasing the demands and needs of the civilians affected. This claim is evident in the design choices and style created to use as a template for the whole project. Essentially the project revolves around the use of a linear 8 x 8-meter grid plan that was based on a patio dwelling unit where aesthetically it would blend some French mediums and the local Moroccan style into one. From here each unit could be rearranged into various configurations that would help to create different courtyard and exterior conditions. This resulted in the creation of the “mat” structure. He had also ventured into using vertically and designed 3 unique structures that each had their own floor plans. Ultimately his goal was to mass spread these low-density and costly vertical structures that made use of vernacular elements throughout most of Casablanca. Unfortunately, his ideas did not fully come to fruition as a simple floor plan was created and mass replicated across the whole site while most of the buildings would eventually be redesigned and repurposed for other uses.
+
+
+The project is the first mixed-use, affordable housing project in Los Angeles to employ this construction method.
+year_completed: 2014
+owner: Morocco Department of Urban Planning
+architect: Michel Ecochard & G.A.M.M.A
+lot_size_sqft: 63,593 sqft
+floor_space_sqft: 60,546 sqft
+#_of_units: 100
+#_of_inhabitants: 3 per unit
+density: 1 person per 1,270 sqft
+outdoor_area: 15,650 sqft
+address: HCMP+78C, Ave Abdelkader Torres, Casablanca 20570, Morocco
+coordinates: 33.583000, -7.564000

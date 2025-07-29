@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Affordable Housing Atlas – Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+  <link rel="stylesheet" href="map.css" />
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+</head>
+<body class="home-page">
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <a href="index.html">
+      <img src="Logo.png" alt="Affordable Housing Atlas Logo" class="logo" />
+    </a>
+  </header>
+
+  <!-- NAVIGATION -->
+  <nav class="menu">
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul class="menu-items" id="menuItems">
+      <li><a href="index.html">Projects</a></li>
+      <li><a href="models.html">Models</a></li>
+      <li><a href="map.html">Map</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- MAP -->
+  <div id="map"></div>
+
+  <!-- SCRIPT -->
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menuItems");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYWhhdGxhcyIsImEiOiJjbWF1Nm15YmMwNjk5Mmtwc2loc2Rud2loIn0.IucseItbLdKhoVw9bslAzQ';
+
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/ahatlas/cmaum4pqb01kr01spbcdq599z',
+      center: [10, 45],
+      zoom: 1
+    });
+
+    map.on('load', () => {
+      map.setProjection('mercator');  // <-- forces flat 2D map
+      
+      // 🏢 Building style
+      map.setPaintProperty('building', 'fill-color', '#333333');      // darker buildings
+      map.setPaintProperty('building', 'fill-opacity', 0.9);       // slightly transparent
+
+      // Light grey background
+      if (map.getLayer('land')) {
+        map.setPaintProperty('land', 'fill-color', '#cccccc');
+       }
+      if (map.getLayer('background')) {
+        map.setPaintProperty('background', 'background-color', '#dddddd');
+      }
+    });
+
+    map.scrollZoom.setZoomRate(2);        // increase zoom speed per scroll
+    map.scrollZoom.setWheelZoomRate(1.5); // how many zoom steps per wheel click
+
+    fetch('projects.json')
+      .then(res => res.json())
+      .then(projects => {
+        projects.forEach(project => {
+          if (!project.address) return;
+
+          const geocodeUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(project.address)}.json?access_token=${mapboxgl.accessToken}`;
+
+          fetch(geocodeUrl)
+            .then(res => res.json())
+            .then(data => {
+              if (data.features && data.features.length > 0) {
+                const [lon, lat] = data.features[0].center;
+
+                const el = document.createElement('div');
+                el.className = 'marker';
+
+                const marker = new mapboxgl.Marker(el)
+                  .setLngLat([lon, lat])
+                  .setPopup(new mapboxgl.Popup().setHTML(`
+                    <h4>${project.title}</h4>
+                    <img src="${project.image}" alt="${project.title}" style="width:100px;height:auto;" />
+                    <p>${project.address}</p>
+                  `))
+                  .addTo(map);
+
+                el.addEventListener('click', () => {
+                  window.location.href = `project.html?id=${project.slug}`;
+                });
+              }
+            });
+        });
+      });
+  </script>
+</body>
+</html>

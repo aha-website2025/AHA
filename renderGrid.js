@@ -8,7 +8,8 @@ const layout = [
   "hatch", "data", "data", "hatch", "blank",
   "data", "data", "hatch", "data", "data",
   "blank", "data", "data", "data", "hatch",
-  "data", "hatch", "data", "data", "blank"
+  "data", "hatch", "data", "data", "blank",
+  "hatch", "data", "blank", "data", "data"
 ];
 
 let allProjects = [];

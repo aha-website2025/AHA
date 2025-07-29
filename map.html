@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Map | Affordable Housing Atlas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="map.css" />
+  <style>
+    #map { height: 80vh; width: 100%; }
+    #filter-box { margin: 1rem; text-align: center; }
+    select { padding: 0.5rem; font-size: 1rem; }
+  </style>
+</head>
+<body class="map-page">
+  <header class="site-header">
+    <a href="index.html">
+      <img src="Logo.png" alt="Affordable Housing Atlas Logo" class="logo" />
+    </a>
+  </header>
+
+  <nav class="menu">
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul class="menu-items" id="menuItems">
+      <li><a href="index.html">Projects</a></li>
+      <li><a href="models.html">Models</a></li>
+      <li><a href="map.html">Map</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <div id="filter-box">
+    <label for="categoryFilter">Filter by category: </label>
+    <select id="categoryFilter">
+      <option value="all">All</option>
+      <option value="co-op">Co-op</option>
+      <option value="public">Public</option>
+      <option value="utopian">Utopian</option>
+    </select>
+  </div>
+
+  <div id="map"></div>
+
+  <script>
+    let map;
+    let allMarkers = [];
+
+    function initMap() {
+      const categoryIcons = {
+      "public/social housing": {
+        url: "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14">
+            <circle cx="7" cy="7" r="6" fill="#00cc44" />
+          </svg>
+        `),
+        scaledSize: new google.maps.Size(14, 14),
+        anchor: new google.maps.Point(7, 7)
+      },
+      "co-operative": {
+        url: "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14">
+            <circle cx="7" cy="7" r="6" fill="#8000ff" />
+          </svg>
+        `),
+        scaledSize: new google.maps.Size(14, 14),
+        anchor: new google.maps.Point(7, 7)
+      },
+      "utopian": {
+        url: "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14">
+            <circle cx="7" cy="7" r="6" fill="#ff8800" />
+          </svg>
+        `),
+        scaledSize: new google.maps.Size(14, 14),
+        anchor: new google.maps.Point(7, 7)
+      }
+    };
+
+    const transparentIcon = {
+        url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII="
+      };
+
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 34.0522, lng: -118.2437 },
+        zoom: 3 ,
+        mapTypeId: 'roadmap',
+        gestureHandling: 'greedy',
+        styles: [
+        {
+          featureType: "all",
+          elementType: "geometry.fill",
+          stylers: [{ color: "#f8f8f8" }]
+        },
+        {
+          featureType: "landscape",
+          elementType: "geometry.fill",
+          stylers: [{ color: "#f8f8f8" }]
+        },
+        {
+          featureType: "transit",
+          elementType: "geometry.fill",
+          stylers: [{ color: "#f8f8f8" }]
+        },
+    
+        {
+          featureType: "building",
+          elementType: "geometry.stroke",
+          stylers: [{ color: "#444444" }]
+        },
+        {
+          featureType: "road",
+          elementType: "geometry",
+          stylers: [{ color: "#d6d6d6" }]
+        },
+        {
+          featureType: "water",
+          elementType: "geometry",
+          stylers: [{ color: "#b3d1ff" }]
+        },
+        {
+          featureType: "poi",
+          elementType: "labels.icon",
+          stylers: [
+            { saturation: -100 },
+            { lightness: 0 },
+            { color: "#999999" } // medium grey
+          ]
+        },
+
+        {
+          featureType: "poi",
+          elementType: "labels.text.fill",
+          stylers: [{ color: "#888888" }]
+        },
+        {
+          featureType: "poi",
+          elementType: "geometry",
+          stylers: [{ color: "#e5e5e5" }]
+        },
+        {
+          featureType: "all",
+          elementType: "labels",
+          stylers: [{ visibility: "off" }]
+        },
+        {
+          featureType: "poi",
+          elementType: "labels",
+          stylers: [{ visibility: "on" }]
+        }
+      ]
+      });
+
+      fetch("projects.json")
+        .then(response => response.json())
+        .then(data => {
+          data.forEach(project => {
+          if (!project.coordinates) return; // skip unbuilt or coordinate-less projects
+
+          const [lat, lng] = project.coordinates.split(",").map(Number);
+
+          const marker = new google.maps.Marker({
+            position: { lat, lng },
+            map: map,
+            icon: categoryIcons[project.category], 
+          });
+
+
+          const infoWindow = new google.maps.InfoWindow({
+            content: `
+                <div style="padding: 12px; max-width: 220px; font-family: sans-serif;">
+                    <button class="close-btn" onclick="map.currentInfoWindow?.close(); map.currentInfoWindow = null;" 
+              style="position: absolute; top: 6px; right: 6px; border: none; background: none; font-size: 20px; cursor: pointer;">×</button>
+                  <h3 style="margin: 0 0 4px 0; font-size: 16px;">${project.title}</h3>
+                  <p style="margin: 0 0 8px 0; font-size: 13px; color: #666;">${project.category}</p>
+                  <a href="project.html?slug=${project.slug}">
+                    <img src="${project.image}" alt="${project.title}" style="width: 100%; border-radius: 4px;" />
+                  </a>
+                </div>
+              `,
+             disableAutoPan: true,
+              shouldFocus: false,
+              pixelOffset: new google.maps.Size(0, -2),
+              // ✅ hide the close button:
+          });
+
+          let currentInfoWindow = null;
+
+          marker.addListener("click", () => {
+            // If this infoWindow is already open, close it
+            if (map.currentInfoWindow === infoWindow) {
+              infoWindow.close();
+              map.currentInfoWindow = null;
+            } else {
+              if (map.currentInfoWindow) {
+                map.currentInfoWindow.close();
+              }
+              infoWindow.open(map, marker);
+              map.currentInfoWindow = infoWindow;
+            }
+          });
+
+          map.addListener("click", () => {
+            if (map.currentInfoWindow) {
+              map.currentInfoWindow.close();
+              map.currentInfoWindow = null;
+            }
+          });
+
+          marker.projectCategory = project.category;
+          allMarkers.push(marker);
+        });
+
+        });
+
+      document.getElementById("categoryFilter").addEventListener("change", function () {
+        const selected = this.value;
+        allMarkers.forEach(marker => {
+          const show = selected === "all" || marker.projectCategory === selected;
+          marker.setVisible(show);
+        });
+      });
+    };
+
+    function toggleMenu() {
+  const menu = document.getElementById("menuItems");
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+  }
+  window.initMap = initMap;
+  </script>
+
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCl1LcKsZZ_av4zVMVRe6hDLCiTVDRmePA&callback=initMap"></script>
+</body>
+</html>

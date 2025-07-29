@@ -17,3 +17,5 @@ floor_space_sqft: 9842.52
 units: 28
 unit_distribution: 3 different sizes (131/164/249 sqft)
 inhabitants_per_unit: 1-5
+address: Carrer de la Constitucio, 85, 89, Sants-Montjuic, 08014 Barcelona, Spain
+coordinates: 41.36961, 2.13478

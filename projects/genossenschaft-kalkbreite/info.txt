@@ -11,3 +11,5 @@ floor_space_sqft: 246,494 sqft
 units: 97
 number of inhabitants:
 density: 1 habitant per 540 sqft
+address: Kalkbreitestrasse 6, 8003 Zürich, Switzerland
+coordinates: 47.37436, 8.52061

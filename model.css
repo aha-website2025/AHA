@@ -1,0 +1,103 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #efefea;
+}
+.site-header {
+  padding: 20px;
+}
+
+.logo {
+  height: 100px; /* adjust as needed */
+}
+
+.menu {
+  position: absolute;
+  top: 100px;
+  right: 40px;
+  z-index: 1000;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  height: 2px;
+  background-color: #555;
+  border-radius: 1px;
+}
+
+.menu-items {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 50px;
+  list-style: none;
+  padding: 0;
+  margin: 10;
+  background: none;
+  border: none;
+  transform: translateY(-90px);
+}
+
+.menu-items li {
+  padding: 8px 0;
+  text-align: right;
+}
+
+.menu-items li a {
+  text-decoration: none;
+  color: #111;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.menu-items li a:hover {
+  color: #666;
+}
+
+
+.model-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 230px); /* smaller squares */
+  grid-gap: 40px; /* bigger gap between them */
+  justify-content: center;
+  margin-bottom: 100px;
+}
+
+.model-tile {
+  background: white;
+  border-radius: 0px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.model-tile:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.model-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 60px 0 30px 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}

@@ -27,3 +27,5 @@ floor_space_sqft: 95,000 sqft
 #_of_inhabitants: 153
 density: 0.001 inhabitant per sqft
 outdoor_area: 15,000 sqft
+address: 240 E 6th St, Los Angeles, CA 90014, USA
+coordinates: 34.04352, -118.24780
