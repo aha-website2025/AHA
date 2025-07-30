@@ -6,11 +6,16 @@ body {
 }
 
 .site-header {
-  padding: 20px;
+  display: flex;
+  justify-content: center;  /* center horizontally */
+  align-items: center;      /* center vertically */
+  padding-top: 0rem;     /* reduced from larger value */
+  padding-bottom: 0rem;
+  margin-top: 0; 
 }
 
 .logo {
-  height: 100px; /* adjust as needed */
+  max-width: 600px;
 }
 
 .menu {
