@@ -1,0 +1,20 @@
+title: Grundbau Und Siedler
+location: Hamburg, Germany
+category: public & social housing
+description:
+Completed in March 2013 and located in Hamburg, Grundbau und Siedler provides affordable self-build housing for German citizens who struggle to find reasonable rents—namely the working class. Parking, the lobby, and workshops are located on the ground floor, and the remaining four floors consists of three units each. Each floor is 10’6” tall. Each unit, ranging between 98-490 square feet, is open and flexible, allowing for the resident(s) to decide how they want to dictate the space.
+
+
+In order to self-build, residents are encouraged to buy a package that includes the necessary materials as well as a detailed construction manual (see diagrams 3-5). The self-builders are then given training, and their work must be inspected by an expert once completed. Self-building is made possible by stairs that are wide enough for transporting materials as well as a lift designed as a goods elevator for carrying materials.
+
+
+Through surveying the residents, it was discovered that there were two main layouts that were often chosen. The first one does away with hallways and joins all rooms, separating them only with a wall and/or dividing door. The second is a more “typical” layout, a system of defined rooms and open common areas. In the first layout, flexibility exists within the residents’ ability to interpret each room as they choose. On the other hand, flexibility in the second layout exists within the way they choose to dictate the open-plan areas.
+year_completed: 2013
+owner: N/A
+architect: BeL Sozietät für Architektur
+lot_size_sqft: 3,166 sqft
+floor_space_sqft: 98-492 sqft per unit
+units: 12
+number of inhabitants: 1+ per unit
+address: Am Inselpark 11 21109 Hamburg
+coordinates: 53.497529, 10.002147

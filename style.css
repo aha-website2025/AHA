@@ -165,14 +165,17 @@ body {
 
 #grid-container {
   display: grid;
+  position: relative;
   grid-template-columns: repeat(5, 1fr);
   gap: 15px;
 }
 
 .grid-line {
-  pointer-events: none;
-  z-index: 10;
+  background-color: transparent;
+  border-top: 2px dashed red;  /* for horizontal */
+  border-left: 2px dashed red; /* for vertical */
 }
+
 
 .tile {
   width: 225px; 
