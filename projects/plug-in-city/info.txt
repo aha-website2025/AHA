@@ -1,0 +1,14 @@
+title: Plug-in City
+location: Unbuilt
+category: utopia
+description:
+Due to their dissatisfaction with the architectural creations of the time, Plug-in City was designed as a fantasy city that contradicts the boring design of homes in British suburbia. Plug-In City was designed by Archigram as a way to combine architecture with technology and society. Even though it was never built, the technological innovations presented in this project completely changed people’s perception of the role of infrastructure. In this project, infrastructure becomes essential in the creation of this “infrastructural mega machine” which consists of modular units, outdoor spaces, transportation, and other services that become mobile due to these cranes. The uniqueness of this project was in the modular units, called prefabricated dwellings, which are customisable and replaceable giving the user lots of flexibility. These modules are then inserted, or “plugged”, into the megastructures. In addition to the cranes, these megastructures contain diagonal lifts, access systems, and servicing elements that bring up food and water, and it also allows the trash to go out. Lastly, in order to create a sense of community in urban living, these megastructures also contained elevated public spaces such as restaurants, an observatory, an outside sitting area, etc. All in all, this project offered a collaboration between architecture, technology and society. It offered a unique take on suburban living that was new, exciting, and creative when compared to the dull British suburbia.
+year_completed: 1963-66
+owner: Peter Cook
+architect: Archigram
+floor_space_sqft: 418 sqft
+units: 28
+unit_distribution: modular
+inhabitants_per_unit: 1-2 people/unit
+density: 209 sqft per person
+address: Carrer de la Constitucio, 85, 89, Sants-Montjuic, 08014 Barcelona, Spain

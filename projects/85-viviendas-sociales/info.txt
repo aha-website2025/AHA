@@ -1,0 +1,17 @@
+title: 85 Viviendas Sociales
+location: Sevilla, Spain
+category: sustainable
+description:
+The most notable element of this residential project is how it is built around a fairly rigid orthogonal grid. Both the building structure, as in the walls, and the building’s program, are arranged in accordance with this grid. The program is thus repeating and modular. With excessive circulation space eliminated, the architects were able to create residential units without obvious hierarchy and with an unusual degree of openness and inner connectivity. The openness serves a purpose in making the units more comfortable and appear to be larger, but furthermore serves to allow the entry of ample natural light and for cross ventilation in all units, keeping energy use low. The building contains an inner courtyard, yet this is not a centerpiece of the project, but rather a means to enable the units to be open on both ends. At the interior and exterior perimeters, the units are provided with an outdoor terrace or long gallery, which gives the units a small semi-public and potentially social space. Because these spaces can only be accessed from the units themselves, they serve as personal outdoor spaces, while still fitting into the larger whole, and can remain physically open to the unit, allowing for the previously mentioned cross-ventilation and serving as additional circulation space.
+
+
+The structure, which frames the space-defining orthogonal grid, is composed of modular cross-laminated timber walls and beams, stacking up 5 stories over a concrete base. This makes it the largest cross-laminated timber residential building in Spain. The use of modular CLT elements allowed for significant cost savings through prefabrication and lower material and labor costs, and greatly improves the sustainability of the project, both of which are essential to the future replication of the project.year_completed: 2018
+owner: Instituto Metropolitano de Promocion del Suelo (IMPSOL)
+architect: Peris + Toral
+lot_size_sqft: 137,945 sqft
+floor_space_sqft: 107,639 sqft
+units: 85
+# of inhabitants: 355
+outdoor area: 30,300 sqft
+address: Av. de la República Argentina, 2141011 Sevilla, Spain
+coordinates: 37.378, -6.001
