@@ -318,21 +318,19 @@ body {
 }
 
 .model-tile img {
-  max-width: 80%;
+  max-width: 70%;
   height: auto;
   display: block;
   margin: 0 auto;
+  margin-top: 0.6rem;
 }
 
 .model-label {
   color: #fff;
-  font-size: 0.8rem;
-  margin-top: 0.5rem;
+  font-size: 0.9rem;
   text-align: center;
   font-family: Calibri, sans-serif;
 }
-
-
 
 
 
