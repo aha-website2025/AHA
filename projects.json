@@ -105,6 +105,20 @@
     "slug": "la-borda"
   },
   {
+    "title": "Rolland Curtis Gardens",
+    "location": "Los Angeles",
+    "category": "co-operative",
+    "description": "Rolland Curtis Gardens is a community-serving development that incorporates the concept of mixed-use that opens doors to affordable housing through not only the sustainably responsible design but also through the community-driven development process. This development is also one of the few large-scale affordable housing that is transit oriented in the area surrounding Downtown Los Angeles.\n\n\nT.R.U.S.T. South LA alongside Abode Communities, bought what was originally owned by Wisconsin Gardens Development Co. after a long conflict between the (at the time) owner, Jeffrey Greene, and his plans to rent the space to the USC student population. This displacement of low income families, made T.R.U.S.T South LA begin a campaign that resulted in the protection of the tenants. This resulted in T.R.U.S.T South LA and Abode Communities purchasing the space and beginning their community-oriented six-month planning and development process, leading to a finished renovation by 2017.\n\n\nRolland Curtis Gardens embodies the goals not only of the stakeholders but also of the tenants and surrounding community, these include affordable housing through creative designs, mobility and access around site, parking, commercial space that addresses the commercial gap in the community, green gathering spaces and safety. The result was an organized combination of residences including multiple community rooms and on-site facilities, programmable and green open spaces, and commercial retail and services. ",
+    "year_completed": "1981 (remodeled in 2017)",
+    "owner": "Abode Communities and T.R.U.S.T. South LA",
+    "lot_size_sqft": "196,377 sqft",
+    "units": "140",
+    "address": "1077 West 38th St., Los Angeles CA",
+    "coordinates": "34.01783, -118.29372",
+    "image": "https://aha-website2025.github.io/AHA/projects/rolland-curtis-gardens/image.jpg",
+    "slug": "rolland-curtis-gardens"
+  },
+  {
     "title": "Star Apartments",
     "location": "Los Angeles, USA",
     "category": "public/social housing",
