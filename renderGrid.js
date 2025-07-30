@@ -9,12 +9,27 @@ const layout = [
   "data", "data", "hatch", "model", "data",
   "blank", "model", "data", "data", "hatch",
   "data", "hatch", "data", "data", "blank",
-  "hatch", "data", "model", "data", "data"
+  "hatch", "data", "model", "blank", "data"
 ];
 
 let allProjects = [];
 
-function createTile(type, project = null) {
+const modelImages = [
+  "graphics/Cooperative Housing.png",
+  "graphics/Syndicate Model.png",
+  "graphics/CLT Model.png",
+];
+
+function shuffleArray(array) {
+  const copy = [...array];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function createTile(type, project = null, modelImage = null) {
   const div = document.createElement("div");
 
   if (type === "data" && project) {
@@ -35,12 +50,13 @@ function createTile(type, project = null) {
       </a>
         `;
   } else if (type === "model") {
-    div.classList.add("tile", "model-tile");
-    div.innerHTML = `
-      <div class="model-content">
-        <img src="assets/model-diagram.png" alt="Model Diagram">
-        <div class="model-label">Cooperative Housing</div>
-      </div>
+     const fileName = modelImage.split('/').pop().replace('.png', ''); // e.g. "model3"
+      div.classList.add("tile", "model-tile");
+      div.innerHTML = `
+        <div class="model-content">
+          <img src="${modelImage}" alt="${fileName}" class="model-image">
+          <div class="model-label">${fileName}</div>
+        </div>
     `;
   } else {
     div.classList.add("tile", type); // 'hatch' or 'blank'
@@ -68,11 +84,15 @@ function renderGrid(projects) {
  
      // Full grid layout
      let dataIndex = 0;
+     const shuffledModelImages = shuffleArray(modelImages);
+    let modelIndex = 0;
      layout.forEach(type => {
        let tileDiv;
  
        if (type === "data" && dataIndex < projects.length) {
          tileDiv = createTile("data", projects[dataIndex++]);
+       } else if (type === "model" && modelIndex < shuffledModelImages.length) {
+         tileDiv = createTile("model", null, shuffledModelImages[modelIndex++]);
        } else {
          tileDiv = createTile(type);
        }

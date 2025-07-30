@@ -10,17 +10,17 @@ body {
   justify-content: center;  /* center horizontally */
   align-items: center;      /* center vertically */
   padding-top: 0rem;     /* reduced from larger value */
-  padding-bottom: 0rem;
-  margin-top: 0; 
+  padding-bottom: 2rem;
+  margin-top: 20px; 
 }
 
 .logo {
-  max-width: 600px;
+  max-width: 300px;
 }
 
 .menu {
   position: absolute;
-  top: 100px;
+  top: 40px;
   right: 40px;
   z-index: 1000;
 }
@@ -51,7 +51,7 @@ body {
   margin: 10;
   background: none;
   border: none;
-  transform: translateY(-90px);
+  transform: translateY(-28px);
 }
 
 .menu-items li {
@@ -62,14 +62,80 @@ body {
 .menu-items li a {
   text-decoration: none;
   color: #111;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: Calibri, sans-serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 17px;
 }
 
 .menu-items li a:hover {
   color: #666;
 }
+
+
+
+/* ============================
+     SEARCH BAR
+   ============================ */
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 100px auto 0; /* adjust to match grid padding */
+}
+
+.search-bar input {
+  padding: 0.3rem 0.8rem;
+  font-size: 0.8rem;
+  border: none;
+  width: 200px;
+}
+
+
+/* // filter menu // */
+
+
+.filter-btn {
+  padding: 0.3rem 0.8rem;
+  background: white;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  color: #555555; 
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+.filter-wrapper {
+  position: relative; 
+}
+
+#categoryMenu {
+  position: absolute;
+  top: 100%; 
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 120px; 
+  background: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: none;
+  z-index: 1000;
+  text-align: left;
+  color: #555555; 
+  font-family: Calibri, sans-serif;
+}
+
+#categoryMenu div {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+#categoryMenu div:hover {
+  background-color: #f0f0f0;
+}
+
 
 .flip-card {
   perspective: 1000px;
@@ -158,60 +224,31 @@ body {
 
 .home-page .housing-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
-  padding: 80px 350px;
-}
-
-.home-page .grid-wrapper {
-  position: relative;
-  padding: 60px;
-}
-
-#grid-container {
-  display: grid;
   position: relative;
   grid-template-columns: repeat(5, 1fr);
-  gap: 15px;
-}
-
-.grid-line {
-  background-color: transparent;
-  border-top: 2px dashed red;  /* for horizontal */
-  border-left: 2px dashed red; /* for vertical */
-}
-
-
-.tile {
-  width: 225px; 
-  aspect-ratio: 1 / 0.9; 
-  background: none;
-  overflow: hidden;
-  padding: 0;
-  display: block;
-}
-
-
-.tile img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.home-page .grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 24px;
-  position: relative;
+  gap: 15px; 
+  padding: 40px 100px; /
+  width: fit-content;              
+  margin: 0 auto;                  
+  padding: 40px 0;  
 }
 
 .home-page .tile {
+  width: 230px;   
+  aspect-ratio: 1 / 0.9;
+  display: block;
+  overflow: hidden;
   background: none;
-  color: inherit;
-  padding: 0;
 }
 
+.home-page .tile:nth-child(5n+1) {
+  border-left: none;
+}
+
+
+.home-page .tile:nth-child(-n+5) {
+  border-top: none;
+}
 
 
 .home-page .tile img {
@@ -221,7 +258,26 @@ body {
   display: block;
 }
 
-/* Placeholder styles */
+.home-page .grid-wrapper {
+  position: relative;
+  padding: 60px;
+}
+
+
+.home-page .tile {
+  background: none;
+  color: inherit;
+  padding: 0;
+}
+
+
+.home-page .tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .home-page .blank {
   background: transparent;
   aspect-ratio: 1 / 0.9;
@@ -273,36 +329,10 @@ body {
   font-size: 0.8rem;
   margin-top: 0.5rem;
   text-align: center;
-  font-family: sans-serif;
+  font-family: Calibri, sans-serif;
 }
 
 
-
-/* ============================
-     SEARCH BAR
-   ============================ */
-.search-bar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin: 40px auto 0; /* adjust to match grid padding */
-}
-
-.filter-btn {
-  padding: 0.4rem 1rem;
-  background: white;
-  border: none;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.search-bar input {
-  padding: 0.4rem 1rem;
-  font-size: 0.95rem;
-  border: none;
-  width: 250px;
-}
 
 
 
@@ -523,43 +553,4 @@ body {
   
   .home-page .tile.flip-in {
     animation: flipIn 0.6s ease-out forwards;
-}
-
-  
-/* // filter menu // */
-
-.search-bar {
-  position: relative; /* 👈 Add this line */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-
-.filter-wrapper {
-  position: relative; /* 👈 very important */
-}
-
-#categoryMenu {
-  position: absolute;
-  top: 100%; /* Adjust depending on your button height */
-  left: 0;
-  right: 0;
-  margin: auto;
-  width: 150px; /* or whatever looks good */
-  background: white;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  display: none;
-  z-index: 1000;
-  text-align: left;
-}
-
-#categoryMenu div {
-  padding: 8px 12px;
-  cursor: pointer;
-}
-
-#categoryMenu div:hover {
-  background-color: #f0f0f0;
 }
