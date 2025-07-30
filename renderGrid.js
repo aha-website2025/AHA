@@ -124,13 +124,12 @@ fetch("https://aha-website2025.github.io/AHA/projects.json")
     setTimeout(drawDashedLinesBetweenTiles, 100);
   });
 
-
 function drawDashedLinesBetweenTiles() {
   const container = document.getElementById("grid-container");
   const tiles = Array.from(container.querySelectorAll(".tile"));
 
-  // Clear previous lines
-  document.querySelectorAll(".grid-line").forEach(line => line.remove());
+  // Remove old lines
+  container.querySelectorAll(".grid-line").forEach(line => line.remove());
 
   for (let i = 0; i < tiles.length; i++) {
     const tileA = tiles[i];
@@ -140,44 +139,40 @@ function drawDashedLinesBetweenTiles() {
       const tileB = tiles[j];
       const rectB = tileB.getBoundingClientRect();
 
-      // Check if they are adjacent horizontally
+      // Horizontal adjacency
       if (Math.abs(rectA.top - rectB.top) < 5 &&
           Math.abs(rectA.right - rectB.left) < 5) {
         const line = document.createElement("div");
         line.className = "grid-line";
-        line.style.top = `${rectA.top + window.scrollY}px`;
-        line.style.left = `${rectA.right + window.scrollX - 1}px`;
-        line.style.width = "1px";
-        line.style.height = `${rectA.height}px`;
-        line.style.borderLeft = "1px dashed #ccc";
         line.style.position = "absolute";
+        line.style.top = `${tileA.offsetTop}px`;
+        line.style.left = `${tileA.offsetLeft + tileA.offsetWidth - 1}px`;
+        line.style.width = "1px";
+        line.style.height = `${tileA.offsetHeight}px`;
+        line.style.borderLeft = "1px dashed #ccc";
         line.style.pointerEvents = "none";
-
-        line.style.backgroundColor = "red"; // just for testing
-
+        line.style.backgroundColor = "red"; // test visibility
         container.appendChild(line);
       }
 
-      // Check if they are adjacent vertically
+      // Vertical adjacency
       if (Math.abs(rectA.left - rectB.left) < 5 &&
           Math.abs(rectA.bottom - rectB.top) < 5) {
         const line = document.createElement("div");
         line.className = "grid-line";
-        line.style.left = `${rectA.left + window.scrollX}px`;
-        line.style.top = `${rectA.bottom + window.scrollY - 1}px`;
-        line.style.height = "1px";
-        line.style.width = `${rectA.width}px`;
-        line.style.borderTop = "1px dashed #ccc";
         line.style.position = "absolute";
+        line.style.left = `${tileA.offsetLeft}px`;
+        line.style.top = `${tileA.offsetTop + tileA.offsetHeight - 1}px`;
+        line.style.width = `${tileA.offsetWidth}px`;
+        line.style.height = "1px";
+        line.style.borderTop = "1px dashed #ccc";
         line.style.pointerEvents = "none";
-        
-        line.style.backgroundColor = "red"; // just for testing
-
-
+        line.style.backgroundColor = "red"; // test visibility
         container.appendChild(line);
       }
     }
   }
 }
+
 
   
