@@ -84,6 +84,7 @@ function handleSearch() {
   );
 
   renderGrid(filtered);
+  setTimeout(drawDashedLinesBetweenTiles, 100);
 }
 
 function handleCategoryFilter(selectedCategory) {
@@ -97,11 +98,13 @@ function handleCategoryFilter(selectedCategory) {
   });
 
   renderGrid(filtered);
+  setTimeout(drawDashedLinesBetweenTiles, 100);
   document.getElementById("categoryMenu").style.display = "none"; // close menu
 }
 
 function showAllProjects() {
   renderGrid(allProjects);
+  setTimeout(drawDashedLinesBetweenTiles, 100);
   document.getElementById("categoryMenu").style.display = "none"; // close the menu
 }
 
@@ -112,16 +115,69 @@ function toggleCategoryMenu() {
 }
 
 
-
-
 // Load data and initialize grid + flip animation
 fetch("https://aha-website2025.github.io/AHA/projects.json")
   .then(res => res.json())
   .then(data => {
     allProjects = data;
     renderGrid(allProjects);
-    // setTimeout(sequentialFlipProjects, 300); // 👈 trigger animation after render
+    setTimeout(drawDashedLinesBetweenTiles, 100);
   });
 
-  
+
+function drawDashedLinesBetweenTiles() {
+  const container = document.getElementById("grid-container");
+  const tiles = Array.from(container.querySelectorAll(".tile"));
+
+  // Clear previous lines
+  document.querySelectorAll(".grid-line").forEach(line => line.remove());
+
+  for (let i = 0; i < tiles.length; i++) {
+    const tileA = tiles[i];
+    const rectA = tileA.getBoundingClientRect();
+
+    for (let j = i + 1; j < tiles.length; j++) {
+      const tileB = tiles[j];
+      const rectB = tileB.getBoundingClientRect();
+
+      // Check if they are adjacent horizontally
+      if (Math.abs(rectA.top - rectB.top) < 5 &&
+          Math.abs(rectA.right - rectB.left) < 5) {
+        const line = document.createElement("div");
+        line.className = "grid-line";
+        line.style.top = `${rectA.top + window.scrollY}px`;
+        line.style.left = `${rectA.right + window.scrollX - 1}px`;
+        line.style.width = "1px";
+        line.style.height = `${rectA.height}px`;
+        line.style.borderLeft = "1px dashed #ccc";
+        line.style.position = "absolute";
+        line.style.pointerEvents = "none";
+
+        line.style.backgroundColor = "red"; // just for testing
+
+        container.appendChild(line);
+      }
+
+      // Check if they are adjacent vertically
+      if (Math.abs(rectA.left - rectB.left) < 5 &&
+          Math.abs(rectA.bottom - rectB.top) < 5) {
+        const line = document.createElement("div");
+        line.className = "grid-line";
+        line.style.left = `${rectA.left + window.scrollX}px`;
+        line.style.top = `${rectA.bottom + window.scrollY - 1}px`;
+        line.style.height = "1px";
+        line.style.width = `${rectA.width}px`;
+        line.style.borderTop = "1px dashed #ccc";
+        line.style.position = "absolute";
+        line.style.pointerEvents = "none";
+        
+        line.style.backgroundColor = "red"; // just for testing
+
+
+        container.appendChild(line);
+      }
+    }
+  }
+}
+
   
