@@ -242,7 +242,34 @@ body {
 }
 
 
+.model-tile {
+  background-color: #111 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  aspect-ratio: 1 / 0.9;
+  padding: 1rem;
+  box-sizing: border-box;
+  position: relative;
+}
 
+.model-tile img {
+  max-width: 80%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.model-label {
+  color: #fff;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  text-align: center;
+  font-family: sans-serif;
+}
 
 
 

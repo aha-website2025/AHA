@@ -6,8 +6,8 @@ function toggleMenu() {
 
 const layout = [
   "hatch", "data", "data", "hatch", "blank",
-  "data", "data", "hatch", "data", "data",
-  "blank", "data", "data", "data", "hatch",
+  "data", "data", "hatch", "model", "data",
+  "blank", "model", "data", "data", "hatch",
   "data", "hatch", "data", "data", "blank",
   "hatch", "data", "blank", "data", "data"
 ];
@@ -34,6 +34,14 @@ function createTile(type, project = null) {
           </div>
       </a>
         `;
+  } else if (type === "model") {
+    div.classList.add("tile", "model-tile");
+    div.innerHTML = `
+      <div class="model-content">
+        <img src="assets/model-diagram.png" alt="Model Diagram">
+        <div class="model-label">Cooperative Housing</div>
+      </div>
+    `;
   } else {
     div.classList.add("tile", type); // 'hatch' or 'blank'
   }
@@ -215,9 +223,9 @@ function drawVerticalDashedLines() {
     const line = document.createElement("div");
     line.className = "vertical-grid-line";
     line.style.position = "absolute";
-    line.style.top = `${topEdge - containerRect.top - 20}px`;
+    line.style.top = `${topEdge - containerRect.top - 15}px`;
     line.style.left = `${midX}px`;
-    line.style.height = `${gridHeight + 40}px`; // Extend 20px beyond top and bottom
+    line.style.height = `${gridHeight + 30}px`; // Extend 20px beyond top and bottom
     line.style.width = "1px";
     line.style.backgroundImage = "repeating-linear-gradient(to bottom, #ccc 0, #ccc 6px, transparent 5px, transparent 11px)";
     line.style.pointerEvents = "none";
