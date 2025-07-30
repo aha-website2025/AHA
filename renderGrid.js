@@ -9,7 +9,7 @@ const layout = [
   "data", "data", "hatch", "model", "data",
   "blank", "model", "data", "data", "hatch",
   "data", "hatch", "data", "data", "blank",
-  "hatch", "data", "blank", "data", "data"
+  "hatch", "data", "model", "data", "data"
 ];
 
 let allProjects = [];
@@ -177,7 +177,7 @@ function drawDashedLinesBetweenTileRows() {
     line.style.width = `${(rightEdge - leftEdge) + 30}px`;
     line.style.borderTop = "none";
     line.style.height = "1px";
-    line.style.backgroundImage = "repeating-linear-gradient(to right, #ccc 0, #ccc 4px, transparent 5px, transparent 8px)";
+    line.style.backgroundImage = "repeating-linear-gradient(to right, #ccc 0, #ccc 4px, transparent 5px, transparent 9px)";
     line.style.pointerEvents = "none";
     line.style.zIndex = "1000";
 
@@ -227,7 +227,7 @@ function drawVerticalDashedLines() {
     line.style.left = `${midX}px`;
     line.style.height = `${gridHeight + 30}px`; // Extend 20px beyond top and bottom
     line.style.width = "1px";
-    line.style.backgroundImage = "repeating-linear-gradient(to bottom, #ccc 0, #ccc 6px, transparent 5px, transparent 11px)";
+    line.style.backgroundImage = "repeating-linear-gradient(to bottom, #ccc 0, #ccc 4px, transparent 5px, transparent 9px)";
     line.style.pointerEvents = "none";
     container.appendChild(line);
   }
