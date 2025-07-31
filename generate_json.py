@@ -1,16 +1,17 @@
 import os
 import json
 import re
+from unidecode import unidecode
 
 PROJECTS_DIR = "projects"
 OUTPUT_FILE = "projects.json"
 BASE_URL = "https://aha-website2025.github.io/AHA"
 
 def slugify(text):
-    text = text.lower()
-    text = re.sub(r'[^a-z0-9\s-]', '', text)  # remove punctuation
-    text = re.sub(r'[\s-]+', '-', text)       # replace spaces/hyphens with single hyphen
-    return text.strip('-')
+    text = unidecode(text).lower()                        
+    text = re.sub(r'[^a-z0-9\s-]', '', text)              
+    text = re.sub(r'[\s-]+', '-', text)                   
+    return text.strip('-') 
 
 def find_image_path(project_path):
     for ext in ['jpg', 'jpeg', 'png']:
