@@ -31,7 +31,7 @@ function createTile(type, project = null, modelImage = null) {
   if (type === "data" && project) {
     div.classList.add("tile", "flip-card");
     div.innerHTML = `
-      <a href="project.html?slug=${project.slug}" class="project-card">  
+      <a href="page_project.html?slug=${project.slug}" class="project-card">  
         <div class="flip-inner">
             <div class="flip-front">
               <img src="${project.image}" alt="${project.title}" />
@@ -48,7 +48,7 @@ function createTile(type, project = null, modelImage = null) {
   } else if (type === "model") {
      div.classList.add("tile", "model-tile");
       div.innerHTML = `
-        <a href="model.html?slug=${modelImage.slug}">
+        <a href="page_model.html?slug=${modelImage.slug}">
           <div class="model-content">
             <img src="${modelImage.logo_image}" alt="${modelImage.type}" class="model-image">
             <div class="model-label">${modelImage.type}</div>
