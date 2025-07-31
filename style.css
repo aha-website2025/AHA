@@ -233,22 +233,30 @@ body {
 }
 
 .model-tile img {
-  max-width: 60%;
+  max-width: 55%;
   height: auto;
   display: block;
   margin: 0 auto;
-  margin-top: 0.9rem;
+  margin-top: 1rem;
 }
 
 .model-label {
   color: #fff;
-  font-size: 0.9rem;
-  margin-top: 0.8rem;
+  font-size: 0.85rem;
+  margin-top: 0.9rem;
   text-align: center;
   font-family: sans-serif;
 }
 
+.model-tile a {
+  text-decoration: none;
+  color: inherit;
+}
 
+.model-tile a:visited {
+  color: inherit;
+  text-decoration: none;
+}
 
 .flip-card {
   perspective: 1000px;
