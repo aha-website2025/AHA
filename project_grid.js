@@ -34,7 +34,7 @@ async function loadProject() {
 
   const tiles = [
     {
-      class: "tile title-tile",
+      class: "tile title",
       style: "grid-column: 1 / 2;",
       html: `<h2>${project.title.toUpperCase()}</h2><p>${project.location}</p>`
     },
@@ -68,16 +68,16 @@ async function loadProject() {
         <p><strong>Year completed: </strong>${project.year_completed}</p>
         <p><strong>Owner: </strong>${project.owner}</p>
         <p><strong>Architect: </strong>${project.architect}</p>
-        <p><strong>Lot size: </strong>${project.lot_size_sqft} sqft</p>`
+        <p><strong>Lot size: </strong>${project.lot_size_sqft}</p>`
     },
     {
       class: "tile text-left",
       style: "grid-column: 3 / 4;",
       html: `
-        <p><strong>Total floor space: </strong>${project.floor_space_sqft} sqft</p>
+        <p><strong>Total floor space: </strong>${project.floor_space_sqft}</p>
         <p><strong># of units: </strong>${project.units}</p>
         <p><strong>Unit distribution: </strong>${project.unit_distribution}</p>
-        <p><strong># of inhabitants: </strong>${project.inhabitants_per_unit} people/unit</p>`
+        <p><strong># of inhabitants: </strong>${project.inhabitants_per_unit}</p>`
     },
     {
       class: "tile hatch",
@@ -123,7 +123,7 @@ async function loadProject() {
     },
     {
       class: "tile hatch",
-      style: "grid-column: 2 / 3; grid-row: 6;",
+      style: "grid-column: 1 / 2; grid-row: 6;",
       html: ""
     },
     {
@@ -164,10 +164,30 @@ async function loadProject() {
     if (tile.class.includes("description")) {
      div.addEventListener("click", () => {
     div.classList.toggle("expanded");
-  });
-}
+      });
+    }
+  }
+  
+  const titleTile = document.querySelector(".tile.title");
+  const doubleTiles = document.querySelectorAll(".tile.full-bleed.double");
+  const projectGrid = document.getElementById("projectGrid");
+
+  if (titleTile && projectGrid) {
+    const rowHeight = titleTile.offsetHeight;
+    const gap = 15;
+    const doubleHeight = 2 * rowHeight + gap;
+
+    projectGrid.style.gridAutoRows = `${rowHeight}px`;
+
+    doubleTiles.forEach(tile => {
+      tile.style.height = `${doubleHeight}px`;
+    });
   }
 }
+
+window.addEventListener("resize", () => {
+  loadProject(); // reloads and recalculates layout
+});
 
 // 🔍 Image popup
 function showPopup(src) {

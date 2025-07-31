@@ -13,12 +13,8 @@ const layout = [
 ];
 
 let allProjects = [];
+let allModels = [];
 
-const modelImages = [
-  "graphics/Cooperative Housing.png",
-  "graphics/Syndicate Model.png",
-  "graphics/CLT Model.png",
-];
 
 function shuffleArray(array) {
   const copy = [...array];
@@ -50,13 +46,14 @@ function createTile(type, project = null, modelImage = null) {
       </a>
         `;
   } else if (type === "model") {
-     const fileName = modelImage.split('/').pop().replace('.png', ''); // e.g. "model3"
-      div.classList.add("tile", "model-tile");
+     div.classList.add("tile", "model-tile");
       div.innerHTML = `
-        <div class="model-content">
-          <img src="${modelImage}" alt="${fileName}" class="model-image">
-          <div class="model-label">${fileName}</div>
-        </div>
+        <a href="model.html?slug=${modelImage.slug}">
+          <div class="model-content">
+            <img src="${modelImage.logo_image}" alt="${modelImage.type}" class="model-image">
+            <div class="model-label">${modelImage.type}</div>
+          </div>
+        </a>
     `;
   } else {
     div.classList.add("tile", type); // 'hatch' or 'blank'
@@ -84,7 +81,7 @@ function renderGrid(projects) {
  
      // Full grid layout
      let dataIndex = 0;
-     const shuffledModelImages = shuffleArray(modelImages);
+     const shuffledModelImages = shuffleArray(allModels);
     let modelIndex = 0;
      layout.forEach(type => {
        let tileDiv;
@@ -143,12 +140,13 @@ function toggleCategoryMenu() {
 }
 
 
-// Load data and initialize grid + flip animation
-fetch("https://aha-website2025.github.io/AHA/projects.json") 
-  .then(res => res.json())
-  .then(data => {
-    allProjects = data;
-    renderGrid(allProjects);
+Promise.all([
+  fetch("https://aha-website2025.github.io/AHA/projects.json").then(res => res.json()),
+  fetch("https://aha-website2025.github.io/AHA/models.json").then(res => res.json())
+]).then(([projectsData, modelsData]) => {
+  allProjects = projectsData;
+  allModels = modelsData;
+  renderGrid(allProjects);
 
     setTimeout(() => {
       drawDashedLinesBetweenTileRows(); // horizontal lines
