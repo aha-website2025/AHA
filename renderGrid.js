@@ -209,46 +209,44 @@ function drawDashedLinesBetweenTileRows() {
 function drawVerticalDashedLines() {
   const container = document.getElementById("grid-container");
   const tiles = Array.from(container.querySelectorAll(".tile"));
-  const containerRect = container.getBoundingClientRect();
 
   // Remove old lines
-  container.querySelectorAll(".vertical-grid-line").forEach(line => line.remove());
+  document.querySelectorAll(".vertical-grid-line").forEach(line => line.remove());
 
   if (tiles.length === 0) return;
 
-  // Group tiles by their `left` positions (i.e., columns)
-  const columnMap = new Map();
+  const columns = new Map();
 
   tiles.forEach(tile => {
     const rect = tile.getBoundingClientRect();
-    const left = Math.round(rect.left);
-    if (!columnMap.has(left)) columnMap.set(left, []);
-    columnMap.get(left).push(rect);
+    const left = Math.round(rect.left + window.scrollX);
+    if (!columns.has(left)) columns.set(left, []);
+    columns.get(left).push(rect);
   });
 
-  const sortedColumns = [...columnMap.entries()].sort((a, b) => a[0] - b[0]);
+  const sortedColumns = [...columns.entries()].sort((a, b) => a[0] - b[0]);
 
-  // Measure top and bottom bounds of the entire grid
-  const topEdge = Math.min(...tiles.map(tile => tile.getBoundingClientRect().top));
-  const bottomEdge = Math.max(...tiles.map(tile => tile.getBoundingClientRect().bottom));
+  const topEdge = Math.min(...tiles.map(tile => tile.getBoundingClientRect().top + window.scrollY));
+  const bottomEdge = Math.max(...tiles.map(tile => tile.getBoundingClientRect().bottom + window.scrollY));
   const gridHeight = bottomEdge - topEdge;
 
-  // For each column pair, draw a dashed line in between
   for (let i = 0; i < sortedColumns.length - 1; i++) {
     const [left1, rects1] = sortedColumns[i];
-    const [left2, rects2] = sortedColumns[i + 1];
+    const [left2] = sortedColumns[i + 1];
 
-    const midX = (left1 + rects1[0].width + left2) / 2 - containerRect.left;
+    const midX = (left1 + rects1[0].width + left2) / 2;
 
     const line = document.createElement("div");
     line.className = "vertical-grid-line";
     line.style.position = "absolute";
-    line.style.top = `${topEdge - containerRect.top - 15}px`;
+    line.style.top = `${topEdge - 15}px`;
     line.style.left = `${midX}px`;
-    line.style.height = `${gridHeight + 30}px`; // Extend 20px beyond top and bottom
+    line.style.height = `${gridHeight + 30}px`;
     line.style.width = "1px";
     line.style.backgroundImage = "repeating-linear-gradient(to bottom, #ccc 0, #ccc 4px, transparent 5px, transparent 9px)";
     line.style.pointerEvents = "none";
-    container.appendChild(line);
+    line.style.zIndex = "1000";
+
+    document.body.appendChild(line);
   }
 }

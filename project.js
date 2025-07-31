@@ -3,6 +3,20 @@ function toggleMenu() {
   menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
 
+// 📁 Dynamic fallback loader
+function getImagePath(slug, filenameBase) {
+  return new Promise(resolve => {
+    const tryJpg = `projects/${slug}/${filenameBase}.jpg`;
+    const tryPng = `projects/${slug}/${filenameBase}.png`;
+
+    const img = new Image();
+    img.onload = () => resolve(tryJpg);
+    img.onerror = () => resolve(tryPng);
+    img.src = tryJpg;
+  });
+}
+
+// 📦 Load and render a project grid
 async function loadProject() {
   const urlParams = new URLSearchParams(window.location.search);
   const slug = urlParams.get("slug");
@@ -22,11 +36,7 @@ async function loadProject() {
     {
       class: "tile title-tile",
       style: "grid-column: 1 / 2;",
-      html: `
-        <img src="${project.image}" alt="${project.title}" />
-        <h2>${project.title.toUpperCase()}</h2>
-        <p>${project.location}</p>
-      `
+      html: `<h2>${project.title.toUpperCase()}</h2><p>${project.location}</p>`
     },
     {
       class: "tile blank",
@@ -36,26 +46,29 @@ async function loadProject() {
     {
       class: "tile full-bleed",
       style: "grid-column: 3 / 4; grid-row: 1 / 2;",
-      html: `<img src="projects/${slug}/1.jpg" alt="Photo 1" />`
+      image: "1",
+      alt: "Photo 1"
     },
     {
       class: "tile full-bleed double",
       style: "grid-column: 4 / 5; grid-row: 1 / span 2;",
-      html: `<img src="projects/${slug}/big1.jpg" alt="Photo 2" />`
+      image: "big1",
+      alt: "Photo 2"
     },
     {
       class: "tile full-bleed",
       style: "grid-column: 1 / 2; grid-row: 2 / 3;",
-      html: `<img src="projects/${slug}/2.jpg" alt="Photo 3" />`
+      image: "2",
+      alt: "Photo 3"
     },
     {
       class: "tile text-left",
       style: "grid-column: 2 / 3;",
       html: `
-          <p><strong>Year completed: </strong>${project.year_completed}</p>
-          <p><strong>Owner: </strong>${project.owner}</p>
-          <p><strong>Architect: </strong>${project.architect}</p>
-          <p><strong>Lot size: </strong>${project.lot_size_sqft} sqft</p>`
+        <p><strong>Year completed: </strong>${project.year_completed}</p>
+        <p><strong>Owner: </strong>${project.owner}</p>
+        <p><strong>Architect: </strong>${project.architect}</p>
+        <p><strong>Lot size: </strong>${project.lot_size_sqft} sqft</p>`
     },
     {
       class: "tile text-left",
@@ -73,8 +86,9 @@ async function loadProject() {
     },
     {
       class: "tile full-bleed",
-      style: "grid-column: 2 / 3; grid-row: 3",
-      html: `<img src="projects/${slug}/3.jpg" alt="Photo 3" />`
+      style: "grid-column: 2 / 3; grid-row: 3;",
+      image: "3",
+      alt: "Photo 4"
     },
     {
       class: "tile blank",
@@ -84,59 +98,72 @@ async function loadProject() {
     {
       class: "description",
       style: "grid-column: 4 / 5; grid-row: 3 / span 2;",
-      html: `${project.description
+      html: project.description
         .split(/\n\s*\n/)
         .map(p => `<p>${p.trim()}</p>`)
-        .join("")}`
+        .join("") + `<div class="expand-indicator">expand →</div>`
     },
     {
       class: "tile full-bleed double",
       style: "grid-column: 2 / 4; grid-row: 4 / span 2;",
-      html: `<img src="projects/${slug}/big2.jpg" alt="Photo 2" />`
+      image: "big2",
+      alt: "Photo 5"
     },
     {
       class: "tile full-bleed",
-      style: "grid-column: 1 / 2; grid-row: 5",
-      html: `<img src="projects/${slug}/4.jpg" alt="Photo 4" />`
+      style: "grid-column: 1 / 2; grid-row: 5;",
+      image: "4",
+      alt: "Photo 6"
     },
     {
       class: "tile full-bleed",
-      style: "grid-column: 4 / 5; grid-row: 5",
-      html: `<img src="projects/${slug}/5.jpg" alt="Photo 5" />`
+      style: "grid-column: 4 / 5; grid-row: 5;",
+      image: "5",
+      alt: "Photo 7"
     },
     {
       class: "tile hatch",
-      style: "grid-column: 2 / 3; grid-row: 6",
+      style: "grid-column: 2 / 3; grid-row: 6;",
       html: ""
     },
     {
       class: "tile full-bleed double",
       style: "grid-column: 3 / 5; grid-row: 6 / span 2;",
-      html: `<img src="projects/${slug}/big3.jpg" alt="Photo 2" />`
+      image: "big3",
+      alt: "Photo 8"
     }
-
   ];
 
-  // Render each tile
-  tiles.forEach((tile, index) => {
+  for (const tile of tiles) {
     const div = document.createElement("div");
     div.className = tile.class;
     if (tile.style) div.style = tile.style;
-    div.innerHTML = tile.html;
+
+    // Load image fallback if needed
+    if (tile.image) {
+      const src = await getImagePath(slug, tile.image);
+      div.innerHTML = `<img src="${src}" alt="${tile.alt}" />`;
+    } else {
+      div.innerHTML = tile.html;
+    }
+
     grid.appendChild(div);
 
-    // Add popup behavior to all image tiles except the first one
     const img = div.querySelector("img");
-    if (img && index !== 0) {
+    if (img) {
       img.style.cursor = "pointer";
-      img.addEventListener("click", () => {
-        showPopup(img.src);
-      });
+      img.addEventListener("click", () => showPopup(img.src));
     }
+    
+    if (tile.class.includes("description")) {
+     div.addEventListener("click", () => {
+    div.classList.toggle("expanded");
   });
 }
+  }
+}
 
-// Helper to show popup
+// 🔍 Image popup
 function showPopup(src) {
   const overlay = document.createElement("div");
   overlay.className = "image-popup-overlay";
@@ -148,15 +175,13 @@ function showPopup(src) {
   overlay.appendChild(popupImage);
   document.body.appendChild(overlay);
 
+  document.body.style.overflow = "hidden";
+
   overlay.addEventListener("click", () => {
     document.body.removeChild(overlay);
-  });
-
-  // Optional: lock scroll while open
-  document.body.style.overflow = "hidden";
-  overlay.addEventListener("click", () => {
     document.body.style.overflow = "";
   });
 }
 
 window.onload = loadProject;
+

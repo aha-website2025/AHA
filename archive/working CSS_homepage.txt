@@ -1,3 +1,5 @@
+/working CSS_homepage/
+
 body {
   margin: 0;
   padding: 0;
@@ -137,117 +139,6 @@ body {
 }
 
 
-
-/* ========================
-   HOMEPAGE-SPECIFIC STYLES
-   ======================== */
-
-
-/* === Grid Container === */
-.home-page .housing-grid {
-  display: grid;
-  position: relative;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 15px; 
-  padding: 40px 100px; 
-  width: fit-content;             
-  margin: 0 auto;                   
-  padding: 40px 0;  
-}
-
-.home-page .tile {
-  width: 230px;   
-  aspect-ratio: 1 / 0.9;
-  display: block;
-  overflow: hidden;
-  background: none;
-}
-
-.home-page .tile:nth-child(5n+1) {
-  border-left: none;
-}
-
-.home-page .tile:nth-child(-n+5) {
-  border-top: none;
-}
-
-.home-page .tile img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.home-page .grid-wrapper {
-  position: relative;
-  padding: 60px;
-}
-
-
-.home-page .tile {
-  background: none;
-  color: inherit;
-  padding: 0;
-}
-
-
-.home-page .blank {
-  background: transparent;
-  aspect-ratio: 1 / 0.9;
-}
-
-.home-page .hatch {
-  aspect-ratio: 1 / 0.9;
-  background: linear-gradient(
-    45deg,
-    #ccc 10%,
-    transparent 10%,
-    transparent 50%,
-    #ccc 50%,
-    #ccc 60%,
-    transparent 60%,
-    transparent
-  );
-  background-size: 8px 8px;
-  background-color: transparent;
-  border: none;
-  box-shadow: none;
-  pointer-events: none;
-}
-
-
-.model-tile {
-  background-color: #111 !important;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 100%;
-  aspect-ratio: 1 / 0.9;
-  padding: 1rem;
-  box-sizing: border-box;
-  position: relative;
-}
-
-.model-tile img {
-  max-width: 60%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  margin-top: 0.9rem;
-}
-
-.model-label {
-  color: #fff;
-  font-size: 0.9rem;
-  margin-top: 0.8rem;
-  text-align: center;
-  font-family: sans-serif;
-}
-
-
-
 .flip-card {
   perspective: 1000px;
   aspect-ratio: 1 / 0.9; /* 👈 maintain aspect ratio */
@@ -300,14 +191,13 @@ body {
   margin: 0;
   font-family: sans-serif;
   font-weight: bold;
-  color: white; /* project name in white */
+  color: white; /* 👈 project name in white */
 }
 
 .flip-back p {
   margin: 0;
   font-family: sans-serif;
-  color: #bbb; /* location in grey */
-  font-size: 0.9rem;
+  color: #bbb; /* 👈 location in grey */
 }
 
 .flip-text {
@@ -329,6 +219,130 @@ body {
   color: white;
 }
 
+/* ========================
+   HOMEPAGE-SPECIFIC STYLES
+   ======================== */
+
+
+/* === Grid Container === */
+.home-page .housing-grid {
+  display: grid;
+  position: relative;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px; /* no gap between tiles to align borders */
+  padding: 40px 100px; /* adjust padding as needed */
+  width: fit-content;               /* Shrinks to fit grid */
+  margin: 0 auto;                   /* Centers horizontally */
+  padding: 40px 0;  
+}
+
+/* === Tile Styling === */
+.home-page .tile {
+  width: 230px;   
+  aspect-ratio: 1 / 0.9;
+  display: block;
+  overflow: hidden;
+  background: none;
+}
+
+/* Remove left border from first column tiles */
+.home-page .tile:nth-child(5n+1) {
+  border-left: none;
+}
+
+/* Remove top border from first row tiles */
+.home-page .tile:nth-child(-n+5) {
+  border-top: none;
+}
+
+/* === Tile Image === */
+.home-page .tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* === Optional Wrapper === */
+.home-page .grid-wrapper {
+  position: relative;
+  padding: 60px;
+}
+
+
+.home-page .tile {
+  background: none;
+  color: inherit;
+  padding: 0;
+}
+
+
+
+.home-page .tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Placeholder styles */
+.home-page .blank {
+  background: transparent;
+  aspect-ratio: 1 / 0.9;
+}
+
+.home-page .hatch {
+  aspect-ratio: 1 / 0.9;
+  background: linear-gradient(
+    45deg,
+    #ccc 10%,
+    transparent 10%,
+    transparent 50%,
+    #ccc 50%,
+    #ccc 60%,
+    transparent 60%,
+    transparent
+  );
+  background-size: 8px 8px;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+
+.model-tile {
+  background-color: #111 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  aspect-ratio: 1 / 0.9;
+  padding: 1rem;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.model-tile img {
+  max-width: 80%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.model-label {
+  color: #fff;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+
+
+
 
 /* ============================
    PROJECT PAGE-SPECIFIC STYLES
@@ -345,7 +359,7 @@ body {
   .project-page .grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 2fr;
-    gap: 15px;
+    gap: 16px;
     padding: 80px 240px;
     position: relative;
     align-items: stretch;
@@ -354,31 +368,28 @@ body {
   .project-page .tile {
     background-color: #111;
     color: white;
-    padding: 0;
-    margin: 0;
-    display: block;
-    aspect-ratio: 1 / 0.85;
-    overflow: hidden; 
-    border: none;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+    text-align: left;
+    height: 200px;
+    overflow: hidden; /* Avoid image overflow */
   }
-  .project-page .tile img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-    
+
   .project-page .tile.title-tile {
-  background-color: #111;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   text-align: center;
-  flex-direction: column;
-  aspect-ratio: 1 / 0.85;
+  padding: 1.5rem 1rem;
+  font-size: 0.9rem;
 }
 
+  .project-page .tile.title-tile img {
+  margin-top: 1rem; /* add bottom margin for image! */
+  max-width: 100%;
+  height: auto;
+}
 
 .project-page .tile.title-tile h2 {
   font-size: 1rem;
@@ -393,8 +404,6 @@ body {
   text-align: center;
   line-height: 1.2;
   font-size: 0.85rem;
-  color: #999999;
-  margin-top: 0.3rem;
 }
 
 .project-page .tile.text-left,
@@ -450,9 +459,18 @@ body {
   }
   
 .project-page .tile.full-bleed img {
-    overflow: hidden;
+    height: 350px;
+    width: 450px;
+    object-fit: cover;
     object-position: center;
     display: block;
+  }
+
+.project-page .tile img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    margin-bottom: 0.5rem;
   }
   
 .project-page .tile h2 {
@@ -468,12 +486,9 @@ body {
 .project-page .description {
     background-color: rgb(0, 0, 0);
     color: #ffffff;
-    padding: 0.1rem 1rem 1rem 1rem;
+    padding: 1rem;
     font-size: 0.9rem;
     line-height: 1.6;
-    max-height: 406px;
-    position: relative;
-    overflow: hidden;
   }
 
   .project-page .description p {
@@ -481,36 +496,7 @@ body {
     line-height: 1.6;
   }
   
-  .project-page .description::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 4rem;
-  background: linear-gradient(to bottom, transparent, #111); /* or #f3f3ef if on light background */
-  pointer-events: none;
-  }
   
-  .project-page .description.expanded {
-  max-height: none;
-  cursor: default;
-}
-
-.project-page .description.expanded::after {
-  display: none;
-}
-
-.project-page .expand-indicator {
-  position: absolute;
-  bottom: 0.5rem;
-  right: 1rem;
-  color: rgb(214, 214, 214);
-  font-size: 0.8rem;
-  background: none;
-  z-index: 2;
-}
-
 .project-page .back {
     margin-bottom: 2rem;
   }
