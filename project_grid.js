@@ -131,6 +131,12 @@ async function loadProject() {
       style: "grid-column: 3 / 5; grid-row: 6 / span 2;",
       image: "big3",
       alt: "Photo 8"
+    },
+    {
+      class: "tile full-bleed",
+      style: "grid-column: 1 / 2; grid-row: 7;",
+      image: "6",
+      alt: "Photo 9"
     }
   ];
 

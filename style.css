@@ -345,6 +345,7 @@ body {
   .project-page .grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 2fr;
+    grid-auto-rows: 230px;
     gap: 15px;
     padding: 80px 240px;
     position: relative;
@@ -416,7 +417,6 @@ body {
 }
   
 .project-page .tile.double {
-    height: 480px; /* 230 x 2 */
     display: flex;
     align-items: stretch;
   }
@@ -471,7 +471,7 @@ body {
     padding: 0.1rem 1rem 1rem 1rem;
     font-size: 0.9rem;
     line-height: 1.6;
-    max-height: 406px;
+    max-height: 475px;
     position: relative;
     overflow: hidden;
   }
