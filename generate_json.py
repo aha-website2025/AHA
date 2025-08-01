@@ -4,7 +4,7 @@ import re
 from unidecode import unidecode
 
 PROJECTS_DIR = "projects"
-OUTPUT_FILE = "projects.json"
+OUTPUT_FILE = "json_projects.json"
 BASE_URL = "https://aha-website2025.github.io/AHA"
 
 def slugify(text):

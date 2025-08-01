@@ -163,7 +163,7 @@ header {
 .gm-style .gm-style-iw-c {
   padding: 0 !important;
   box-shadow: none !important;
-  border-radius: 8px !important;
+  border-radius: 0px !important;
   border: none !important;
 }
 
@@ -172,9 +172,13 @@ header {
   font-family: sans-serif;
   padding: 10px;
   background: #fff;
-  border-radius: 8px;
+  border-radius: 0px;
   box-sizing: border-box;
   position: relative;
+}
+
+.info-window-content img {
+  border-radius: 0 !important;
 }
 
 .info-window-content::after {
@@ -185,6 +189,6 @@ header {
   bottom: 6px;
   left: 6px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 0px;
   pointer-events: none;
 }
