@@ -117,7 +117,7 @@ function handleCategoryFilter(selectedCategory) {
     if (Array.isArray(project.categories)) {
       return project.categories.includes(selectedCategory);
     } else if (typeof project.category === 'string') {
-      return project.category.toLowerCase() === selectedCategory.toLowerCase();
+      return project.category.trim().toLowerCase() === selectedCategory.trim().toLowerCase();
     }
     return false;
   });
