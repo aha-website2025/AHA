@@ -45,7 +45,7 @@ async function loadProject() {
     },
     {
       class: "tile full-bleed double",
-      style: "grid-column:  3/ 5; grid-row: 1 / span 2;",
+      style: "grid-column:  3 / 5; grid-row: 1 / span 2;",
       image: "big1",
       alt: "Photo 2"
     },
@@ -184,13 +184,6 @@ if (titleTile && gridContainer) {
   });
 }
 
-const colWidth = titleTile.offsetWidth;
-const gap = 15;
-const numCols = 5;
-const totalGridWidth = numCols * colWidth + (numCols - 1) * gap;
-
-gridContainer.style.maxWidth = `${totalGridWidth}px`;
-gridContainer.style.margin = "0 auto";
 
 
 }

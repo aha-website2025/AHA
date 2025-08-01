@@ -42,7 +42,14 @@
     </select>
   </div>
 
-  <div id="map"></div>
+  <div class="map">
+    <!-- These are the new divs for the custom corners -->
+    <div class="corner corner-top-left"></div>
+    <div class="corner corner-top-right"></div>
+    <div class="corner corner-bottom-left"></div>
+    <div class="corner corner-bottom-right"></div>
+    <div id="map"></div>
+  </div> 
 
   <script>
     let map;
@@ -117,8 +124,8 @@
         },
         {
           featureType: "water",
-          elementType: "geometry",
-          stylers: [{ color: "#b3d1ff" }]
+          elementType: "geometry.fill",
+          stylers: [{ color: "#CCCCCC" }]
         },
         {
           featureType: "poi",

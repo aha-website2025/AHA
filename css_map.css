@@ -4,11 +4,30 @@ body {
   background: #efefea;
 }
 
-#map {
+.map {
+  /* This is the key part. It sets the div to 80% of its parent's width */
   width: 75%;
-  min-height: 90vh;
-  margin: 50px auto 50px auto;
-  border-radius: 0px;
+  
+  /* And this centers the div by automatically distributing the remaining 20%
+      as equal left and right margins. */
+  margin: 0 auto;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  /* Add some visual styling to the container itself */
+  border: none; 
+  position: relative;
+
+  overflow: hidden; /* This ensures the map's rounded corners match the container */
+  padding: 10px;
+}
+
+
+/* The iframe itself should fill the container entirely */
+.map-container iframe {
+    width: 100%;
+    height: 100%; /* Set a fixed height for the map */
+    display: block; /* Removes any default spacing below the iframe */
+    border: 0; /* Remove default iframe border */
 }
 
 header {
@@ -64,6 +83,8 @@ header {
   border-radius: 50%;
   cursor: pointer;
 }
+
+
 
 
 .menu {
