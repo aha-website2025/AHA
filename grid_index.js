@@ -9,7 +9,7 @@ const layout = [
   "data", "data", "hatch", "model", "data",
   "blank", "model", "data", "data", "hatch",
   "data", "hatch", "data", "data", "blank",
-  "hatch", "data", "model", "blank", "data"
+  "hatch", "data", "model", "hatch", "data"
 ];
 
 let allProjects = [];
@@ -83,19 +83,22 @@ function renderGrid(projects) {
      let dataIndex = 0;
      const shuffledModelImages = shuffleArray(allModels);
     let modelIndex = 0;
-     layout.forEach(type => {
-       let tileDiv;
- 
-       if (type === "data" && dataIndex < projects.length) {
-         tileDiv = createTile("data", projects[dataIndex++]);
-       } else if (type === "model" && modelIndex < shuffledModelImages.length) {
-         tileDiv = createTile("model", null, shuffledModelImages[modelIndex++]);
-       } else {
-         tileDiv = createTile(type);
-       }
+     let layoutIndex = 0;
+    while (layoutIndex < layout.length || dataIndex < projects.length) {
+      let type = layout[layoutIndex] || "data"; // fill extra space with 'data'
+      let tileDiv;
+
+      if (type === "data" && dataIndex < projects.length) {
+        tileDiv = createTile("data", projects[dataIndex++]);
+      } else if (type === "model" && modelIndex < shuffledModelImages.length) {
+        tileDiv = createTile("model", null, shuffledModelImages[modelIndex++]);
+      } else {
+        tileDiv = createTile(type);
+      }
 
       container.appendChild(tileDiv);
-  });
+      layoutIndex++;
+    }
   }
 }
 
