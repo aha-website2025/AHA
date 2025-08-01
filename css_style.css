@@ -460,11 +460,15 @@ body {
   color: #999999;
 }
 
+.project-page .tile,
+.project-page .tile.text-left {
+  box-sizing: border-box;
+}
 
 .project-page .tile.text-left {
   background-color: #111;
   align-self: stretch;
-  
+  padding-left: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -511,7 +515,7 @@ body {
   overflow: hidden;
   width: 100%;
   display: block;
-  background: none !important;
+  background: #f3f3ef;
   }
 
 .project-page .tile.full-bleed.triple img {
@@ -645,19 +649,23 @@ body {
   }
 
 .project-page .tile.hatch {
-    background-image: repeating-linear-gradient(
-      45deg,
-      #aaa 0,
-      #aaa 1px,
-      transparent 1px,
-      transparent 5px
-    );
     aspect-ratio: 1 / 0.85;
-    width: 100%;
-    background-color: transparent;
-    border: none;
-    box-shadow: none;
-    pointer-events: none;
+  background: linear-gradient(
+    45deg,
+    #ccc 10%,
+    transparent 10%,
+    transparent 50%,
+    #ccc 50%,
+    #ccc 60%,
+    transparent 60%,
+    transparent
+  );
+  background-size: 8px 8px;
+  background-color: transparent;
+  width: 100%;
+  border: none;
+  box-shadow: none;
+  pointer-events: none;
   }
   
 

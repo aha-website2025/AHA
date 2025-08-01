@@ -61,7 +61,7 @@ def read_model_data(model_path, folder_name):
     if 'category' not in model_data:
         return None
 
-    model_data["slug"] = slugify(model_data["category"])
+    model_data["slug"] = slugify(folder_name)
 
     # Include logo and diagram image URLs
     for ext in ['jpg', 'jpeg', 'png']:

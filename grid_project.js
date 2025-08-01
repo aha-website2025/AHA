@@ -289,7 +289,7 @@ function drawDashedLinesBetweenTileRows() {
     line.style.width = `${(rightEdge - leftEdge) + 30}px`;
     line.style.borderTop = "none";
     line.style.height = "1px";
-    line.style.backgroundImage = "repeating-linear-gradient(to right, #b7b7b7 0, #b7b7b7 4px, transparent 5px, transparent 9px)";
+    line.style.backgroundImage = "repeating-linear-gradient(to right, #ccc 0, #ccc 4px, transparent 5px, transparent 9px)";
     line.style.pointerEvents = "none";
     line.style.zIndex = "10";
 
@@ -335,7 +335,7 @@ function drawVerticalDashedLines() {
     line.style.left = `${midX}px`;
     line.style.height = `${gridHeight + 30}px`;
     line.style.width = "1px";
-    line.style.backgroundImage = "repeating-linear-gradient(to bottom, #b7b7b7 0, #b7b7b7 4px, transparent 5px, transparent 9px)";
+    line.style.backgroundImage = "repeating-linear-gradient(to bottom, #ccc 0, #ccc 4px, transparent 5px, transparent 9px)";
     line.style.pointerEvents = "none";
     line.style.zIndex = "10";
 
