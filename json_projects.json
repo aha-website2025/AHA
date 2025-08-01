@@ -51,7 +51,7 @@
     "image": "https://aha-website2025.github.io/AHA/projects/carrieres-centrales/image.jpg",
     "slug": "carrieres-centrales"
   },
-  {
+   {
     "title": "Rolland Curtis Gardens",
     "location": "Los Angeles, USA",
     "category": "cooperative",
@@ -170,7 +170,8 @@
     "image": "https://aha-website2025.github.io/AHA/projects/la-borda/image.jpg",
     "slug": "la-borda"
   },
-  {
+
+   {
     "title": "Cidade de Deus",
     "location": "Rio de Janeiro, Brazil",
     "category": "public/social housing",
