@@ -18,9 +18,24 @@
     "slug": "85-viviendas-sociales"
   },
   {
+    "title": "ASP Holzwohnbau Aspern",
+    "location": "Vienna, Austria",
+    "category": "cooperative",
+    "description": "ASP holzwohnnbau aspern is a mixed-use development with an emphasis on sustainability. The architects of this project integrated sustainable practices economically, socially, and environmentally. Economically, the rent for the units is about half of the area’s average rental price. The construction of this building was highly prefabricated, which makes for a speedy site assembly, reduction in fumes, dust, and sound pollution. ASP holzwohnnbau aspern is articulated into seven different buildings and parts ranging from 4–7 floors above ground. They are connected by three rows of access decks that run in the north and south directions. The north and south orientations force circulation routes that offer varied spatial experiences because of the light-flooded staircases and open deck access to communal terraces. This linear and serial organization provides great flexibility in laying out different types of apartments. This project was designed for everyone in mind meaning it is accessible for disabled and low-income persons making it socially sustainable. Wood is the primary material; the architects enjoyed that wood is renewable, compostable, deliberately aging, graying. These qualities of the material help create identity in an urban context.\n\n\nAlong with sustainability, ASP holzwohnnbau aspern pushes the idea of a community with a staggered layout to make different kinds of courtyards and various visual relationships. Paths are intentionally cut out to prevent the development of corridor-like routes. It is designed for the community to meet one another. Ultimately, the paths create a space in the heart of the project, which they call the canyon. The canyon has a two-story multifunctional ring which offers all the residents the opportunity to mingle and experience community. The Holzwohnnbau co-op encourages communal interactions with a beautifully designed landscape and an abundant amount of shared spaces.\n\n\nThe client for this project, EBG, is a company that solely builds co-ops. EBG is committed to social and socio-political responsibility to shape the future of living actively. Their mission is “to develop, build, maintain and administrate accessible, high quality and safe living space.” The goal is social justice, not profit. With the idea of each tenant in mind, EBG is just the framework. They want to encourage the tenants to fill the space with personality, wishes and concerns.",
+    "year_completed": "2015",
+    "owner": "EBG Wohnen",
+    "architect": "querkraft",
+    "units": "213",
+    "unit_distribution": "1-5 bedrooms (452-1184 sqft)",
+    "address": "Maria-Tusch-Straße 6, 1220 Wien, Austria",
+    "coordinates": "48.2242, 16.4990",
+    "image": "https://aha-website2025.github.io/AHA/projects/asp-holzwohnbau-aspern/image.jpg",
+    "slug": "asp-holzwohnbau-aspern"
+  },
+  {
     "title": "Carrieres Centrales",
     "location": "Casablanca, Morocco",
-    "category": "vernacular",
+    "category": "vernacular housing",
     "description": "Carrières Centrales represents a series of housing located in Casablanca, Morocco designed for factory workers and locals from rural work areas within the city. French architect (and urban planner) Michel Ecochard was brought in to develop emergency housing due to mass displacement caused by local strikes and liberation struggles against French colonialistic occupation during the 1930s through the mid-1950s. Two events, in particular, rapidly escalated the situation into a humanitarian crisis that ultimately left around 130,000 people displaced from their neighborhoods and cities. The first event revolves around French authorities destroying a multitude of shanty towns located near “European quarters” behind the scapegoat of a typhoid epidemic spreading throughout the region. The other critical moment comes in the form of a two-day “mouse strike” organized by the Moroccan Worker Union Confederation (UGSCM) and their respective nationalist party, Istiqlal, where participants simply refused to leave home to go to work. This led to some tension between them and the French police that was attempting to end the strike, ultimately leading to the police shooting anyone who was either defensive or refusing to leave their homes.\n\n\nMany consider the Carrières Centrales project to not be an actual response to major issues happening at the time. Rather, they consider it to be Ecochard’s way of attempting to shut down the anti-colonial movement by appeasing the demands and needs of the civilians affected. This claim is evident in the design choices and style created to use as a template for the whole project. Essentially the project revolves around the use of a linear 8 x 8-meter grid plan that was based on a patio dwelling unit where aesthetically it would blend some French mediums and the local Moroccan style into one. From here each unit could be rearranged into various configurations that would help to create different courtyard and exterior conditions. This resulted in the creation of the “mat” structure. He had also ventured into using vertically and designed 3 unique structures that each had their own floor plans. Ultimately his goal was to mass spread these low-density and costly vertical structures that made use of vernacular elements throughout most of Casablanca. Unfortunately, his ideas did not fully come to fruition as a simple floor plan was created and mass replicated across the whole site while most of the buildings would eventually be redesigned and repurposed for other uses.\n\n\nThe project is the first mixed-use, affordable housing project in Los Angeles to employ this construction method.",
     "year_completed": "2014",
     "owner": "Morocco Department of Urban Planning",
@@ -39,7 +54,7 @@
   {
     "title": "Cidade de Deus",
     "location": "Rio de Janeiro, Brazil",
-    "category": "public_social",
+    "category": "public/social housing",
     "description": "Cidade de Deus, or “City of God,” began as a predefined, mass housing project built in Rio de Janeiro in the 1960s with the aim to promote economic growth and political reform in Latin America. The formerly sterile, uniform layout has informally grown over the span of multiple decades to accommodate a growing population, activating the spaces between and around the original housing units and apartment blocks. The informal construction undertaken by its citizens has generated a heterogeneous structure that, although it is recognizable as a whole, is composed of hyper-specific, continuously transforming space. Rather than creating specific structures to mold into specific categories, an open catalog of construction technologies, production modes, financial means, programmatic evolution, popular aesthetics, etc., has been and is being employed on a regular basis to conscientiously evolve with Cidade de Deus’s residents.\n\n\nAlthough this basis of the city was composed of similar housing and apartment units arranged in neat rows and blocks, they are now barely recognizable — or even visible — within the informally built extensions. Originally, 3,053 units were built to house a planned 10,000 people. Because the initial structures were not properly suited towards holding this many citizens, much less acting as collective housing, Cidade de Deus’s residents modified their spatial configuration on their own. They filled in the space between the early housing units with layered commercial and social spaces and structures and transformed the single family homes into multi-story, multi-generational ones, eventually building the city into one of the most famous favelas and urban sub-centers of Rio de Janeiro.",
     "year_completed": "1966",
     "owner": "Rio de Janeiro",
@@ -71,6 +86,23 @@
     "coordinates": "47.7565, 7.3207",
     "image": "https://aha-website2025.github.io/AHA/projects/cite-manifeste/image.png",
     "slug": "cite-manifeste"
+  },
+  {
+    "title": "Co-op City",
+    "location": "Bronx, USA",
+    "category": "cooperative",
+    "description": "This housing co-op was based on Rochdale Principles of Cooperation (1844), which was later adopted by the International Cooperative Alliance in 1937 and implemented as a basis for many cooperative housing projects around the world.\nThe area began as marshland, until it was converted into a Freedomland USA amusement park in 1960. By 1966, construction for Co-op city began. When it concluded in 1973, there were 35 high-rise buildings with seven clusters of townhouses, totaling over 15,000 units. All of these buildings sit on a site of 320 acres, but occupy only about 20%, leaving the rest as green space. This development is known as the largest housing cooperative in the world, and was sponsored by the United Housing Foundation, an allegiance responsible for many large scale projects intended to meet the need for low priced housing in New York. In addition, the Mitchell-Lama program promised to develop and build affordable housing for middle-income families.\n\n\nIn this district, less people live in poverty, are unemployed, and feel rent burdened than those in the greater Bronx and New York City.\nTo acquire an apartment, buyers had to purchase eighteen shares of stock for each room desired, at about $25 per share. Thanks to large, cheap, and vacant parcels of land, tall buildings, and large single-family apartments, the density levels per person were very low.\nDemographics have changed, in the beginning, many west Bronx (concourse, westchester, coming from projects in the west bx) moved to co-op city – lots of jewish and old people, many synagogues, as those people passed on the demographics drastically changed.",
+    "year_completed": "1973",
+    "owner": "Riverbay Corporation",
+    "architect": "Abraham Kaza & Herman J Jessoe",
+    "units": "1,328",
+    "unit_distribution": "3 different sizes (131/164/249 sqft)",
+    "inhabitants": "+43,000",
+    "density": "51 people/acre",
+    "address": "177 Dreiser Loop, Bronx, NY 10475 USA",
+    "coordinates": "40.87539, -73.8257",
+    "image": "https://aha-website2025.github.io/AHA/projects/co-op-city/image.jpg",
+    "slug": "co-op-city"
   },
   {
     "title": "Dymaxion House",
@@ -109,7 +141,7 @@
   {
     "title": "Grundbau Und Siedler",
     "location": "Hamburg, Germany",
-    "category": "public_social",
+    "category": "public & social housing",
     "description": "Completed in March 2013 and located in Hamburg, Grundbau und Siedler provides affordable self-build housing for German citizens who struggle to find reasonable rents—namely the working class. Parking, the lobby, and workshops are located on the ground floor, and the remaining four floors consists of three units each. Each floor is 10’6” tall. Each unit, ranging between 98-490 square feet, is open and flexible, allowing for the resident(s) to decide how they want to dictate the space.\n\n\nIn order to self-build, residents are encouraged to buy a package that includes the necessary materials as well as a detailed construction manual (see diagrams 3-5). The self-builders are then given training, and their work must be inspected by an expert once completed. Self-building is made possible by stairs that are wide enough for transporting materials as well as a lift designed as a goods elevator for carrying materials.\n\n\nThrough surveying the residents, it was discovered that there were two main layouts that were often chosen. The first one does away with hallways and joins all rooms, separating them only with a wall and/or dividing door. The second is a more “typical” layout, a system of defined rooms and open common areas. In the first layout, flexibility exists within the residents’ ability to interpret each room as they choose. On the other hand, flexibility in the second layout exists within the way they choose to dictate the open-plan areas.",
     "year_completed": "2013",
     "owner": "N/A",
@@ -158,7 +190,7 @@
   {
     "title": "Star Apartments",
     "location": "Los Angeles, USA",
-    "category": "public_social",
+    "category": "public/social housing",
     "description": "The six-story, 95,000 sf Star Apartments expands upon the “the idea providing permanent supportive housing within the downtown core of Los Angeles, specifically the Skid Row Housing.” The building is organized around “three principal spatial zones”, stacked one upon the other: a commercial/retail zone at street level; a second level for community programs; and four terraced floors of residences above.\n\n\nThe building design allows for a “recovery process” for homeless residents based on positive re-socialization, healthy interdependent relationships, and wellness. The project seeks to not only improve the quality of life for residents but to inspire a sense of pride, independence, and dignity.\n\n\nThis design focuses on creation of multiple terraces for communal activities maximising air flow and sunlight. This indoor/outdoor solid/void relationship that it creates plays well against the density and urbanism in downtown Los Angeles.\n\n\nThe LEED for Homes Platinum development was constructed with “prefabricated modular housing units that are cantilevered” on a 2 story concrete superstructure. Individual apartment units were built off-site using prefabricated materials and delivered to the project site and craned into place on the structural podium. These units are spacious and designed to promote independent and healthy living. Individual studio apartments include an eat-in kitchen, bedroom, and bathroom.\n\n\nAs the project had limited budget, the design team used prefabricated modules which were lifted into place over a new structural podium (acting at times like a courtyard). By doing so they were able to meet tighter construction tolerances and sustainability goals while increasing not only the construction quality, but also the quality of living.\n\n\nThe project is the first mixed-use, affordable housing project in Los Angeles to employ this construction method.",
     "year_completed": "2014",
     "owner": "Skid Row Housing Trust",

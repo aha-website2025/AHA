@@ -400,10 +400,12 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 2fr;
     grid-auto-rows: auto;
-    gap: 15px;
+    gap: 13px;
     padding: 80px 240px;
     position: relative;
     align-items: stretch;
+    width: 75%;
+    margin: 0 auto;
   }
   
   .project-page .tile {
@@ -426,6 +428,7 @@ body {
   .project-page .tile.title {
   background-color: #111;
   color: white;
+  padding: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -446,10 +449,12 @@ body {
 }
 
 .project-page .tile.title img.model-logo {
-  width: 60%;
+  width: 75%;
   height: auto;
   object-fit: contain;
   margin: 0 auto;
+  margin-top: 2rem;
+  justify-content: center !important;
 }
 
 .project-page .tile.title p {
@@ -553,7 +558,18 @@ body {
 .project-page .tile p {
     margin: 0;
     font-size: 0.85rem;
+    z-index: 20;
   }
+
+  .project-page .model-title {
+  font-size: 1rem !important;
+  margin-top: 0;
+  margin-bottom: 4rem !important;
+  text-align: center;
+  color: #ffffff !important;
+  z-index: 100;
+}
+
 
 
 .project-page .description {
@@ -565,6 +581,7 @@ body {
     max-height: 475px;
     position: relative;
     overflow: hidden;
+    z-index: 20;
   }
 
   .project-page .description p {

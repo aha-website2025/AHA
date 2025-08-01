@@ -39,8 +39,7 @@ async function loadProject() {
       style: "grid-column: 1 / 2; grid-row: 1;",
       html: `
         <img src="models/${slug}/logo.png" alt="${project.title}" class="model-logo" />
-        <p>${project.title}</p>
-      </div>
+        <p class="model-title">${project.title}</p>
     `,
     },
     {
@@ -84,14 +83,15 @@ async function loadProject() {
 
     grid.appendChild(div);
 
-    const res2 = await fetch("projects.json");
+    const res2 = await fetch("json_projects.json");
     const allProjects = await res2.json();
-     const relatedPool = allProjects
-      .filter(p => p.category.toLowerCase() === project.category.toLowerCase() && p.slug !== project.slug);
+    const relatedPool = allProjects.filter(
+      p => p.category.toLowerCase() === project.category.toLowerCase() && p.slug !== project.slug
+    );
 
     const related = relatedPool
       .sort(() => 0.5 - Math.random()) // shuffle
-      .slice(0, 2);      
+      .slice(0, 2); // take 2
 
     related.forEach((p, idx) => {
       const div = document.createElement('div');
@@ -99,12 +99,13 @@ async function loadProject() {
       div.style = `grid-column: ${idx + 1} / ${idx + 2}; grid-row: 3;`;
 
       div.innerHTML = `
-        <a href="project.html?slug=${p.slug}">
-          <img src="projects/${p.slug}/image.jpg" alt="${p.title}" />
+        <a href="page_project.html?slug=${p.slug}">
+          <img src="projects/${p.slug}/image.jpg" alt="${p.title}" style="width: 100%; height: 100%; object-fit: cover;" />
         </a>
       `;
-      grid.appendChild(div);
-    });
+
+  grid.appendChild(div);
+});
 
 
     const img = div.querySelector("img");
@@ -201,54 +202,73 @@ window.onload = async () => {
 };
 
 
-
 function drawDashedLinesBetweenTileRows() {
-  const tiles = Array.from(document.querySelectorAll('.tile'));
+  const tiles = Array.from(document.querySelectorAll('.tile, .project-page .description'));
   if (tiles.length === 0) return;
 
-  const gap = 15; // tile gap in px
-  const rows = {};
+  const rowThreshold = 10; // Allow up to 10px difference in top values to group tiles in same row
+  const rows = [];
 
-  // Group tiles by row (based on top position)
+  // Group tiles into rows based on vertical position (within threshold)
   tiles.forEach(tile => {
     const rect = tile.getBoundingClientRect();
-    const top = Math.round(rect.top);
+    const top = rect.top;
 
-    if (!rows[top]) rows[top] = [];
-    rows[top].push(tile);
+    let foundRow = false;
+    for (let row of rows) {
+      if (Math.abs(row.top - top) < rowThreshold) {
+        row.tiles.push(tile);
+        foundRow = true;
+        break;
+      }
+    }
+
+    if (!foundRow) {
+      rows.push({ top, tiles: [tile] });
+    }
   });
 
-  const sortedTops = Object.keys(rows).map(Number).sort((a, b) => a - b);
+  // Sort rows by top position
+  rows.sort((a, b) => a.top - b.top);
 
-  for (let i = 0; i < sortedTops.length - 1; i++) {
-    const row1 = rows[sortedTops[i]];
-    const row2 = rows[sortedTops[i + 1]];
+  // Compute max horizontal span across all rows
+  let maxLeft = Infinity;
+  let maxRight = -Infinity;
 
-    const rect1 = row1[0].getBoundingClientRect();
-    const rect2 = row2[0].getBoundingClientRect();
+  rows.forEach(row => {
+    row.tiles.forEach(tile => {
+      const rect = tile.getBoundingClientRect();
+      maxLeft = Math.min(maxLeft, rect.left);
+      maxRight = Math.max(maxRight, rect.right);
+    });
+  });
 
-    const y1 = rect1.bottom;
-    const y2 = rect2.top;
-    const midpoint = (y1 + y2) / 2 + window.scrollY;
+  const totalLineWidth = maxRight - maxLeft;
 
-    // Get leftmost and rightmost bounds
-    const leftEdge = Math.min(...row1.map(tile => tile.getBoundingClientRect().left)) + window.scrollX;
-    const rightEdge = Math.max(...row1.map(tile => tile.getBoundingClientRect().right)) + window.scrollX;
+  // Draw lines between each row
+  for (let i = 0; i < rows.length - 1; i++) {
+    const row1 = rows[i];
+    const row2 = rows[i + 1];
+
+    const rect1 = row1.tiles[0].getBoundingClientRect();
+    const rect2 = row2.tiles[0].getBoundingClientRect();
+
+    const y1 = rect1.bottom + window.scrollY;
+    const y2 = rect2.top + window.scrollY;
+    const midpoint = (y1 + y2) / 2;
 
     const line = document.createElement("div");
     line.style.position = "absolute";
     line.style.top = `${midpoint}px`;
-    line.style.left = `${leftEdge - 15}px`;
-    line.style.width = `${(rightEdge - leftEdge) + 30}px`;
-    line.style.borderTop = "none";
+    line.style.left = `${maxLeft - 15 + window.scrollX}px`;
+    line.style.width = `${totalLineWidth + 30}px`;
     line.style.height = "1px";
     line.style.backgroundImage = "repeating-linear-gradient(to right, #ccc 0, #ccc 4px, transparent 5px, transparent 9px)";
     line.style.pointerEvents = "none";
-    line.style.zIndex = "10";
-
     document.body.appendChild(line);
   }
 }
+
 
 
 function drawVerticalDashedLines() {

@@ -133,6 +133,19 @@ function showAllProjects() {
   document.getElementById("categoryMenu").style.display = "none"; // close the menu
 }
 
+function showOnlyModels() {
+  const grid = document.getElementById("grid-container");
+  grid.innerHTML = ""; // clear grid
+
+  allModels.forEach(model => {
+    const tile = createTile("model", null, model);  // use "model" type and pass model as third param
+    grid.appendChild(tile);
+  });
+  document.getElementById("categoryMenu").style.display = "none";
+}
+
+
+
 function toggleCategoryMenu() {
   const menu = document.getElementById("categoryMenu");
   const isVisible = menu.style.display === "block";

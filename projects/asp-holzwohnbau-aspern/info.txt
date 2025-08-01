@@ -1,0 +1,18 @@
+title: ASP Holzwohnbau Aspern
+location: Vienna, Austria
+category: cooperative
+description:
+ASP holzwohnnbau aspern is a mixed-use development with an emphasis on sustainability. The architects of this project integrated sustainable practices economically, socially, and environmentally. Economically, the rent for the units is about half of the area’s average rental price. The construction of this building was highly prefabricated, which makes for a speedy site assembly, reduction in fumes, dust, and sound pollution. ASP holzwohnnbau aspern is articulated into seven different buildings and parts ranging from 4–7 floors above ground. They are connected by three rows of access decks that run in the north and south directions. The north and south orientations force circulation routes that offer varied spatial experiences because of the light-flooded staircases and open deck access to communal terraces. This linear and serial organization provides great flexibility in laying out different types of apartments. This project was designed for everyone in mind meaning it is accessible for disabled and low-income persons making it socially sustainable. Wood is the primary material; the architects enjoyed that wood is renewable, compostable, deliberately aging, graying. These qualities of the material help create identity in an urban context.
+
+
+Along with sustainability, ASP holzwohnnbau aspern pushes the idea of a community with a staggered layout to make different kinds of courtyards and various visual relationships. Paths are intentionally cut out to prevent the development of corridor-like routes. It is designed for the community to meet one another. Ultimately, the paths create a space in the heart of the project, which they call the canyon. The canyon has a two-story multifunctional ring which offers all the residents the opportunity to mingle and experience community. The Holzwohnnbau co-op encourages communal interactions with a beautifully designed landscape and an abundant amount of shared spaces.
+
+
+The client for this project, EBG, is a company that solely builds co-ops. EBG is committed to social and socio-political responsibility to shape the future of living actively. Their mission is “to develop, build, maintain and administrate accessible, high quality and safe living space.” The goal is social justice, not profit. With the idea of each tenant in mind, EBG is just the framework. They want to encourage the tenants to fill the space with personality, wishes and concerns.
+year_completed: 2015
+owner: EBG Wohnen
+architect: querkraft
+units: 213
+unit_distribution: 1-5 bedrooms (452-1184 sqft)
+address: Maria-Tusch-Straße 6, 1220 Wien, Austria
+coordinates: 48.2242, 16.4990
