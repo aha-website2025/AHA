@@ -38,8 +38,9 @@ async function loadProject() {
       class: "tile title",
       style: "grid-column: 1 / 2; grid-row: 1;",
       html: `
-        <img src="models/${slug}/logo.png" alt="${project.category}" class="model-logo" />
-        <p>${project.category}</p>
+        <img src="models/${slug}/logo.png" alt="${project.title}" class="model-logo" />
+        <p>${project.title}</p>
+      </div>
     `,
     },
     {

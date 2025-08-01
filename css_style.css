@@ -437,21 +437,27 @@ body {
   
 }
 
-.project-page .tile.title img.model-logo {
-  width: 65%;
-  height: auto;
-  object-fit: contain;
+.project-page .tile-label {
+  margin-top: 0 rem;
   margin-bottom: 0.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #999;
 }
 
+.project-page .tile.title img.model-logo {
+  width: 60%;
+  max-height: 50%;
+  object-fit: contain;
+  margin: 0 auto;
+}
 
 .project-page .tile.title p {
   margin: 0;
   text-align: center;
   line-height: 1.2;
   font-size: 0.85rem;
-  color: #999999;
-  margin-top: 0.3rem;
+  color: #ffffff;
 }
 
 
