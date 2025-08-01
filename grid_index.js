@@ -50,8 +50,8 @@ function createTile(type, project = null, modelImage = null) {
       div.innerHTML = `
         <a href="page_model.html?slug=${modelImage.slug}">
           <div class="model-content">
-            <img src="${modelImage.logo_image}" alt="${modelImage.type}" class="model-image">
-            <div class="model-label">${modelImage.type}</div>
+            <img src="${modelImage.logo_image}" alt="${modelImage.title}" class="model-image">
+            <div class="model-label">${modelImage.title}</div>
           </div>
         </a>
     `;
