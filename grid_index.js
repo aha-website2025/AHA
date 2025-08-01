@@ -197,7 +197,7 @@ function drawDashedLinesBetweenTileRows() {
     line.style.height = "1px";
     line.style.backgroundImage = "repeating-linear-gradient(to right, #ccc 0, #ccc 4px, transparent 5px, transparent 9px)";
     line.style.pointerEvents = "none";
-    line.style.zIndex = "1000";
+    line.style.zIndex = "10";
 
     document.body.appendChild(line);
   }
@@ -243,7 +243,7 @@ function drawVerticalDashedLines() {
     line.style.width = "1px";
     line.style.backgroundImage = "repeating-linear-gradient(to bottom, #ccc 0, #ccc 4px, transparent 5px, transparent 9px)";
     line.style.pointerEvents = "none";
-    line.style.zIndex = "1000";
+    line.style.zIndex = "10";
 
     document.body.appendChild(line);
   }
