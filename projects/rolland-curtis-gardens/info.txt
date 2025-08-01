@@ -1,6 +1,6 @@
 title: Rolland Curtis Gardens
 location: Los Angeles, USA
-category: co-operative
+category: cooperative
 description:
 Rolland Curtis Gardens is a community-serving development that incorporates the concept of mixed-use that opens doors to affordable housing through not only the sustainably responsible design but also through the community-driven development process. This development is also one of the few large-scale affordable housing that is transit oriented in the area surrounding Downtown Los Angeles.
 

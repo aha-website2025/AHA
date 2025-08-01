@@ -141,8 +141,8 @@ function toggleCategoryMenu() {
 
 
 Promise.all([
-  fetch("https://aha-website2025.github.io/AHA/projects.json").then(res => res.json()),
-  fetch("https://aha-website2025.github.io/AHA/models.json").then(res => res.json())
+  fetch("https://aha-website2025.github.io/AHA/json_projects.json").then(res => res.json()),
+  fetch("https://aha-website2025.github.io/AHA/json_models.json").then(res => res.json())
 ]).then(([projectsData, modelsData]) => {
   allProjects = projectsData;
   allModels = modelsData;

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <title>Map | Affordable Housing Atlas</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="map.css" />
+  <link rel="stylesheet" href="css_map.css" />
   <style>
     #map { height: 80vh; width: 100%; }
     #filter-box { margin: 1rem; text-align: center; }
@@ -153,7 +153,7 @@
       ]
       });
 
-      fetch("projects.json")
+      fetch("json_projects.json")
         .then(response => response.json())
         .then(data => {
           data.forEach(project => {

@@ -1,6 +1,6 @@
 title: La Borda
 location: Barcelona, Spain
-category: co-operative
+category: cooperative
 description:
 La Borda is a cooperative housing project in Barcelona developed in response to the region's housing shortage. The cooperative is built on land owned by the City Council, granted for 75 years for state-subsidized housing. This arrangement allowed local residents to collaborate with architects from Lacol and other consultants to establish a 28-unit sustainable housing complex. The community prioritized three core principles in its development--economic and environmental sustainability, cooperation through community participation, and the advancement of communal living.
 

@@ -2,7 +2,7 @@ const fs = require('fs');
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 const accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
-const projects = require('./projects.json');
+const projects = require('../projects.json');
 
 async function geocodeAddress(address) {
   const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(address)}.json?access_token=${accessToken}`;

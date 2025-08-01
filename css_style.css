@@ -5,6 +5,11 @@ body {
   font-family: sans-serif;
 }
 
+
+/* ============================
+           HEADER
+   ============================ */
+
 .site-header {
   display: flex;
   justify-content: center;  /* center horizontally */
@@ -76,8 +81,9 @@ body {
 
 
 /* ============================
-     SEARCH BAR
+           SEARCH BAR
    ============================ */
+   
 .search-bar {
   position: relative;
   display: flex;
@@ -95,7 +101,9 @@ body {
 }
 
 
-/* // filter menu // */
+/* ============================
+           FILTER MENU
+   ============================ */
 
 
 .filter-btn {
@@ -258,6 +266,42 @@ body {
   text-decoration: none;
 }
 
+
+.model-logo {
+  background-color: #111;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  aspect-ratio: 1 / 0.9;
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+}
+
+.model-logo img {
+  max-width: 50% !important; /* adjust this if needed */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  margin-top: 1rem;
+}
+
+.model-logo .model-label {
+  color: #fff;
+  font-size: 0.85rem;
+  margin-top: 0.9rem;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.tile.diagram {
+  background-color: none
+}
+
+
 .flip-card {
   perspective: 1000px;
   aspect-ratio: 1 / 0.9; /* 👈 maintain aspect ratio */
@@ -363,7 +407,7 @@ body {
   }
   
   .project-page .tile {
-    background-color: #111;
+    background-color: none;
     color: white;
     padding: 0;
     margin: 0;
@@ -387,17 +431,19 @@ body {
   align-items: center;
   text-align: center;
   flex-direction: column;
+  overflow: hidden; 
   aspect-ratio: 1 / 0.85;
+  width: 100%;
+  
 }
 
-
-.project-page .tile.title h2 {
-  font-size: 1rem;
-  font-weight: bold;
-  text-align: center;
-  line-height: 1.2;
-  margin: 0.5rem 0 0.25rem;
+.project-page .tile.title img.model-logo {
+  width: 65%;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
 }
+
 
 .project-page .tile.title p {
   margin: 0;
@@ -410,6 +456,7 @@ body {
 
 
 .project-page .tile.text-left {
+  background-color: #111;
   align-self: stretch;
   padding: 1rem;
   display: flex;
@@ -438,6 +485,7 @@ body {
   overflow: hidden;
   width: 100%;
   display: block;
+  background: none !important;
   }
 
 .project-page .tile.full-bleed.double img {
@@ -446,6 +494,26 @@ body {
   width: 100%;
   height: 100%; 
   object-fit: cover;
+  overflow: hidden;
+  object-position: center;
+  display: block;
+  }
+  
+  .project-page .tile.full-bleed.triple {
+  padding: 0;
+  margin: 0;  
+  overflow: hidden;
+  width: 100%;
+  display: block;
+  background: none !important;
+  }
+
+.project-page .tile.full-bleed.triple img {
+  padding: 0;
+  margin: 0;  
+  width: 100%;
+  height: 100%; 
+  object-fit: contain;
   overflow: hidden;
   object-position: center;
   display: block;
@@ -535,6 +603,8 @@ body {
     border: none;
     box-shadow: none;
     pointer-events: none;
+    aspect-ratio: 1 / 0.85;
+    width: 100%;
   }
 
 .project-page .tile.hatch {
@@ -545,12 +615,39 @@ body {
       transparent 1px,
       transparent 5px
     );
+    aspect-ratio: 1 / 0.85;
+    width: 100%;
     background-color: transparent;
     border: none;
     box-shadow: none;
     pointer-events: none;
   }
   
+
+.related-header {
+  padding: 1.5rem 0 0.5rem;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+  padding: 0 100px;
+}
+
+.related-tile img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.related-tile p {
+  text-align: center;
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+}
 
 .image-popup-overlay {
     position: fixed;
