@@ -396,7 +396,7 @@ body {
     padding: 80px 240px;
     position: relative;
     align-items: stretch;
-    width: 75%;
+    width: 68%;
     margin: 0 auto;
   }
   
@@ -735,4 +735,80 @@ body {
   
   .home-page .tile.flip-in {
     animation: flipIn 0.6s ease-out forwards;
+}
+
+
+/* === Project page hover previews === */
+.project-page .nav-arrow {
+  position: fixed !important;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 3000;
+  pointer-events: auto;
+}
+
+.project-page .left-arrow  { left: 5px; }
+.project-page .right-arrow { right: 5px; }
+
+.project-page .arrow {
+  font-size: 50px;
+  line-height: 8;
+  color: rgb(214, 214, 214);   
+  user-select: none;
+}
+
+/* The card is absolutely positioned next to the arrow and hidden by default */
+.project-page .nav-arrow .preview-card {
+  position: absolute !important;
+  top: 50%;
+  width: 200px;
+  background: #fff;
+  border-radius: 0px;
+  padding: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .28s ease, opacity .2s ease;
+}
+
+/* start slightly offset so it "slides" in */
+.project-page .left-arrow  .preview-card { left: 100%;  transform: translate(24px, -50%); }
+.project-page .right-arrow .preview-card { right: 100%; transform: translate(-24px, -50%); }
+
+.project-page .preview-card a,
+.project-page .preview-card a:visited {
+  color: inherit;            /* use your normal text color */
+  text-decoration: none;     /* no underline */
+  display: block;            /* make the whole card clickable */
+}
+
+/* show on hover */
+.project-page .nav-arrow:hover .preview-card {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(0, -50%);
+}
+
+/* reset images inside the card so global img rules don’t blow them up */
+.project-page .preview-card img {
+  display: block;
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+/* small text tweaks */
+.project-page .preview-card h4 {
+  margin: 10px 0 4px;
+  font-size: 16px;
+}
+.project-page .preview-card p {
+  margin: 0;
+  font-size: 13px;
+  color: #555;
 }

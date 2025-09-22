@@ -370,3 +370,29 @@ window.addEventListener("resize", () => {
   drawDashedLinesBetweenTileRows();
   drawVerticalDashedLines();
 });
+
+let allProjects = []; // will be fetched from your JSON
+
+// Fetch projects once
+fetch("projects.json")
+  .then(res => res.json())
+  .then(data => {
+    allProjects = data;
+    setRandomPreview();
+  });
+
+// Pick random project and inject into preview cards
+function setRandomPreview() {
+  const previews = document.querySelectorAll(".preview-card");
+
+  previews.forEach(card => {
+    const project = allProjects[Math.floor(Math.random() * allProjects.length)];
+    card.innerHTML = `
+      <a href="page_project.html?slug=${project.slug}" class="preview-link">
+        <img src="${project.image}" style="width:100%; height:150px; object-fit:cover;" />
+        <h4>${project.title}</h4>
+        <p>${project.location}</p>
+      </a>
+    `;
+  });
+}
