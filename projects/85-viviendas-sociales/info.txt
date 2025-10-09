@@ -16,3 +16,6 @@ units: 85
 outdoor area: 30,300 sqft
 address: Av. de la República Argentina, 2141011 Sevilla, Spain
 coordinates: 37.378, -6.001
+typology: apartment
+material: CLT
+model: social housing
