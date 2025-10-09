@@ -51,7 +51,7 @@ async function loadProject() {
     },
     {
       class: "tile full-bleed double",
-      style: "grid-column: 4 / 5; grid-row: 1 / span 2;",
+      style: "grid-column: 4 / 6; grid-row: 1 / span 2;",
       image: "big1",
       alt: "Photo "
     },
@@ -59,7 +59,7 @@ async function loadProject() {
       class: "tile full-bleed",
       style: "grid-column: 1 / 2; grid-row: 2 / 3;",
       image: "1",
-      alt: "Photo 3"
+      alt: "Photo 2"
     },
     {
       class: "tile text-left",
@@ -81,28 +81,18 @@ async function loadProject() {
     },
     {
       class: "tile hatch",
-      style: "grid-column: 1 / 2;",
+      style: "grid-column: 1 / 2; grid-row: 3;",
       html: ""
     },
     {
-      class: "tile full-bleed",
-      style: "grid-column: 2 / 3; grid-row: 3;",
-      image: "3",
-      alt: "Photo 4"
-    },
-    {
-      class: "tile blank",
-      style: "grid-column: 2 / 3;",
-      html: ""
-    },
-    {
-      class: "tile blank",
-      style: "grid-column: 3 / 4; grid-row: 3;",
-      html: ""
+      class: "tile full-bleed double",
+      style: "grid-column: 2 / 4; grid-row: 3 / span 2;",
+      image: "big2",
+      alt: "Photo 5"
     },
     {
       class: "description",
-      style: "grid-column: 4 / 5; grid-row: 3 / span 2;",
+      style: "grid-column: 4 / 6; grid-row: 3 / span 2;",
       html: project.description
         .split(/\n\s*\n/)
         .map(p => `<p>${p.trim()}</p>`)
@@ -114,40 +104,40 @@ async function loadProject() {
       html: ""
     },
     {
-      class: "tile full-bleed double",
-      style: "grid-column: 2 / 4; grid-row: 4 / span 2;",
-      image: "big2",
-      alt: "Photo 5"
-    },
-    {
       class: "tile full-bleed",
       style: "grid-column: 1 / 2; grid-row: 5;",
-      image: "4",
-      alt: "Photo 6"
+      image: "2",
+      alt: "Photo 3"
     },
     {
-      class: "tile full-bleed",
-      style: "grid-column: 4 / 5; grid-row: 5;",
-      image: "5",
-      alt: "Photo 7"
-    },
-    {
-      class: "tile hatch",
-      style: "grid-column: 1 / 2; grid-row: 6;",
-      html: ""
+      class: "tile text-left",
+      style: "grid-column: 2 / 3; grid-row: 5;",
+      html: `
+        <p><strong>Finance</strong></p>`
     },
     {
       class: "tile full-bleed double",
-      style: "grid-column: 3 / 5; grid-row: 6 / span 2;",
+      style: "grid-column: 3 / 5; grid-row: 5 / span 2;",
       image: "big3",
       alt: "Photo 8"
     },
     {
-      class: "tile full-bleed",
-      style: "grid-column: 1 / 2; grid-row: 7;",
-      image: "2",
-      alt: "Photo 9"
+      class: "tile hatch",
+      style: "grid-column: 5 / 6; grid-row: 5;",
+      html: ""
+    },
+    {
+      class: "tile text-left",
+      style: "grid-column: 5 / 6; grid-row: 6;",
+      html: `
+        <p><strong>Tags</strong></p>`
+    },
+    {
+      class: "tile hatch",
+      style: "grid-column: 2 / 3; grid-row: 6;",
+      html: ""
     }
+    
   ];
 
   for (const tile of tiles) {
@@ -249,117 +239,165 @@ window.onload = loadProject;
 
 
 function drawDashedLinesBetweenTileRows() {
-  const tiles = Array.from(document.querySelectorAll('.tile, .project-page .description'));
-  if (tiles.length === 0) return;
+  const grid = document.querySelector('.project-page .grid');
+  if (!grid) return;
 
-  const rowThreshold = 10; // Allow up to 10px difference in top values to group tiles in same row
-  const rows = [];
+  // collect tiles that define rows
+  const tiles = Array.from(grid.querySelectorAll('.tile, .project-page .description'));
+  if (!tiles.length) return;
 
-  // Group tiles into rows based on vertical position (within threshold)
-  tiles.forEach(tile => {
-    const rect = tile.getBoundingClientRect();
-    const top = rect.top;
-
-    let foundRow = false;
-    for (let row of rows) {
-      if (Math.abs(row.top - top) < rowThreshold) {
-        row.tiles.push(tile);
-        foundRow = true;
-        break;
-      }
-    }
-
-    if (!foundRow) {
-      rows.push({ top, tiles: [tile] });
-    }
-  });
-
-  // Sort rows by top position
-  rows.sort((a, b) => a.top - b.top);
-
-  // Compute max horizontal span across all rows
-  let maxLeft = Infinity;
-  let maxRight = -Infinity;
-
-  rows.forEach(row => {
-    row.tiles.forEach(tile => {
-      const rect = tile.getBoundingClientRect();
-      maxLeft = Math.min(maxLeft, rect.left);
-      maxRight = Math.max(maxRight, rect.right);
+  // create/clear the line layer (sits behind tiles)
+  let layer = grid.querySelector('.row-lines');
+  if (!layer) {
+    layer = document.createElement('div');
+    layer.className = 'row-lines';
+    Object.assign(layer.style, {
+      position: 'absolute', inset: '0', pointerEvents: 'none', zIndex: '0'
     });
+    grid.prepend(layer);
+  }
+  layer.innerHTML = '';
+
+  // helper: rect in document coords
+  const docRect = el => {
+    const r = el.getBoundingClientRect();
+    return {
+      top: r.top + window.scrollY,
+      left: r.left + window.scrollX,
+      right: r.right + window.scrollX,
+      bottom: r.bottom + window.scrollY,
+      width: r.width,
+      height: r.height
+    };
+  };
+
+  const gridTopDoc = grid.getBoundingClientRect().top + window.scrollY;
+
+  // --- group tiles into visual rows ---
+  const rowThreshold = 10; // px tolerance
+  const rows = [];
+  tiles.forEach(el => {
+    const top = el.getBoundingClientRect().top;
+    let row = rows.find(r => Math.abs(r.top - top) < rowThreshold);
+    if (row) row.tiles.push(el);
+    else rows.push({ top, tiles: [el] });
   });
+  rows.sort((a, b) => a.top - b.top);
+  if (rows.length < 2) return;
 
-  const totalLineWidth = maxRight - maxLeft;
+  // sort tiles in each row left→right so "first left-most" is index 0
+  rows.forEach(r =>
+    r.tiles.sort((a, b) => a.getBoundingClientRect().left - b.getBoundingClientRect().left)
+  );
 
-  // Draw lines between each row
-  for (let i = 0; i < rows.length - 1; i++) {
-    const row1 = rows[i];
-    const row2 = rows[i + 1];
+  // --- compute spacing per your spec ---
+  const r1 = docRect(rows[0].tiles[0]);      // first tile, row 1
+  const r2 = docRect(rows[1].tiles[0]);      // first tile, row 2
+  const gap = r2.top - r1.bottom;            // distance between rows’ first tiles
+  const x = r1.height + gap;                 // step size you defined
 
-    const rect1 = row1.tiles[0].getBoundingClientRect();
-    const rect2 = row2.tiles[0].getBoundingClientRect();
+  // first dashed line at midpoint of the first gap
+  let y = r1.bottom + gap / 2;               // document-space Y
 
-    const y1 = rect1.bottom + window.scrollY;
-    const y2 = rect2.top + window.scrollY;
-    const midpoint = (y1 + y2) / 2;
+  // number of lines = (number of rows - 1)
+  const nLines = rows.length - 1;
 
-    const line = document.createElement("div");
-    line.style.position = "absolute";
-    line.style.top = `${midpoint}px`;
-    line.style.left = `${maxLeft - 15 + window.scrollX}px`;
-    line.style.width = `${totalLineWidth + 30}px`;
-    line.style.height = "1px";
-    line.style.backgroundImage = "repeating-linear-gradient(to right, #ccc 0, #ccc 4px, transparent 5px, transparent 9px)";
-    line.style.pointerEvents = "none";
-    document.body.appendChild(line);
+  // compute horizontal span: across all tiles in grid
+  let minLeft = Infinity, maxRight = -Infinity;
+  rows.forEach(row => row.tiles.forEach(el => {
+    const r = docRect(el);
+    minLeft = Math.min(minLeft, r.left);
+    maxRight = Math.max(maxRight, r.right);
+  }));
+
+  // draw lines
+  for (let i = 0; i < nLines; i++) {
+    const line = document.createElement('div');
+    Object.assign(line.style, {
+      position: 'absolute',
+      left: `${minLeft - (grid.getBoundingClientRect().left + window.scrollX) - 15}px`,
+      width: `${(maxRight - minLeft) + 30}px`,
+      height: '1px',
+      top: `${y - gridTopDoc}px`,
+      backgroundImage:
+        'repeating-linear-gradient(to right, #ccc 0, #ccc 4px, transparent 5px, transparent 9px)'
+    });
+    layer.appendChild(line);
+    y += x; // subsequent lines spaced by x
   }
 }
 
 
-function drawVerticalDashedLines() {
+function drawVerticalDashedLines({
+  selector = ".tile",
+  lines = 4,
+  rowThreshold = 10
+} = {}) {
   const container = document.getElementById("projectGrid");
-  const tiles = Array.from(container.querySelectorAll(".tile"));
+  if (!container) return;
 
-  // Remove old lines
-  document.querySelectorAll(".vertical-grid-line").forEach(line => line.remove());
+  // remove old
+  document.querySelectorAll(".vertical-grid-line").forEach(el => el.remove());
 
-  if (tiles.length === 0) return;
+  // ----- first row -----
+  const tiles = Array.from(container.querySelectorAll(selector));
+  if (tiles.length < 2) return;
 
-  const columns = new Map();
+  const rectsFirst = tiles.map(el => ({ el, r: el.getBoundingClientRect() }));
+  const minTop = Math.min(...rectsFirst.map(o => o.r.top));
+  const firstRow = rectsFirst
+    .filter(o => Math.abs(o.r.top - minTop) < rowThreshold)
+    .sort((a, b) => a.r.left - b.r.left);
 
-  tiles.forEach(tile => {
-    const rect = tile.getBoundingClientRect();
-    const left = Math.round(rect.left + window.scrollX);
-    if (!columns.has(left)) columns.set(left, []);
-    columns.get(left).push(rect);
-  });
+  if (firstRow.length < 2) return;
 
-  const sortedColumns = [...columns.entries()].sort((a, b) => a[0] - b[0]);
+  const first  = firstRow[0].r;
+  const second = firstRow[1].r;
 
-  const topEdge = Math.min(...tiles.map(tile => tile.getBoundingClientRect().top + window.scrollY));
-  const bottomEdge = Math.max(...tiles.map(tile => tile.getBoundingClientRect().bottom + window.scrollY));
-  const gridHeight = bottomEdge - topEdge;
+  // measure spacing
+  const firstTileWidth = first.width;
+  const measuredGap = (second.left - first.right);
+  const cs = getComputedStyle(container);
+  const cssGap = parseFloat(cs.columnGap || cs.gap || 0);
+  const gap = measuredGap > 0 && measuredGap < firstTileWidth * 2 ? measuredGap : cssGap;
 
-  for (let i = 0; i < sortedColumns.length - 1; i++) {
-    const [left1, rects1] = sortedColumns[i];
-    const [left2] = sortedColumns[i + 1];
+  // first gutter midpoint
+  const xStart = (first.right + second.left) / 2 + window.scrollX;
 
-    const midX = (left1 + rects1[0].width + left2) / 2;
+  // ----- vertical span from tiles (top of first row to bottom of last) -----
+  const tilesAll = Array.from(container.querySelectorAll(".tile, .description"));
+  if (!tilesAll.length) return;
+
+  const rectsAll = tilesAll.map(t => t.getBoundingClientRect());
+  let topEdge    = Math.min(...rectsAll.map(r => r.top))    + window.scrollY;
+  let bottomEdge = Math.max(...rectsAll.map(r => r.bottom)) + window.scrollY;
+  let lineHeight = bottomEdge - topEdge;
+
+  // offsets you wanted
+  const offsetTop = -12;     // start a bit higher
+  const offsetBottom = 12;  // end a bit lower
+  topEdge   += offsetTop;
+  lineHeight += offsetBottom - offsetTop;
+
+  // ----- draw lines -----
+  for (let i = 0; i < lines; i++) {
+    const x = xStart + i * (firstTileWidth + gap);
 
     const line = document.createElement("div");
     line.className = "vertical-grid-line";
     line.style.position = "absolute";
-    line.style.top = `${topEdge - 15}px`;
-    line.style.left = `${midX}px`;
-    line.style.height = `${gridHeight + 30}px`;
+    line.style.left = `${x}px`;
+    line.style.top = `${topEdge}px`;
+    line.style.height = `${lineHeight}px`;   // ← use lineHeight, not height
     line.style.width = "1px";
-    line.style.backgroundImage = "repeating-linear-gradient(to bottom, #ccc 0, #ccc 4px, transparent 5px, transparent 9px)";
+    line.style.backgroundImage =
+      "repeating-linear-gradient(to bottom, #ccc 0, #ccc 4px, transparent 5px, transparent 9px)";
     line.style.pointerEvents = "none";
-    line.style.zIndex = "10";
-
+    line.style.zIndex = "-1";
     document.body.appendChild(line);
   }
 }
+
 
 
 window.addEventListener("resize", () => {
@@ -381,12 +419,14 @@ fetch("projects.json")
     setRandomPreview();
   });
 
-// Pick random project and inject into preview cards
+// Pick a random project and attach its slug to the arrow container
 function setRandomPreview() {
   const previews = document.querySelectorAll(".preview-card");
 
   previews.forEach(card => {
     const project = allProjects[Math.floor(Math.random() * allProjects.length)];
+
+    // render the preview
     card.innerHTML = `
       <a href="page_project.html?slug=${project.slug}" class="preview-link">
         <img src="${project.image}" style="width:100%; height:150px; object-fit:cover;" />
@@ -394,5 +434,21 @@ function setRandomPreview() {
         <p>${project.location}</p>
       </a>
     `;
+
+    // save the slug on the arrow wrapper so the arrow can use it
+    const wrapper = card.closest(".nav-arrow");
+    if (wrapper) wrapper.dataset.slug = project.slug;
   });
 }
+
+// make the arrow itself navigate to the previewed project
+document.addEventListener("click", (e) => {
+  const arrow = e.target.closest(".nav-arrow .arrow");
+  if (!arrow) return;
+
+  const wrapper = arrow.closest(".nav-arrow");
+  const slug = wrapper && wrapper.dataset.slug;
+  if (slug) {
+    window.location.href = `page_project.html?slug=${slug}`;
+  }
+});

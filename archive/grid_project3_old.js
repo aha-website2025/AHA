@@ -35,18 +35,35 @@ async function loadProject() {
   const tiles = [
     {
       class: "tile title",
-      style: "grid-column: 1 / 2; grid-row: 1 / 2",
+      style: "grid-column: 1 / 2;",
       html: `<h2>${project.title.toUpperCase()}</h2><p>${project.location}</p>`
     },
-     {
+    {
+      class: "tile blank",
+      style: "grid-column: 2 / 3; grid-row: 1;",
+      html: ""
+    },
+    {
       class: "tile full-bleed",
-      style: "grid-column: 2 / 3; grid-row: 1 / 2;",
+      style: "grid-column: 3 / 4; grid-row: 1 / 2;",
       image: "image",
       alt: "Photo 1"
     },
-      {
+    {
+      class: "tile full-bleed double",
+      style: "grid-column: 4 / 5; grid-row: 1 / span 2;",
+      image: "big1",
+      alt: "Photo "
+    },
+    {
+      class: "tile full-bleed",
+      style: "grid-column: 1 / 2; grid-row: 2 / 3;",
+      image: "1",
+      alt: "Photo 3"
+    },
+    {
       class: "tile text-left",
-      style: "grid-column: 3 / 4; grid-row: 1 / 2;",
+      style: "grid-column: 2 / 3;",
       html: `
         <p><strong>Year completed: </strong>${project.year_completed}</p>
         <p><strong>Owner: </strong>${project.owner}</p>
@@ -55,82 +72,82 @@ async function loadProject() {
     },
     {
       class: "tile text-left",
-      style: "grid-column: 4 / 5; grid-row: 1 / 2;",
+      style: "grid-column: 3 / 4;",
       html: `
         <p><strong>Total floor space: </strong>${project.floor_space_sqft}</p>
         <p><strong># of units: </strong>${project.units}</p>
         <p><strong>Unit distribution: </strong>${project.unit_distribution}</p>
         <p><strong># of inhabitants: </strong>${project.inhabitants_per_unit}</p>`
     },
-   
+    {
+      class: "tile hatch",
+      style: "grid-column: 1 / 2;",
+      html: ""
+    },
+    {
+      class: "tile full-bleed",
+      style: "grid-column: 2 / 3; grid-row: 3;",
+      image: "3",
+      alt: "Photo 4"
+    },
+    {
+      class: "tile blank",
+      style: "grid-column: 2 / 3;",
+      html: ""
+    },
+    {
+      class: "tile blank",
+      style: "grid-column: 3 / 4; grid-row: 3;",
+      html: ""
+    },
     {
       class: "description",
-      style: "grid-column: 4 / 6; grid-row: 2 / 4; span 2;",
+      style: "grid-column: 4 / 5; grid-row: 3 / span 2;",
       html: project.description
         .split(/\n\s*\n/)
         .map(p => `<p>${p.trim()}</p>`)
         .join("") 
     },
     {
-      class: "tile hatch",
-      style: "grid-column: 1 / 2; grid-row: 2 / 3;",
+      class: "tile blank",
+      style: "grid-column: 1 / 2; grid-row: 4;",
       html: ""
     },
     {
       class: "tile full-bleed double",
-      style: "grid-column: 2 / 4; grid-row: 2 / 4; span 2;",
-      image: "big1",
-      alt: "Photo "
-    },
-
-     {
-      class: "tile full-bleed double",
-      style: "grid-column: 1 / 3; grid-row: 4 / 6; span 2;",
+      style: "grid-column: 2 / 4; grid-row: 4 / span 2;",
       image: "big2",
       alt: "Photo 5"
     },
-     {
-      class: "tile text-left",
-      style: "grid-column: 3 / 4; grid-row: 4 / 5;",
-      html: `
-        <p><strong>Finance</strong></p>`
-    },
     {
-      class: "tile text-left",
-      style: "grid-column: 4 / 5; grid-row: 4 / 5;",
-      html: `
-        <p><strong>Tags</strong></p>`
+      class: "tile full-bleed",
+      style: "grid-column: 1 / 2; grid-row: 5;",
+      image: "4",
+      alt: "Photo 6"
     },
     {
       class: "tile full-bleed",
-      style: "grid-column: 5 / 6; grid-row: 4 / 5;",
-      image: "1",
-      alt: "Photo 3"
+      style: "grid-column: 4 / 5; grid-row: 5;",
+      image: "5",
+      alt: "Photo 7"
     },
-   
+    {
+      class: "tile hatch",
+      style: "grid-column: 1 / 2; grid-row: 6;",
+      html: ""
+    },
     {
       class: "tile full-bleed double",
-      style: "grid-column: 3 / 5; grid-row: 5 / 6; span 2;",
+      style: "grid-column: 3 / 5; grid-row: 6 / span 2;",
       image: "big3",
       alt: "Photo 8"
     },
     {
       class: "tile full-bleed",
-      style: "grid-column: 5 / 6; grid-row: 5;",
+      style: "grid-column: 1 / 2; grid-row: 7;",
       image: "2",
       alt: "Photo 9"
-    },{
-      class: "tile hatch",
-      style: "grid-column: 2 / 3; grid-row: 6;",
-      html: ""
-    },
-    
-    {
-      class: "tile hatch",
-      style: "grid-column: 5 / 6; grid-row: 6;",
-      html: ""
     }
-    
   ];
 
   for (const tile of tiles) {
@@ -154,6 +171,28 @@ async function loadProject() {
       img.addEventListener("click", () => showPopup(img.src));
     }
     
+    if (tile.class.includes("description")) {
+  div.addEventListener("click", () => {
+    const overlay = document.createElement("div");
+    overlay.className = "description-popup-overlay";
+
+    const popup = document.createElement("div");
+    popup.className = "description-popup";
+    popup.innerHTML = `
+      <div class="description-popup-close">×</div>
+      ${tile.html}
+    `;
+
+    overlay.appendChild(popup);
+    document.body.appendChild(overlay);
+    document.body.style.overflow = "hidden";
+
+    overlay.addEventListener("click", () => {
+      document.body.removeChild(overlay);
+      document.body.style.overflow = "";
+    });
+  });
+}
 
   }
   
@@ -182,6 +221,9 @@ async function loadProject() {
 
 
 
+window.addEventListener("resize", () => {
+  loadProject(); // reloads and recalculates layout
+});
 
 // 🔍 Image popup
 function showPopup(src) {
@@ -366,8 +408,6 @@ function drawVerticalDashedLines({
   }
 }
 
-
-
 window.addEventListener("resize", () => {
   // 🧹 Remove existing dashed lines
   document.querySelectorAll(".vertical-grid-line, .horizontal-grid-line").forEach(line => line.remove());
@@ -387,14 +427,12 @@ fetch("projects.json")
     setRandomPreview();
   });
 
-// Pick a random project and attach its slug to the arrow container
+// Pick random project and inject into preview cards
 function setRandomPreview() {
   const previews = document.querySelectorAll(".preview-card");
 
   previews.forEach(card => {
     const project = allProjects[Math.floor(Math.random() * allProjects.length)];
-
-    // render the preview
     card.innerHTML = `
       <a href="page_project.html?slug=${project.slug}" class="preview-link">
         <img src="${project.image}" style="width:100%; height:150px; object-fit:cover;" />
@@ -402,21 +440,5 @@ function setRandomPreview() {
         <p>${project.location}</p>
       </a>
     `;
-
-    // save the slug on the arrow wrapper so the arrow can use it
-    const wrapper = card.closest(".nav-arrow");
-    if (wrapper) wrapper.dataset.slug = project.slug;
   });
 }
-
-// make the arrow itself navigate to the previewed project
-document.addEventListener("click", (e) => {
-  const arrow = e.target.closest(".nav-arrow .arrow");
-  if (!arrow) return;
-
-  const wrapper = arrow.closest(".nav-arrow");
-  const slug = wrapper && wrapper.dataset.slug;
-  if (slug) {
-    window.location.href = `page_project.html?slug=${slug}`;
-  }
-});

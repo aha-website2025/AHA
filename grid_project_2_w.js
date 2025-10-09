@@ -1,9 +1,14 @@
+/* =========================
+   Menu toggle
+   ========================= */
 function toggleMenu() {
   const menu = document.getElementById("menuItems");
   menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
 
-// 📁 Dynamic fallback loader
+/* =========================
+   Image fallback loader
+   ========================= */
 function getImagePath(slug, filenameBase) {
   return new Promise(resolve => {
     const tryJpg = `projects/${slug}/${filenameBase}.jpg`;
@@ -16,7 +21,43 @@ function getImagePath(slug, filenameBase) {
   });
 }
 
-// 📦 Load and render a project grid
+/* =========================
+   Grid sizing (deterministic)
+   ========================= */
+function setGridHeights() {
+  const grid = document.getElementById('projectGrid');
+  const firstTile = grid?.querySelector('.tile');
+  if (!grid || !firstTile) return;
+
+  // read the same ratio used in CSS (fallback to 0.85)
+  const root = getComputedStyle(document.documentElement);
+  const cssRatio = parseFloat(root.getPropertyValue('--tile-ratio')) || 0.85;
+
+  // read the actual CSS grid gap so JS matches your stylesheet (13px in your CSS)
+  const cs = getComputedStyle(grid);
+  const gap = parseFloat(cs.rowGap || cs.gap || 13);
+
+  // base row height = column width * ratio
+  const colW = firstTile.getBoundingClientRect().width;
+  const rowH = Math.round(colW * cssRatio);
+
+  // set track height for all implicit rows
+  grid.style.gridAutoRows = `${rowH}px`;
+
+  // explicit heights for spanning tiles
+  const doubleH = rowH * 2 + gap;
+  const tripleH = rowH * 3 + gap * 2;
+
+  grid.querySelectorAll('.tile.full-bleed.double, .description')
+      .forEach(el => { el.style.height = `${doubleH}px`; });
+
+  grid.querySelectorAll('.tile.full-bleed.triple')
+      .forEach(el => { el.style.height = `${tripleH}px`; });
+}
+
+/* =========================
+   Load & render project (grid layout #2)
+   ========================= */
 async function loadProject() {
   const urlParams = new URLSearchParams(window.location.search);
   const slug = urlParams.get("slug");
@@ -35,18 +76,32 @@ async function loadProject() {
   const tiles = [
     {
       class: "tile title",
-      style: "grid-column: 1 / 2; grid-row: 1 / 2",
+      style: "grid-column: 1 / 2; grid-row: 1 / 2;",
       html: `<h2>${project.title.toUpperCase()}</h2><p>${project.location}</p>`
     },
-     {
+    {
       class: "tile full-bleed",
       style: "grid-column: 2 / 3; grid-row: 1 / 2;",
       image: "image",
       alt: "Photo 1"
     },
-      {
+    {
+      class: "description",
+      style: "grid-column: 4 / 6; grid-row: 1 / 3;", // spans 2 rows via JS height
+      html: project.description
+        .split(/\n\s*\n/)
+        .map(p => `<p>${p.trim()}</p>`)
+        .join("")
+    },
+    {
+      class: "tile full-bleed double",
+      style: "grid-column: 2 / 4; grid-row: 2 / 4;", // 2 rows tall via JS
+      image: "big1",
+      alt: "Photo"
+    },
+    {
       class: "tile text-left",
-      style: "grid-column: 3 / 4; grid-row: 1 / 2;",
+      style: "grid-column: 1 / 2; grid-row: 2 / 3;",
       html: `
         <p><strong>Year completed: </strong>${project.year_completed}</p>
         <p><strong>Owner: </strong>${project.owner}</p>
@@ -55,135 +110,123 @@ async function loadProject() {
     },
     {
       class: "tile text-left",
-      style: "grid-column: 4 / 5; grid-row: 1 / 2;",
+      style: "grid-column: 4 / 5; grid-row: 3 / 4;",
       html: `
         <p><strong>Total floor space: </strong>${project.floor_space_sqft}</p>
         <p><strong># of units: </strong>${project.units}</p>
         <p><strong>Unit distribution: </strong>${project.unit_distribution}</p>
         <p><strong># of inhabitants: </strong>${project.inhabitants_per_unit}</p>`
     },
-   
-    {
-      class: "description",
-      style: "grid-column: 4 / 6; grid-row: 2 / 4; span 2;",
-      html: project.description
-        .split(/\n\s*\n/)
-        .map(p => `<p>${p.trim()}</p>`)
-        .join("") 
-    },
     {
       class: "tile hatch",
-      style: "grid-column: 1 / 2; grid-row: 2 / 3;",
+      style: "grid-column: 5 / 6; grid-row: 3 / 4;",
       html: ""
     },
     {
       class: "tile full-bleed double",
-      style: "grid-column: 2 / 4; grid-row: 2 / 4; span 2;",
-      image: "big1",
-      alt: "Photo "
-    },
-
-     {
-      class: "tile full-bleed double",
-      style: "grid-column: 1 / 3; grid-row: 4 / 6; span 2;",
+      style: "grid-column: 1 / 3; grid-row: 4 / 6;", // 2 rows tall via JS
       image: "big2",
       alt: "Photo 5"
     },
-     {
-      class: "tile text-left",
+    {
+      class: "tile full-bleed",
       style: "grid-column: 3 / 4; grid-row: 4 / 5;",
-      html: `
-        <p><strong>Finance</strong></p>`
+      image: "1",
+      alt: "Photo 3"
     },
     {
       class: "tile text-left",
       style: "grid-column: 4 / 5; grid-row: 4 / 5;",
-      html: `
-        <p><strong>Tags</strong></p>`
+      html: `<p><strong>Finance</strong></p>`
     },
-    {
-      class: "tile full-bleed",
-      style: "grid-column: 5 / 6; grid-row: 4 / 5;",
-      image: "1",
-      alt: "Photo 3"
-    },
-   
     {
       class: "tile full-bleed double",
-      style: "grid-column: 3 / 5; grid-row: 5 / 6; span 2;",
+      style: "grid-column: 3 / 5; grid-row: 5 / 6;", // will be double tall by JS
       image: "big3",
       alt: "Photo 8"
     },
     {
       class: "tile full-bleed",
-      style: "grid-column: 5 / 6; grid-row: 5;",
+      style: "grid-column: 5 / 6; grid-row: 5 / 6;",
       image: "2",
       alt: "Photo 9"
-    },{
-      class: "tile hatch",
-      style: "grid-column: 2 / 3; grid-row: 6;",
-      html: ""
     },
-    
     {
       class: "tile hatch",
-      style: "grid-column: 5 / 6; grid-row: 6;",
+      style: "grid-column: 1 / 2; grid-row: 6 / 7;",
+      html: ""
+    },
+    {
+      class: "tile text-left",
+      style: "grid-column: 2 / 3; grid-row: 6 / 7;",
+      html: `<p><strong>Tags</strong></p>`
+    },
+    {
+      class: "tile hatch",
+      style: "grid-column: 5 / 6; grid-row: 6 / 7;",
       html: ""
     }
-    
   ];
 
+  // append tiles
   for (const tile of tiles) {
     const div = document.createElement("div");
     div.className = tile.class;
-    if (tile.style) div.style = tile.style;
+    if (tile.style) div.style.cssText = tile.style;
 
-    // Load image fallback if needed
     if (tile.image) {
       const src = await getImagePath(slug, tile.image);
       div.innerHTML = `<img src="${src}" alt="${tile.alt}" />`;
     } else {
       div.innerHTML = tile.html;
     }
-
     grid.appendChild(div);
 
+    // image popup
     const img = div.querySelector("img");
     if (img) {
       img.style.cursor = "pointer";
       img.addEventListener("click", () => showPopup(img.src));
     }
-    
 
+    // description popup
+    if (tile.class.includes("description")) {
+      div.addEventListener("click", () => {
+        const overlay = document.createElement("div");
+        overlay.className = "description-popup-overlay";
+
+        const popup = document.createElement("div");
+        popup.className = "description-popup";
+        popup.innerHTML = `
+          <div class="description-popup-close">×</div>
+          ${tile.html}
+        `;
+
+        overlay.appendChild(popup);
+        document.body.appendChild(overlay);
+        document.body.style.overflow = "hidden";
+
+        overlay.addEventListener("click", () => {
+          document.body.removeChild(overlay);
+          document.body.style.overflow = "";
+        });
+      });
+    }
   }
-  
-  const titleTile = document.querySelector(".tile.title");
-  const doubleTiles = document.querySelectorAll(".tile.full-bleed.double");
-  const projectGrid = document.getElementById("projectGrid");
 
-  if (titleTile && projectGrid) {
-    const rowHeight = titleTile.offsetHeight;
-    const gap = 15;
-    const doubleHeight = 2 * rowHeight + gap;
-
-    projectGrid.style.gridAutoRows = `${rowHeight}px`;
-
-    doubleTiles.forEach(tile => {
-      tile.style.height = `${doubleHeight}px`;
-    });
-  }
-
-  setTimeout(() => {
+  // after fonts (to avoid small metric shifts)
+  const whenFontsReady = document.fonts ? document.fonts.ready : Promise.resolve();
+  whenFontsReady.then(() => {
+    setGridHeights();
+    // draw lines after sizing is stable
     drawDashedLinesBetweenTileRows();
     drawVerticalDashedLines();
-  }, 100);
-
+  });
 }
 
-
-
-
-// 🔍 Image popup
+/* =========================
+   Image popup
+   ========================= */
 function showPopup(src) {
   const overlay = document.createElement("div");
   overlay.className = "image-popup-overlay";
@@ -196,25 +239,23 @@ function showPopup(src) {
   document.body.appendChild(overlay);
 
   document.body.style.overflow = "hidden";
-
   overlay.addEventListener("click", () => {
     document.body.removeChild(overlay);
     document.body.style.overflow = "";
   });
 }
 
-window.onload = loadProject;
-
-
+/* =========================
+   Horizontal dashed lines
+   ========================= */
 function drawDashedLinesBetweenTileRows() {
   const grid = document.querySelector('.project-page .grid');
   if (!grid) return;
 
-  // collect tiles that define rows
   const tiles = Array.from(grid.querySelectorAll('.tile, .project-page .description'));
   if (!tiles.length) return;
 
-  // create/clear the line layer (sits behind tiles)
+  // create/clear the line layer (behind tiles)
   let layer = grid.querySelector('.row-lines');
   if (!layer) {
     layer = document.createElement('div');
@@ -226,7 +267,6 @@ function drawDashedLinesBetweenTileRows() {
   }
   layer.innerHTML = '';
 
-  // helper: rect in document coords
   const docRect = el => {
     const r = el.getBoundingClientRect();
     return {
@@ -241,8 +281,8 @@ function drawDashedLinesBetweenTileRows() {
 
   const gridTopDoc = grid.getBoundingClientRect().top + window.scrollY;
 
-  // --- group tiles into visual rows ---
-  const rowThreshold = 10; // px tolerance
+  // group into rows
+  const rowThreshold = 10;
   const rows = [];
   tiles.forEach(el => {
     const top = el.getBoundingClientRect().top;
@@ -253,24 +293,20 @@ function drawDashedLinesBetweenTileRows() {
   rows.sort((a, b) => a.top - b.top);
   if (rows.length < 2) return;
 
-  // sort tiles in each row left→right so "first left-most" is index 0
   rows.forEach(r =>
     r.tiles.sort((a, b) => a.getBoundingClientRect().left - b.getBoundingClientRect().left)
   );
 
-  // --- compute spacing per your spec ---
-  const r1 = docRect(rows[0].tiles[0]);      // first tile, row 1
-  const r2 = docRect(rows[1].tiles[0]);      // first tile, row 2
-  const gap = r2.top - r1.bottom;            // distance between rows’ first tiles
-  const x = r1.height + gap;                 // step size you defined
+  // spacing per spec
+  const r1 = docRect(rows[0].tiles[0]);
+  const r2 = docRect(rows[1].tiles[0]);
+  const gap = r2.top - r1.bottom;
+  const x = r1.height + gap;
 
-  // first dashed line at midpoint of the first gap
-  let y = r1.bottom + gap / 2;               // document-space Y
-
-  // number of lines = (number of rows - 1)
+  let y = r1.bottom + gap / 2;
   const nLines = rows.length - 1;
 
-  // compute horizontal span: across all tiles in grid
+  // horizontal span across all tiles
   let minLeft = Infinity, maxRight = -Infinity;
   rows.forEach(row => row.tiles.forEach(el => {
     const r = docRect(el);
@@ -278,9 +314,9 @@ function drawDashedLinesBetweenTileRows() {
     maxRight = Math.max(maxRight, r.right);
   }));
 
-  // draw lines
   for (let i = 0; i < nLines; i++) {
     const line = document.createElement('div');
+    line.className = 'horizontal-grid-line';
     Object.assign(line.style, {
       position: 'absolute',
       left: `${minLeft - (grid.getBoundingClientRect().left + window.scrollX) - 15}px`,
@@ -291,11 +327,13 @@ function drawDashedLinesBetweenTileRows() {
         'repeating-linear-gradient(to right, #ccc 0, #ccc 4px, transparent 5px, transparent 9px)'
     });
     layer.appendChild(line);
-    y += x; // subsequent lines spaced by x
+    y += x;
   }
 }
 
-
+/* =========================
+   Vertical dashed lines
+   ========================= */
 function drawVerticalDashedLines({
   selector = ".tile",
   lines = 4,
@@ -307,7 +345,6 @@ function drawVerticalDashedLines({
   // remove old
   document.querySelectorAll(".vertical-grid-line").forEach(el => el.remove());
 
-  // ----- first row -----
   const tiles = Array.from(container.querySelectorAll(selector));
   if (tiles.length < 2) return;
 
@@ -322,17 +359,14 @@ function drawVerticalDashedLines({
   const first  = firstRow[0].r;
   const second = firstRow[1].r;
 
-  // measure spacing
   const firstTileWidth = first.width;
   const measuredGap = (second.left - first.right);
   const cs = getComputedStyle(container);
   const cssGap = parseFloat(cs.columnGap || cs.gap || 0);
   const gap = measuredGap > 0 && measuredGap < firstTileWidth * 2 ? measuredGap : cssGap;
 
-  // first gutter midpoint
   const xStart = (first.right + second.left) / 2 + window.scrollX;
 
-  // ----- vertical span from tiles (top of first row to bottom of last) -----
   const tilesAll = Array.from(container.querySelectorAll(".tile, .description"));
   if (!tilesAll.length) return;
 
@@ -341,13 +375,11 @@ function drawVerticalDashedLines({
   let bottomEdge = Math.max(...rectsAll.map(r => r.bottom)) + window.scrollY;
   let lineHeight = bottomEdge - topEdge;
 
-  // offsets you wanted
-  const offsetTop = -12;     // start a bit higher
-  const offsetBottom = 12;  // end a bit lower
+  const offsetTop = -12;
+  const offsetBottom = 12;
   topEdge   += offsetTop;
   lineHeight += offsetBottom - offsetTop;
 
-  // ----- draw lines -----
   for (let i = 0; i < lines; i++) {
     const x = xStart + i * (firstTileWidth + gap);
 
@@ -356,7 +388,7 @@ function drawVerticalDashedLines({
     line.style.position = "absolute";
     line.style.left = `${x}px`;
     line.style.top = `${topEdge}px`;
-    line.style.height = `${lineHeight}px`;   // ← use lineHeight, not height
+    line.style.height = `${lineHeight}px`;
     line.style.width = "1px";
     line.style.backgroundImage =
       "repeating-linear-gradient(to bottom, #ccc 0, #ccc 4px, transparent 5px, transparent 9px)";
@@ -366,20 +398,20 @@ function drawVerticalDashedLines({
   }
 }
 
-
-
+/* =========================
+   Resize: recompute + redraw
+   ========================= */
 window.addEventListener("resize", () => {
-  // 🧹 Remove existing dashed lines
-  document.querySelectorAll(".vertical-grid-line, .horizontal-grid-line").forEach(line => line.remove());
-
-  // 🔁 Redraw
+  document.querySelectorAll(".vertical-grid-line, .horizontal-grid-line").forEach(n => n.remove());
+  setGridHeights();
   drawDashedLinesBetweenTileRows();
   drawVerticalDashedLines();
 });
 
-let allProjects = []; // will be fetched from your JSON
-
-// Fetch projects once
+/* =========================
+   Previews (unchanged)
+   ========================= */
+let allProjects = [];
 fetch("projects.json")
   .then(res => res.json())
   .then(data => {
@@ -387,14 +419,10 @@ fetch("projects.json")
     setRandomPreview();
   });
 
-// Pick a random project and attach its slug to the arrow container
 function setRandomPreview() {
   const previews = document.querySelectorAll(".preview-card");
-
   previews.forEach(card => {
     const project = allProjects[Math.floor(Math.random() * allProjects.length)];
-
-    // render the preview
     card.innerHTML = `
       <a href="page_project.html?slug=${project.slug}" class="preview-link">
         <img src="${project.image}" style="width:100%; height:150px; object-fit:cover;" />
@@ -402,21 +430,10 @@ function setRandomPreview() {
         <p>${project.location}</p>
       </a>
     `;
-
-    // save the slug on the arrow wrapper so the arrow can use it
-    const wrapper = card.closest(".nav-arrow");
-    if (wrapper) wrapper.dataset.slug = project.slug;
   });
 }
 
-// make the arrow itself navigate to the previewed project
-document.addEventListener("click", (e) => {
-  const arrow = e.target.closest(".nav-arrow .arrow");
-  if (!arrow) return;
-
-  const wrapper = arrow.closest(".nav-arrow");
-  const slug = wrapper && wrapper.dataset.slug;
-  if (slug) {
-    window.location.href = `page_project.html?slug=${slug}`;
-  }
-});
+/* =========================
+   Boot
+   ========================= */
+window.onload = loadProject;

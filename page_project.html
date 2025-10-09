@@ -34,7 +34,23 @@
     <!-- Project content loads here -->
   </div>
 
-  <script src="grid_project1.js"></script>
+ <script>
+  (function () {
+    // pick one at random each page load
+    const layouts = ["grid_project1.js", "grid_project2.js", "grid_project3.js"];
+    const chosen = layouts[Math.floor(Math.random() * layouts.length)];
+
+    // inject the chosen script
+    const s = document.createElement("script");
+    s.src = chosen;
+    s.async = true;                 // dynamic scripts are async by default; explicit for clarity
+    document.body.appendChild(s);
+
+    // optional: mark which layout was chosen (handy for debugging)
+    document.body.setAttribute("data-layout", chosen);
+  })();
+</script>
+
 
     <!-- Left Arrow + Preview -->
   <div class="nav-arrow left-arrow">
