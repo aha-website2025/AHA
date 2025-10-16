@@ -5,10 +5,10 @@ Over the past two decades, Silverlake has transformed into a dense, socially div
 year_completed: 2019
 owner: CIM Group
 architect: Lorcan O'Herlihy Architect
-lot size: 29,000 sqft
-units: 49
+lot_size_sqft: 29,000 sqft
+#_of_units: 49
 unit_distribution: Two-row layout
-inhabitants: 114
+#_of_inhabitants: 114
 outdoor area: 11,000 sqft
 address: 617 N Dillon St, Los Angeles, CA 90026
 coordinates: 34.079, -118.279
