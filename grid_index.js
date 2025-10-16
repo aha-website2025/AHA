@@ -61,7 +61,6 @@ function createTile(type, project = null, modelImage = null) {
 
   return div;
 }
-
 function renderGrid(projects) {
   const container = document.getElementById("grid");
   container.innerHTML = "";
@@ -69,39 +68,44 @@ function renderGrid(projects) {
   if (projects.length < allProjects.length) {
     // FILTERED MODE (keep order as-is)
     container.classList.add('filtered');
-    projects.forEach(project => {
-      const tileDiv = createTile("data", project);
-      container.appendChild(tileDiv);
-    });
+    projects.forEach(project => container.appendChild(createTile("data", project)));
+    return;
+  }
 
-  } else {
-    // FULL LAYOUT MODE — RANDOMIZE ORDER
-    container.classList.remove('filtered');
+  // FULL LAYOUT MODE — RANDOMIZE ORDER + REPEAT PATTERN
+  container.classList.remove('filtered');
 
-    const dataOrder = shuffleArray(projects); // ← randomize on each full render
-    let dataIndex = 0;
+  const dataOrder = shuffleArray(projects);          // randomize projects on each full render
+  const models    = shuffleArray(allModels || []);   // randomize models too
+  let dataIndex   = 0;
+  let modelIndex  = 0;
 
-    const shuffledModelImages = shuffleArray(allModels);
-    let modelIndex = 0;
+  // Keep emitting tiles by cycling over the pattern,
+  // but STOP immediately after placing the final 'data' tile.
+  for (let i = 0; ; i++) {
+    const type = layout[i % layout.length];
 
-    let layoutIndex = 0;
-    while (layoutIndex < layout.length || dataIndex < dataOrder.length) {
-      const type = layout[layoutIndex] || "data";
-      let tileDiv;
-
-      if (type === "data" && dataIndex < dataOrder.length) {
-        tileDiv = createTile("data", dataOrder[dataIndex++]);
-      } else if (type === "model" && modelIndex < shuffledModelImages.length) {
-        tileDiv = createTile("model", null, shuffledModelImages[modelIndex++]);
+    if (type === "data") {
+      const p = dataOrder[dataIndex];
+      if (!p) break; // no more projects, safety
+      container.appendChild(createTile("data", p));
+      dataIndex++;
+      if (dataIndex === dataOrder.length) break; // STOP right after last data placed
+    } else if (type === "model") {
+      if (models.length > 0) {
+        container.appendChild(createTile("model", null, models[modelIndex % models.length]));
+        modelIndex++;
       } else {
-        tileDiv = createTile(type);
+        // if no models available, fall back to a decorative blank/hatch
+        container.appendChild(createTile("hatch"));
       }
-
-      container.appendChild(tileDiv);
-      layoutIndex++;
+    } else {
+      // 'hatch' or 'blank'
+      container.appendChild(createTile(type));
     }
   }
 }
+
 
 
 function handleSearch() {
