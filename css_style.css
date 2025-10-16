@@ -72,72 +72,210 @@ body {
 
 
 
-/* ============================
-           SEARCH BAR
-   ============================ */
-   
-.search-bar {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin: 100px auto 0; 
-}
-
-.search-bar input {
-  padding: 0.3rem 0.8rem;
-  font-size: 0.8rem;
-  border: none;
-  width: 200px;
-}
-
 
 /* ============================
            FILTER MENU
    ============================ */
 
+  :root {
+  --controls-width: 280px;   /* set this to your search input width */
+  }
 
-.filter-btn {
-  padding: 0.3rem 0.8rem;
-  background: white;
+  .controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;          
+  margin-top: 100px;     
+}
+
+.filters {
+  display: flex;
+  justify-content: center;    
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .75rem;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  position: relative;
+}
+.filter-group { 
+  position: relative;  
+  flex: 1;
+  margin: 0 0.25rem;
+}
+
+.filters-primary {
+  display: flex;
+  justify-content: center; /* center only the grey boxes */
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.filter-group {
+  flex: 1;
+  margin: 0 0.25rem;                             
+}
+
+.filter-toggle {
+  width: 80px;
+  padding: 0.5rem 0.8rem;
   border: none;
-  font-weight: bold;
+  background: #dadad7;
+  color: #333;
   cursor: pointer;
-  color: #555555; 
-  font-family: 'Helvetica Neue', sans-serif;
+  border-radius: 0;
+  text-align: center;
 }
 
-.filter-wrapper {
-  position: relative; 
+.filter-toggle:hover {
+  background: #cfcfcb;
+}
+.filter-menu { 
+  position:absolute; 
+  top:calc(100% + 6px); 
+  left:0; 
+  z-index:10; 
+  width: auto;              
+  min-width: 100%;           
+  white-space: nowrap; 
+  background:#fff; 
+  border:none;
+  display:none; 
+}
+.filter-menu.open { 
+  display:flex; 
+  flex-direction: column;
+  gap:2px; 
 }
 
-#categoryMenu {
+.filter-chip { 
+  border:none;
+  display: block;
+  cursor:pointer; 
+  background:#fff; 
+  color: #555;  
+  font-size:.75rem; 
+  user-select:none; 
+  text-align:left; 
+  padding: 4px 6px;
+}
+.filter-chip.active { 
+  background:#222; 
+  color:#fff; 
+  border: none;
+}
+
+.filter-chip:hover {
+  color: #999;
+}
+
+.clear-filters {
   position: absolute;
-  top: 100%; 
-  left: 0;
-  right: 0;
-  margin: auto;
-  width: 120px; 
-  background: white;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  display: none;
-  z-index: 1000;
-  text-align: left;
-  color: #555555; 
-  font-family: Calibri, sans-serif;
-}
-
-#categoryMenu div {
-  padding: 8px 12px;
+  left: 50%;
+  transform: translateX(170px);
+  padding: 0.5rem 0.8rem;
+  height: 38px; 
+  line-height: 1;
+  border: 1px solid #dadad7;
+  background: #f3f3ef;
+  color: #333;
   cursor: pointer;
+  border-radius: 0;
+  height: 100%;
+  margin-left: auto;                   /* ⬅️ creates visual separation */
 }
 
-#categoryMenu div:hover {
-  background-color: #f0f0f0;
+.clear-filters:hover {
+  border: 1px solid #b8b8b5;
 }
 
+.hidden { 
+  display:none !important; 
+}
+
+/* container for selected items, placed inside each .filter-group */
+.selected-tags {
+  position: absolute;
+  bottom: calc(100% + 6px);   /* sits just above the grey button */
+  left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-width: 100%;
+}
+
+/* the pill */
+.filter-pill {
+  background: #f3f3ef;
+  border: none;
+  border-radius: 0;
+  padding: 0 3px;
+  font-size: .75rem;
+  line-height: 1;  
+  color: #555;
+  gap: 3px;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.filter-pill + .filter-pill {
+  margin-top: -1px;     /* slight overlap to remove visual gap */
+}
+
+/* the little X */
+.filter-pill .pill-x {
+  margin-left: 6px;
+  border: none;
+  background: transparent;
+  font-size: .9rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #666;
+}
+.filter-pill .pill-x:hover { color: #000; }
+
+#pillBoard {
+  position: absolute;
+  right: 0;                  
+  bottom: 0;                 
+  display: flex;
+  flex-direction: column-reverse; 
+  align-items: flex-end;     
+  gap: 0;                  
+  pointer-events: auto;
+}
+
+#pillBoard .filter-pill {
+  margin: 0;
+  white-space: nowrap;
+}
+/* ============================
+           SEARCH BAR
+   ============================ */
+   
+.search-row {
+  display: flex;
+  justify-content: center;
+  margin: 0.4rem auto 0; 
+}
+
+.search-row input#searchInput {
+  width: 283px;
+  box-sizing: border-box; 
+  text-align: center; 
+  padding: 0.35rem 0.7rem;
+  font-size: 0.8rem;
+  border: none;         
+  background: #f8f8f8;  
+  outline: none;         
+  transition: border-color 0.2s ease;
+}
+
+.search-row input#searchInput:focus {
+  border-bottom: 0px solid #555; /* darker line when focused */
+}
 
 
 /* ========================

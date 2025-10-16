@@ -63,33 +63,34 @@ function createTile(type, project = null, modelImage = null) {
 }
 
 function renderGrid(projects) {
-  const container = document.getElementById("grid-container");
+  const container = document.getElementById("grid");
   container.innerHTML = "";
 
   if (projects.length < allProjects.length) {
-     // 🔥 Add filtered class
-     container.classList.add('filtered');
+    // FILTERED MODE (keep order as-is)
+    container.classList.add('filtered');
+    projects.forEach(project => {
+      const tileDiv = createTile("data", project);
+      container.appendChild(tileDiv);
+    });
 
-     // Render filtered projects (simple flex)
-     projects.forEach(project => {
-       const tileDiv = createTile("data", project);
-       container.appendChild(tileDiv);
-     });
-   } else {
-     // 🔥 Remove filtered class
-     container.classList.remove('filtered');
- 
-     // Full grid layout
-     let dataIndex = 0;
-     const shuffledModelImages = shuffleArray(allModels);
+  } else {
+    // FULL LAYOUT MODE — RANDOMIZE ORDER
+    container.classList.remove('filtered');
+
+    const dataOrder = shuffleArray(projects); // ← randomize on each full render
+    let dataIndex = 0;
+
+    const shuffledModelImages = shuffleArray(allModels);
     let modelIndex = 0;
-     let layoutIndex = 0;
-    while (layoutIndex < layout.length || dataIndex < projects.length) {
-      let type = layout[layoutIndex] || "data"; // fill extra space with 'data'
+
+    let layoutIndex = 0;
+    while (layoutIndex < layout.length || dataIndex < dataOrder.length) {
+      const type = layout[layoutIndex] || "data";
       let tileDiv;
 
-      if (type === "data" && dataIndex < projects.length) {
-        tileDiv = createTile("data", projects[dataIndex++]);
+      if (type === "data" && dataIndex < dataOrder.length) {
+        tileDiv = createTile("data", dataOrder[dataIndex++]);
       } else if (type === "model" && modelIndex < shuffledModelImages.length) {
         tileDiv = createTile("model", null, shuffledModelImages[modelIndex++]);
       } else {
@@ -102,6 +103,7 @@ function renderGrid(projects) {
   }
 }
 
+
 function handleSearch() {
   const keyword = document.getElementById("searchInput").value.toLowerCase();
 
@@ -112,8 +114,14 @@ function handleSearch() {
   );
 
   renderGrid(filtered);
-  setTimeout(drawDashedLinesBetweenTileRows, 100);
+
+  // draw BOTH kinds of guides for search results, just like filters
+  setTimeout(() => {
+    drawDashedLinesBetweenTileRows();  // rows - 1
+    drawVerticalDashedLines();         // stop where the row stops
+  }, 100);
 }
+
 
 function handleCategoryFilter(selectedCategory) {
   const filtered = allProjects.filter(project => {
@@ -137,7 +145,7 @@ function showAllProjects() {
 }
 
 function showOnlyModels() {
-  const grid = document.getElementById("grid-container");
+  const grid = document.getElementById("grid");
   grid.innerHTML = ""; // clear grid
 
   allModels.forEach(model => {
@@ -161,106 +169,144 @@ Promise.all([
   fetch("https://aha-website2025.github.io/AHA/json_models.json").then(res => res.json())
 ]).then(([projectsData, modelsData]) => {
   allProjects = projectsData;
-  allModels = modelsData;
+  allModels   = modelsData;
+
+  // initial full grid render
   renderGrid(allProjects);
 
-    setTimeout(() => {
-      drawDashedLinesBetweenTileRows(); // horizontal lines
-      drawVerticalDashedLines();        // vertical lines
-    }, 100);
+  // draw dashed lines once
+  setTimeout(() => {
+    drawDashedLinesBetweenTileRows();
+    drawVerticalDashedLines();
+  }, 100);
+
+  // ✨ initialize filters after data + first render
+  initAHAFilters({
+    projects: allProjects,
+    renderGrid, // pass the same render function you already use
+    onAfterRender: () => {
+      // redraw dashed lines after every filter action
+      setTimeout(() => {
+        drawDashedLinesBetweenTileRows();
+        drawVerticalDashedLines();
+      }, 100);
+    }
   });
+}).catch(err => console.error("Failed to load data:", err));
+
 
 
 function drawDashedLinesBetweenTileRows() {
-  const tiles = Array.from(document.querySelectorAll('.tile'));
+  const container = document.getElementById("grid");
+  if (!container) return;
+
+  // remove previous lines
+  document.querySelectorAll(".horizontal-grid-line").forEach(line => line.remove());
+
+  const tiles = Array.from(container.querySelectorAll(".tile"));
   if (tiles.length === 0) return;
 
-  const gap = 15; // tile gap in px
+  // group tiles by row based on top position
   const rows = {};
-
-  // Group tiles by row (based on top position)
   tiles.forEach(tile => {
     const rect = tile.getBoundingClientRect();
     const top = Math.round(rect.top);
-
     if (!rows[top]) rows[top] = [];
     rows[top].push(tile);
   });
 
   const sortedTops = Object.keys(rows).map(Number).sort((a, b) => a - b);
+  const rowCount = sortedTops.length;
 
-  for (let i = 0; i < sortedTops.length - 1; i++) {
-    const row1 = rows[sortedTops[i]];
-    const row2 = rows[sortedTops[i + 1]];
+  // draw only (rows - 1) lines
+  for (let i = 0; i < rowCount - 1; i++) {
+    const currentRowTiles = rows[sortedTops[i]];
+    const rect = currentRowTiles[0].getBoundingClientRect();
+    const nextRowTop = sortedTops[i + 1];
 
-    const rect1 = row1[0].getBoundingClientRect();
-    const rect2 = row2[0].getBoundingClientRect();
+    const y = (rect.bottom + nextRowTop) / 2 + window.scrollY;
 
-    const y1 = rect1.bottom;
-    const y2 = rect2.top;
-    const midpoint = (y1 + y2) / 2 + window.scrollY;
-
-    // Get leftmost and rightmost bounds
-    const leftEdge = Math.min(...row1.map(tile => tile.getBoundingClientRect().left)) + window.scrollX;
-    const rightEdge = Math.max(...row1.map(tile => tile.getBoundingClientRect().right)) + window.scrollX;
+    // use min/max x bounds of the current row
+    const leftEdge = Math.min(...currentRowTiles.map(t => t.getBoundingClientRect().left)) + window.scrollX;
+    const rightEdge = Math.max(...currentRowTiles.map(t => t.getBoundingClientRect().right)) + window.scrollX;
 
     const line = document.createElement("div");
+    line.className = "horizontal-grid-line";
     line.style.position = "absolute";
-    line.style.top = `${midpoint}px`;
+    line.style.top = `${y}px`;
     line.style.left = `${leftEdge - 15}px`;
     line.style.width = `${(rightEdge - leftEdge) + 30}px`;
-    line.style.borderTop = "none";
     line.style.height = "1px";
     line.style.backgroundImage = "repeating-linear-gradient(to right, #ccc 0, #ccc 4px, transparent 5px, transparent 9px)";
     line.style.pointerEvents = "none";
-    line.style.zIndex = "10";
-
+    line.style.zIndex = "1";
     document.body.appendChild(line);
   }
 }
 
 
 function drawVerticalDashedLines() {
-  const container = document.getElementById("grid-container");
-  const tiles = Array.from(container.querySelectorAll(".tile"));
+  const container = document.getElementById("grid");
+  if (!container) return;
 
-  // Remove old lines
+  // remove old lines
   document.querySelectorAll(".vertical-grid-line").forEach(line => line.remove());
 
+  const tiles = Array.from(container.querySelectorAll(".tile")).filter(el => el.offsetParent !== null);
   if (tiles.length === 0) return;
 
+  // group by column (left edge)
   const columns = new Map();
-
   tiles.forEach(tile => {
-    const rect = tile.getBoundingClientRect();
-    const left = Math.round(rect.left + window.scrollX);
-    if (!columns.has(left)) columns.set(left, []);
-    columns.get(left).push(rect);
+    const r = tile.getBoundingClientRect();
+    const left = Math.round(r.left + window.scrollX);
+    if (!columns.has(left)) columns.set(left, { rects: [], width: r.width });
+    columns.get(left).rects.push(r);
   });
 
-  const sortedColumns = [...columns.entries()].sort((a, b) => a[0] - b[0]);
+  const colList = [...columns.entries()]
+    .sort((a, b) => a[0] - b[0])
+    .map(([left, info]) => {
+      const tops = info.rects.map(rr => rr.top + window.scrollY);
+      const bottoms = info.rects.map(rr => rr.bottom + window.scrollY);
+      return {
+        left,
+        width: info.width,
+        topMin: Math.min(...tops),
+        bottomMax: Math.max(...bottoms)
+      };
+    });
 
-  const topEdge = Math.min(...tiles.map(tile => tile.getBoundingClientRect().top + window.scrollY));
-  const bottomEdge = Math.max(...tiles.map(tile => tile.getBoundingClientRect().bottom + window.scrollY));
-  const gridHeight = bottomEdge - topEdge;
+  if (colList.length < 2) return;
 
-  for (let i = 0; i < sortedColumns.length - 1; i++) {
-    const [left1, rects1] = sortedColumns[i];
-    const [left2] = sortedColumns[i + 1];
+  const topEdge = Math.min(...colList.map(c => c.topMin));
 
-    const midX = (left1 + rects1[0].width + left2) / 2;
+  for (let i = 0; i < colList.length - 1; i++) {
+    const c1 = colList[i];
+    const c2 = colList[i + 1];
+
+    // x midway between columns
+    const midX = (c1.left + c1.width + c2.left) / 2;
+
+    // ⬅️ use the TALLER of the two columns
+    const bottomEdgeForDivider = Math.max(c1.bottomMax, c2.bottomMax);
+
+    const h = bottomEdgeForDivider - topEdge;
+    if (h <= 0) continue;
 
     const line = document.createElement("div");
     line.className = "vertical-grid-line";
     line.style.position = "absolute";
-    line.style.top = `${topEdge - 15}px`;
+    line.style.top = `${topEdge - 15}px`;      // keep your vertical padding
     line.style.left = `${midX}px`;
-    line.style.height = `${gridHeight + 30}px`;
+    line.style.height = `${h + 30}px`;         // +30 (15 top + 15 bottom) padding
     line.style.width = "1px";
-    line.style.backgroundImage = "repeating-linear-gradient(to bottom, #ccc 0, #ccc 4px, transparent 5px, transparent 9px)";
+    line.style.backgroundImage =
+      "repeating-linear-gradient(to bottom, #ccc 0, #ccc 4px, transparent 5px, transparent 9px)";
     line.style.pointerEvents = "none";
-    line.style.zIndex = "10";
+    line.style.zIndex = "1";
 
     document.body.appendChild(line);
   }
 }
+

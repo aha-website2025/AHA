@@ -1,33 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Affordable Housing Grid</title>
-  <link rel="stylesheet" href="css_style.css">
+  <link rel="stylesheet" href="css_style.css" />
 </head>
 <body class="home-page">
-    <header class="site-header">
-        <a href="page_index.html">
-            <img src="graphics/Logo.png" alt="Affordable Housing Atlas Logo" class="logo">
-          </a>
-    </header>
 
-    <div class="search-bar">
-      <div class="filter-wrapper">
-        <button class="filter-btn" onclick="toggleCategoryMenu()">FILTER <span class="arrow">▼</span></button>
-        
-        <div id="categoryMenu" style="display:none;">
-          <div onclick="handleCategoryFilter('vernacular')">Vernacular</div>
-          <div onclick="handleCategoryFilter('utopian')">Utopian</div>
-          <div onclick="handleCategoryFilter('cooperative')">Cooperative</div>
-          <div onclick="handleCategoryFilter('public_social')">Public/social</div>
-          <div onclick="handleCategoryFilter('collective')">Collective</div>
-          <div onclick="handleCategoryFilter('sustainable')">Sustainable</div>
-          <div onclick="showOnlyModels()">Models</div>
-          <div onclick="showAllProjects()">Show All</div>
-        </div>
+  <header class="site-header">
+    <a href="page_index.html">
+      <img src="graphics/Logo.png" alt="Affordable Housing Atlas Logo" class="logo" />
+    </a>
+  </header>
+
+  <!-- Controls: filters on top, search below (both centered) -->
+  <div class="controls">
+    <!-- Filter Bar -->
+      <div id="filters" class="filters">
+    <div class="filters-primary">
+      <div class="filter-group" data-key="typology">
+        <button class="filter-toggle" type="button">Typology</button>
+        <div class="filter-menu"></div>
       </div>
+
+      <div class="filter-group" data-key="material">
+        <button class="filter-toggle" type="button">Material</button>
+        <div class="filter-menu"></div>
+      </div>
+
+      <div class="filter-group" data-key="model">
+        <button class="filter-toggle" type="button">Model</button>
+        <div class="filter-menu"></div>
+      </div>
+    </div>
+
+      <button id="clearFilters" class="clear-filters" type="button">Clear</button>
     
+  </div>
+
+
+    <!-- Search (now under the filters) -->
+    <div class="search-row">
       <input
         type="text"
         id="searchInput"
@@ -35,22 +48,24 @@
         oninput="handleSearch()"
       />
     </div>
-    
-    
-    <nav class="menu">
-        <div class="hamburger" onclick="toggleMenu()">
-        </div>
-        <ul class="menu-items" id="menuItems">
-          <li><a href="page_index.html">Projects</a></li>
-          <li><a href="page_models.html">Models</a></li>
-          <li><a href="page_map.html">Map</a></li>
-          <li><a href="page_about.html">About</a></li>
-        </ul>
-      </nav>
+  </div>
 
-    <!-- GRID ITEMS -->
-    <div id="grid-container" class="housing-grid"></div>
+  <!-- Main nav -->
+  <nav class="menu">
+    <div class="hamburger" onclick="toggleMenu()"></div>
+    <ul class="menu-items" id="menuItems">
+      <li><a href="page_index.html">Projects</a></li>
+      <li><a href="page_model.html">Models</a></li>
+      <li><a href="page_map.html">Map</a></li>
+      <li><a href="page_about.html">About</a></li>
+    </ul>
+  </nav>
 
+  <!-- Grid -->
+  <div id="grid" class="index-grid housing-grid"></div>
+
+  <!-- Scripts -->
+  <script src="filters.js" defer></script>
   <script src="grid_index.js" defer></script>
 </body>
 </html>
