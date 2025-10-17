@@ -9,7 +9,8 @@ const layout = [
   "data", "data", "hatch", "model", "data",
   "blank", "model", "data", "data", "hatch",
   "data", "hatch", "data", "data", "blank",
-  "hatch", "data", "model", "hatch", "data"
+  "hatch", "data", "model", "hatch", "data",
+  "data", "data", "blank", "data", "hatch"
 ];
 
 let allProjects = [];

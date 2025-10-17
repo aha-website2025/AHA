@@ -130,7 +130,7 @@ async function loadProject() {
       class: "tile text-left",
       style: "grid-column: 5 / 6; grid-row: 6;",
       html: `
-        <p><strong>Tags</strong></p>`
+        <p><strong>Materials Used</strong></p>`
     },
     {
       class: "tile hatch",

@@ -121,7 +121,7 @@ async function loadProject() {
       class: "tile text-left",
       style: "grid-column: 1 / 2; grid-row: 6 / 7;",
       html: `
-        <p><strong>Tags</strong></p>`
+        <p><strong>Materials Used</strong></p>`
     },
     {
       class: "tile full-bleed double",

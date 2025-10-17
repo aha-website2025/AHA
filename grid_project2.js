@@ -99,7 +99,7 @@ async function loadProject() {
       class: "tile text-left",
       style: "grid-column: 4 / 5; grid-row: 4 / 5;",
       html: `
-        <p><strong>Tags</strong></p>`
+        <p><strong>Materials Used</strong></p>`
     },
     {
       class: "tile full-bleed",

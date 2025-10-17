@@ -2,49 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Housing Models | Affordable Housing Atlas</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css_model.css" />
+  <title>Affordable Housing Grid</title>
+  <link rel="stylesheet" href="css_style.css" />
 </head>
-<body class="model-page">
+<body class="models-page">
+
   <header class="site-header">
-    <a href="index.html">
-      <img src="Logo.png" alt="Affordable Housing Atlas Logo" class="logo" />
+    <a href="page_index.html">
+      <img src="graphics/Logo.png" alt="Affordable Housing Atlas Logo" class="logo" />
     </a>
   </header>
 
-  <nav class="menu">
-    <div class="hamburger" onclick="toggleMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
+    <!-- Search (now under the filters) -->
+    <div class="search-row">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search"
+        oninput="handleSearch()"
+      />
     </div>
+  </div>
+
+  <!-- Main nav -->
+  <nav class="menu">
+    <div class="hamburger black" onclick="toggleMenu()"></div>
     <ul class="menu-items" id="menuItems">
-      <li><a href="index.html">Projects</a></li>
-      <li><a href="models.html">Models</a></li>
-      <li><a href="map.html">Map</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><a href="page_index.html">Projects</a></li>
+      <li><a href="page_models.html">Models</a></li>
+      <li><a href="page_map.html">Map</a></li>
+      <li><a href="page_about.html">About</a></li>
     </ul>
   </nav>
 
-<main class="model-container">
-    <h1 class="model-title">Housing Models</h1>
+  <!-- Grid -->
+  <div id="grid" class="index-grid housing-grid"></div>
 
-  <div class="model-grid">
-    <a href="model-coop.html" class="model-tile">Co-op</a>
-    <a href="model-public.html" class="model-tile">Public Housing</a>
-    <a href="model-utopian.html" class="model-tile">Utopian</a>
-    <a href="model-community.html" class="model-tile">Community Land Trust</a>
-    <a href="model-rent.html" class="model-tile">Affordable Rental</a>
-    <a href="model-collective.html" class="model-tile">Collective Housing</a>
-  </div>
-</main>
-
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById("menuItems");
-      menu.style.display = menu.style.display === "block" ? "none" : "block";
-    }
-  </script>
+  <!-- Scripts -->
+  <script src="grid_models.js" defer></script>
 </body>
 </html>
