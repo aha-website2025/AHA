@@ -412,7 +412,7 @@ window.addEventListener("resize", () => {
 let allProjects = []; // will be fetched from your JSON
 
 // Fetch projects once
-fetch("projects.json")
+fetch("json_projects.json")
   .then(res => res.json())
   .then(data => {
     allProjects = data;
