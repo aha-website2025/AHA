@@ -150,6 +150,19 @@ function createModelTile(model) {
   return div;
 }
 
+const LAYOUT_PATTERN = [
+  "model", "model", "hatch",
+  "hatch", "model", "model",
+  "model", "hatch", "model"
+];
+
+// Create hatch tile
+function createHatchTile() {
+  const div = document.createElement("div");
+  div.classList.add("tile", "hatch");
+  return div;
+}
+
 async function renderModelsGrid(models) {
   const container = document.getElementById("grid");
   if (!container) return;
@@ -194,7 +207,7 @@ function handleModelSearch() {
 /* ---------- Boot ---------- */
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    const res = await fetch("https://aha-website2025.github.io/AHA/json_models.json");
+    const res = await fetch(`https://aha-website2025.github.io/AHA/json_models.json?v=${Date.now()}`);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     allModels = await res.json();
 
