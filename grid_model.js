@@ -71,7 +71,7 @@ async function loadProject() {
     },
     {
       class: "description",
-      style: "grid-column: 3 / 5; grid-row: 3 / span 2;",
+      style: "grid-column: 3 / 5; grid-row: 3;",
       html: project.description
         .split(/\n\s*\n/)
         .map(p => `<p>${p.trim()}</p>`)
