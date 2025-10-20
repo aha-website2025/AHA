@@ -1,4 +1,4 @@
-// Models page (3 cols) with live search + dashed guides
+// grid_models.js — Models page (3 cols) with pattern, search, and dashed guides
 
 /* ---------- Menu ---------- */
 function toggleMenu() {
@@ -9,7 +9,16 @@ function toggleMenu() {
 /* ---------- Globals ---------- */
 let allModels = [];
 
-/* ---------- Helpers ---------- */
+/* ---------- Config: 3×3 repeating layout ---------- */
+const LAYOUT_PATTERN = [
+  "model", "model", "hatch",
+  "hatch", "model", "model",
+  "model", "hatch", "model"
+];
+
+/* ---------- Utilities ---------- */
+const rafp = (cb) => new Promise(res => requestAnimationFrame(() => { if (cb) cb(); res(); }));
+
 function shuffle(arr) {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -22,23 +31,20 @@ function shuffle(arr) {
 function waitForImages(container) {
   const imgs = Array.from(container.querySelectorAll("img"));
   if (!imgs.length) return Promise.resolve();
-  return Promise.all(
-    imgs.map(img =>
-      img.complete
-        ? Promise.resolve()
-        : new Promise(res => {
-            img.addEventListener("load", res, { once: true });
-            img.addEventListener("error", res, { once: true });
-          })
-    )
-  );
+  return Promise.all(imgs.map(img =>
+    img.complete ? Promise.resolve() :
+    new Promise(res => {
+      img.addEventListener("load", res, { once: true });
+      img.addEventListener("error", res, { once: true });
+    })
+  ));
 }
-const rafp = cb => new Promise(r => requestAnimationFrame(() => { cb && cb(); r(); }));
 
-/* ---------- Dashed lines (relative to #grid) ---------- */
+/* ---------- Dashed guides (relative to #grid) ---------- */
 function drawDashedLinesBetweenTileRows() {
   const container = document.getElementById("grid");
   if (!container) return;
+
   container.querySelectorAll(".horizontal-grid-line").forEach(el => el.remove());
 
   const tiles = Array.from(container.querySelectorAll(".tile"));
@@ -46,6 +52,7 @@ function drawDashedLinesBetweenTileRows() {
 
   const cRect = container.getBoundingClientRect();
   const rows = new Map();
+
   tiles.forEach(tile => {
     const r = tile.getBoundingClientRect();
     const key = Math.round(r.top);
@@ -71,7 +78,8 @@ function drawDashedLinesBetweenTileRows() {
       left: `${leftEdge - 15}px`,
       width: `${(rightEdge - leftEdge) + 30}px`,
       height: "1px",
-      backgroundImage: "repeating-linear-gradient(to right,#ccc 0,#ccc 4px,transparent 5px,transparent 9px)",
+      backgroundImage:
+        "repeating-linear-gradient(to right,#ccc 0,#ccc 4px,transparent 5px,transparent 9px)",
       pointerEvents: "none",
       zIndex: "2"
     });
@@ -82,6 +90,7 @@ function drawDashedLinesBetweenTileRows() {
 function drawVerticalDashedLines() {
   const container = document.getElementById("grid");
   if (!container) return;
+
   container.querySelectorAll(".vertical-grid-line").forEach(el => el.remove());
 
   const tiles = Array.from(container.querySelectorAll(".tile"));
@@ -89,6 +98,7 @@ function drawVerticalDashedLines() {
 
   const cRect = container.getBoundingClientRect();
   const columns = new Map();
+
   tiles.forEach(tile => {
     const r = tile.getBoundingClientRect();
     const key = Math.round(r.left);
@@ -121,7 +131,8 @@ function drawVerticalDashedLines() {
       left: `${midX}px`,
       height: `${(bottomEdge - topEdge) + 30}px`,
       width: "1px",
-      backgroundImage: "repeating-linear-gradient(to bottom,#ccc 0,#ccc 4px,transparent 5px,transparent 9px)",
+      backgroundImage:
+        "repeating-linear-gradient(to bottom,#ccc 0,#ccc 4px,transparent 5px,transparent 9px)",
       pointerEvents: "none",
       zIndex: "2"
     });
@@ -135,7 +146,7 @@ async function redrawGuides() {
   drawVerticalDashedLines();
 }
 
-/* ---------- Tiles / Render ---------- */
+/* ---------- Tiles ---------- */
 function createModelTile(model) {
   const div = document.createElement("div");
   div.classList.add("tile", "model-tile");
@@ -150,46 +161,52 @@ function createModelTile(model) {
   return div;
 }
 
-const LAYOUT_PATTERN = [
-  "model", "model", "hatch",
-  "hatch", "model", "model",
-  "model", "hatch", "model"
-];
-
-// Create hatch tile
 function createHatchTile() {
   const div = document.createElement("div");
   div.classList.add("tile", "hatch");
   return div;
 }
 
+/* ---------- Render with pattern ---------- */
 async function renderModelsGrid(models) {
   const container = document.getElementById("grid");
   if (!container) return;
 
   container.innerHTML = "";
-  const order = shuffle(models);
-  order.forEach(m => container.appendChild(createModelTile(m)));
+
+  const order = shuffle(models); // remove shuffle() if you want fixed order
+  let modelIndex = 0;
+
+  // Repeat pattern until all models placed; skip excess hatches at the end
+  for (let i = 0; modelIndex < order.length; i++) {
+    const type = LAYOUT_PATTERN[i % LAYOUT_PATTERN.length];
+
+    if (type === "hatch") {
+      container.appendChild(createHatchTile());
+    } else {
+      const m = order[modelIndex];
+      if (!m) break;
+      container.appendChild(createModelTile(m));
+      modelIndex++;
+    }
+  }
 
   await waitForImages(container);
   await redrawGuides();
 }
 
-/* ---------- Search ---------- */
-// Preload searchable text (title + info.txt).
+/* ---------- Search (title + info.txt near logo path) ---------- */
 async function preloadSearchText(models) {
   const jobs = models.map(async m => {
-    // derive the folder from the logo path and fetch info.txt beside it
     let infoText = "";
     try {
       const logo = m.logo_image || "";
-      const dir  = logo.slice(0, logo.lastIndexOf("/")); // e.g. "models/clt"
+      const dir  = logo.slice(0, logo.lastIndexOf("/"));
       if (dir) {
-        const res = await fetch(`${dir}/info.txt`);
+        const res = await fetch(`${dir}/info.txt?v=${Date.now()}`);
         if (res.ok) infoText = await res.text();
       }
     } catch (_) {}
-    // cache: title + info
     m._searchText = `${m.title || ""} ${infoText}`.toLowerCase();
   });
   await Promise.all(jobs);
@@ -211,17 +228,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     allModels = await res.json();
 
-    // preload search corpus, then first render
     await preloadSearchText(allModels);
     await renderModelsGrid(allModels);
 
-    // wire up search
     const search = document.getElementById("searchInput");
-    if (search) {
-      search.addEventListener("input", handleModelSearch);
-    }
+    if (search) search.addEventListener("input", handleModelSearch);
 
-    // keep guides correct on resize
     window.addEventListener("resize", () => redrawGuides());
   } catch (e) {
     console.error("Failed to init models page:", e);

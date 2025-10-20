@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Affordable Housing Grid</title>
+  <link rel="stylesheet" href="https://freight.cargo.site/m/M2607742770740310176835618345121/css_style.css" />
+</head>
+<body class="home-page">
+
+  <header class="site-header">
+    <a href="index.html">
+      <img src="graphics/Logo.png" alt="Affordable Housing Atlas Logo" class="logo" />
+    </a>
+  </header>
+
+  <!-- Controls: filters on top, search below (both centered) -->
+  <div class="controls">
+    <!-- Filter Bar -->
+      <div id="filters" class="filters">
+    <div class="filters-primary">
+      <div class="filter-group" data-key="typology">
+        <button class="filter-toggle" type="button">Typology</button>
+        <div class="filter-menu"></div>
+      </div>
+
+      <div class="filter-group" data-key="material">
+        <button class="filter-toggle" type="button">Material</button>
+        <div class="filter-menu"></div>
+      </div>
+
+      <div class="filter-group" data-key="model">
+        <button class="filter-toggle" type="button">Model</button>
+        <div class="filter-menu"></div>
+      </div>
+    </div>
+
+      <button id="clearFilters" class="clear-filters" type="button">Clear</button>
+    
+  </div>
+
+
+    <!-- Search (now under the filters) -->
+    <div class="search-row">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search"
+        oninput="handleSearch()"
+      />
+    </div>
+  </div>
+
+  <!-- Main nav -->
+  <nav class="menu">
+    <div class="hamburger black" onclick="toggleMenu()"></div>
+    <ul class="menu-items" id="menuItems">
+      <li><a href="index.html">Projects</a></li>
+      <li><a href="page_models.html">Models</a></li>
+      <li><a href="page_map.html">Map</a></li>
+      <li><a href="page_about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- Grid -->
+  <div id="grid" class="home-page housing-grid"></div>
+
+  <!-- Scripts -->
+  <script src="https://freight.cargo.site/m/K2607742770758756920909327896737/filters.js" defer></script>
+  <script src="https://freight.cargo.site/m/F2607742770814097153130456551585/grid_index.js" defer></script>
+</body>
+</html>

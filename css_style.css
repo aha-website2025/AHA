@@ -369,6 +369,23 @@ body {
   pointer-events: none;
 }
 
+/* A single row for the leftover models appended at the end */
+.home-page .model-overflow-row {
+  display: flex;           /* one horizontal row */
+  gap: var(--tile-gap, 14px);
+  margin-top: 14px;        /* space above the strip */
+  flex-wrap: nowrap;       /* keep in one line; change to wrap if you prefer */
+  overflow-x: auto;        /* scroll if too many to fit */
+  padding-bottom: 6px;     /* a little room so the dashed line doesn’t overlap */
+}
+
+/* Make each tile in the strip behave like your regular tiles */
+.home-page .model-overflow-row .tile {
+  flex: 0 0 auto;          /* don’t stretch */
+  width: 230px;            /* match your tile width */
+  aspect-ratio: 1 / 0.9;
+}
+
 
 .model-tile {
   background-color: #111 !important;
