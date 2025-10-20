@@ -65,12 +65,22 @@ async function loadProject() {
       html: ""
     },
     {
+      class: "tile hatch",
+      style: "grid-column: 1 / 2; grid-row: 4;",
+      html: ""
+    },
+    {
       class: "description",
-      style: "grid-column: 3 / 5; grid-row: 3;",
+      style: "grid-column: 3 / 5; grid-row: 3 / span 2;",
       html: project.description
         .split(/\n\s*\n/)
         .map(p => `<p>${p.trim()}</p>`)
         .join("") 
+    },
+    {
+      class: "tile blank",
+      style: "grid-column: 2 / 3; grid-row: 5;",
+      html: ""
     }
   ];
 
@@ -140,23 +150,88 @@ async function loadProject() {
 
   const related = relatedPool
     .sort(() => 0.5 - Math.random()) // shuffle
-    .slice(0, 2); // take 2
+    .slice(0, 6); // take 6 for more examples
   
   console.log("Selected related projects:", related.length);
 
-  related.forEach((p, idx) => {
+  // Row 3: 2 related projects (columns 1-2)
+  related.slice(0, 2).forEach((p, idx) => {
     const div = document.createElement('div');
-    div.className = "tile full-bleed";
+    div.className = "tile flip-card";
     div.style.cssText = `grid-column: ${idx + 1} / ${idx + 2}; grid-row: 3;`;
 
     div.innerHTML = `
-      <a href="page_project.html?slug=${p.slug}">
-        <img src="projects/${p.slug}/image.jpg" alt="${p.title}" style="width: 100%; height: 100%; object-fit: cover;" />
+      <a href="page_project.html?slug=${p.slug}" class="project-card">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <img src="projects/${p.slug}/image.jpg" alt="${p.title}" />
+          </div>
+          <div class="flip-back">
+            <div class="flip-text">
+              <h4>${p.title}</h4>
+              <p>${p.location || ''}</p>
+            </div>
+          </div>
+        </div>
       </a>
     `;
 
     grid.appendChild(div);
-    console.log("Added related project tile:", p.title);
+    console.log("Added related project tile (row 3):", p.title);
+  });
+
+  // Row 4: 1 related project (column 2)
+  if (related[2]) {
+    const div = document.createElement('div');
+    div.className = "tile flip-card";
+    div.style.cssText = `grid-column: 2 / 3; grid-row: 4;`;
+
+    div.innerHTML = `
+      <a href="page_project.html?slug=${related[2].slug}" class="project-card">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <img src="projects/${related[2].slug}/image.jpg" alt="${related[2].title}" />
+          </div>
+          <div class="flip-back">
+            <div class="flip-text">
+              <h4>${related[2].title}</h4>
+              <p>${related[2].location || ''}</p>
+            </div>
+          </div>
+        </div>
+      </a>
+    `;
+
+    grid.appendChild(div);
+    console.log("Added related project tile (row 4):", related[2].title);
+  }
+
+  // Row 5: 3 related projects (columns 1, 3, 4)
+  const row5Positions = [1, 3, 4];
+  related.slice(3, 6).forEach((p, idx) => {
+    const div = document.createElement('div');
+    div.className = "tile flip-card";
+    const col = row5Positions[idx];
+    div.style.cssText = `grid-column: ${col} / ${col + 1}; grid-row: 5;`;
+
+    div.innerHTML = `
+      <a href="page_project.html?slug=${p.slug}" class="project-card">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <img src="projects/${p.slug}/image.jpg" alt="${p.title}" />
+          </div>
+          <div class="flip-back">
+            <div class="flip-text">
+              <h4>${p.title}</h4>
+              <p>${p.location || ''}</p>
+            </div>
+          </div>
+        </div>
+      </a>
+    `;
+
+    grid.appendChild(div);
+    console.log("Added related project tile (row 5):", p.title);
   });
   
     // ⬇️ Enforce 1:0.85 aspect ratio for all tiles
@@ -352,3 +427,58 @@ window.addEventListener("resize", () => {
   drawDashedLinesBetweenTileRows();
   drawVerticalDashedLines();
 });
+
+// ========================================
+// Navigation Arrow Logic for Random Models
+// ========================================
+
+let allModels = [];
+
+// Fetch all models and set up navigation arrows
+async function setupModelNavigation() {
+  try {
+    const res = await fetch("json_models.json");
+    allModels = await res.json();
+    
+    // Set random previews for both arrows
+    setRandomModelPreview();
+  } catch (error) {
+    console.error("Error setting up model navigation:", error);
+  }
+}
+
+// Pick a random model and attach its slug to the arrow container
+function setRandomModelPreview() {
+  const previews = document.querySelectorAll(".preview-card");
+
+  previews.forEach(card => {
+    const model = allModels[Math.floor(Math.random() * allModels.length)];
+
+    // render the preview with model logo
+    card.innerHTML = `
+      <a href="page_model.html?slug=${model.slug}">
+        <img src="models/${model.slug}/logo.png" alt="${model.title}" />
+        <h4>${model.title}</h4>
+      </a>
+    `;
+
+    // save the slug on the arrow wrapper so the arrow can use it
+    const wrapper = card.closest(".nav-arrow");
+    if (wrapper) wrapper.dataset.slug = model.slug;
+  });
+}
+
+// make the arrow itself navigate to the previewed model
+document.addEventListener("click", (e) => {
+  const arrow = e.target.closest(".nav-arrow .arrow");
+  if (!arrow) return;
+
+  const wrapper = arrow.closest(".nav-arrow");
+  const slug = wrapper && wrapper.dataset.slug;
+  if (slug) {
+    window.location.href = `page_model.html?slug=${slug}`;
+  }
+});
+
+// Initialize navigation on page load
+setupModelNavigation();
