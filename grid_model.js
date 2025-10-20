@@ -6,8 +6,8 @@ function toggleMenu() {
 // 📁 Dynamic fallback loader
 function getImagePath(slug, filenameBase) {
   return new Promise(resolve => {
-    const tryJpg = `https://aha-website2025.github.io/AHA/models/${slug}/${filenameBase}.jpg`;
-    const tryPng = `https://aha-website2025.github.io/AHA/models/${slug}/${filenameBase}.png`;
+    const tryJpg = `models/${slug}/${filenameBase}.jpg`;
+    const tryPng = `models/${slug}/${filenameBase}.png`;
 
     const img = new Image();
     img.onload = () => resolve(tryJpg);
@@ -21,7 +21,7 @@ async function loadProject() {
   const urlParams = new URLSearchParams(window.location.search);
   const slug = urlParams.get("slug");
 
-  const res = await fetch("https://aha-website2025.github.io/AHA/json_models.json");
+  const res = await fetch("json_models.json");
   const projects = await res.json();
   const project = projects.find(p => p.slug === slug);
 
@@ -38,7 +38,7 @@ async function loadProject() {
       class: "tile title",
       style: "grid-column: 1 / 2; grid-row: 1;",
       html: `
-        <img src="https://aha-website2025.github.io/AHA/models/${slug}/logo.png" alt="${project.title}" class="model-logo" />
+        <img src="models/${slug}/logo.png" alt="${project.title}" class="model-logo" />
         <p class="model-title">${project.title}</p>
     `,
     },
@@ -114,7 +114,7 @@ async function loadProject() {
   }
 
   // Add related projects after all main tiles
-  const res2 = await fetch("https://aha-website2025.github.io/AHA/json_projects.json");
+  const res2 = await fetch("json_projects.json");
   const allProjects = await res2.json();
   const relatedPool = allProjects.filter(
     p => p.category.toLowerCase() === project.category.toLowerCase() && p.slug !== project.slug
@@ -131,7 +131,7 @@ async function loadProject() {
 
     div.innerHTML = `
       <a href="page_project.html?slug=${p.slug}">
-        <img src="https://aha-website2025.github.io/AHA/projects/${p.slug}/image.jpg" alt="${p.title}" style="width: 100%; height: 100%; object-fit: cover;" />
+        <img src="projects/${p.slug}/image.jpg" alt="${p.title}" style="width: 100%; height: 100%; object-fit: cover;" />
       </a>
     `;
 

@@ -214,7 +214,7 @@ function ensureGlobalPillBoard() {
     projects,
     renderGrid,
     gridSelector = "#grid",
-    infoPath = slug => `https://aha-website2025.github.io/AHA/projects/${encodeURIComponent(slug)}/info.txt`,
+    infoPath = slug => `projects/${encodeURIComponent(slug)}/info.txt`,
     onAfterRender
   }) {
     if (!projects || !renderGrid) {

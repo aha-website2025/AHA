@@ -224,7 +224,7 @@ function handleModelSearch() {
 /* ---------- Boot ---------- */
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    const res = await fetch(`https://aha-website2025.github.io/AHA/json_models.json?v=${Date.now()}`);
+    const res = await fetch(`json_models.json?v=${Date.now()}`);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     allModels = await res.json();
 
