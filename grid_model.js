@@ -68,20 +68,25 @@ async function loadProject() {
     }
   ];
 
+  console.log("Total tiles to render:", tiles.length);
+  
   for (const tile of tiles) {
+    console.log("Rendering tile:", tile.class);
     const div = document.createElement("div");
     div.className = tile.class;
-    if (tile.style) div.style = tile.style;
+    if (tile.style) div.style.cssText = tile.style;
 
     // Load image fallback if needed
     if (tile.image) {
       const src = await getImagePath(slug, tile.image);
+      console.log("Image loaded for", tile.class, ":", src);
       div.innerHTML = `<img src="${src}" alt="${tile.alt}" />`;
     } else {
       div.innerHTML = tile.html;
     }
 
     grid.appendChild(div);
+    console.log("Tile appended:", tile.class);
 
     const img = div.querySelector("img");
     if (img) {
