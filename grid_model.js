@@ -65,11 +65,6 @@ async function loadProject() {
       html: ""
     },
     {
-      class: "tile hatch",
-      style: "grid-column: 1 / 2; grid-row: 4;",
-      html: ""
-    },
-    {
       class: "description",
       style: "grid-column: 3 / 5; grid-row: 3;",
       html: project.description
@@ -78,8 +73,23 @@ async function loadProject() {
         .join("") 
     },
     {
+      class: "tile hatch",
+      style: "grid-column: 1 / 2; grid-row: 4;",
+      html: ""
+    },
+    {
+      class: "tile blank",
+      style: "grid-column: 3 / 4; grid-row: 4;",
+      html: ""
+    },
+    {
       class: "tile blank",
       style: "grid-column: 2 / 3; grid-row: 5;",
+      html: ""
+    },
+    {
+      class: "tile hatch",
+      style: "grid-column: 4 / 5; grid-row: 5;",
       html: ""
     }
   ];
@@ -180,22 +190,24 @@ async function loadProject() {
     console.log("Added related project tile (row 3):", p.title);
   });
 
-  // Row 4: 1 related project (column 2)
-  if (related[2]) {
+  // Row 4: 2 related projects (columns 2, 4)
+  const row4Positions = [2, 4];
+  related.slice(2, 4).forEach((p, idx) => {
     const div = document.createElement('div');
     div.className = "tile flip-card";
-    div.style.cssText = `grid-column: 2 / 3; grid-row: 4;`;
+    const col = row4Positions[idx];
+    div.style.cssText = `grid-column: ${col} / ${col + 1}; grid-row: 4;`;
 
     div.innerHTML = `
-      <a href="page_project.html?slug=${related[2].slug}" class="project-card">
+      <a href="page_project.html?slug=${p.slug}" class="project-card">
         <div class="flip-inner">
           <div class="flip-front">
-            <img src="projects/${related[2].slug}/image.jpg" alt="${related[2].title}" />
+            <img src="projects/${p.slug}/image.jpg" alt="${p.title}" />
           </div>
           <div class="flip-back">
             <div class="flip-text">
-              <h4>${related[2].title}</h4>
-              <p>${related[2].location || ''}</p>
+              <h4>${p.title}</h4>
+              <p>${p.location || ''}</p>
             </div>
           </div>
         </div>
@@ -203,12 +215,12 @@ async function loadProject() {
     `;
 
     grid.appendChild(div);
-    console.log("Added related project tile (row 4):", related[2].title);
-  }
+    console.log("Added related project tile (row 4):", p.title);
+  });
 
-  // Row 5: 3 related projects (columns 1, 3, 4)
-  const row5Positions = [1, 3, 4];
-  related.slice(3, 6).forEach((p, idx) => {
+  // Row 5: 2 related projects (columns 1, 3)
+  const row5Positions = [1, 3];
+  related.slice(4, 6).forEach((p, idx) => {
     const div = document.createElement('div');
     div.className = "tile flip-card";
     const col = row5Positions[idx];
@@ -372,47 +384,78 @@ function drawDashedLinesBetweenTileRows() {
 }
 
 
-
 function drawVerticalDashedLines() {
   const container = document.getElementById("grid-container");
-  const tiles = Array.from(container.querySelectorAll(".tile"));
+  if (!container) return;
 
-  // Remove old lines
+  // remove old lines
   document.querySelectorAll(".vertical-grid-line").forEach(line => line.remove());
 
+  const tiles = Array.from(container.querySelectorAll(".tile")).filter(el => el.offsetParent !== null);
   if (tiles.length === 0) return;
 
+  // group by column (left edge)
   const columns = new Map();
-
   tiles.forEach(tile => {
-    const rect = tile.getBoundingClientRect();
-    const left = Math.round(rect.left + window.scrollX);
-    if (!columns.has(left)) columns.set(left, []);
-    columns.get(left).push(rect);
+    const r = tile.getBoundingClientRect();
+    const left = Math.round(r.left + window.scrollX);
+    if (!columns.has(left)) columns.set(left, { rects: [], width: r.width });
+    columns.get(left).rects.push(r);
   });
 
-  const sortedColumns = [...columns.entries()].sort((a, b) => a[0] - b[0]);
+  const colList = [...columns.entries()]
+    .sort((a, b) => a[0] - b[0])
+    .map(([left, info]) => {
+      const tops = info.rects.map(rr => rr.top + window.scrollY);
+      const bottoms = info.rects.map(rr => rr.bottom + window.scrollY);
+      return {
+        left,
+        width: info.width,
+        topMin: Math.min(...tops),
+        bottomMax: Math.max(...bottoms)
+      };
+    });
 
-  const topEdge = Math.min(...tiles.map(tile => tile.getBoundingClientRect().top + window.scrollY));
-  const bottomEdge = Math.max(...tiles.map(tile => tile.getBoundingClientRect().bottom + window.scrollY));
-  const gridHeight = bottomEdge - topEdge;
+  if (colList.length < 2) return;
 
-  for (let i = 0; i < sortedColumns.length - 1; i++) {
-    const [left1, rects1] = sortedColumns[i];
-    const [left2] = sortedColumns[i + 1];
+  const topEdge = Math.min(...colList.map(c => c.topMin));
 
-    const midX = (left1 + rects1[0].width + left2) / 2;
+  // Calculate tile width and gap from first two columns
+  const tileWidth = colList[0].width;
+  const firstColRight = colList[0].left + colList[0].width;
+  const secondColLeft = colList[1].left;
+  const gap = secondColLeft - firstColRight;
+  
+  // Position of first divider (midway between columns 1 and 2)
+  const firstDividerX = firstColRight + (gap / 2);
+  
+  // Increment for each subsequent divider (tile width + gap)
+  const increment = tileWidth + gap;
+
+  for (let i = 0; i < colList.length - 1; i++) {
+    const c1 = colList[i];
+    const c2 = colList[i + 1];
+
+    // Calculate X position: first divider + (i * increment)
+    const midX = firstDividerX + (i * increment);
+
+    // ⬅️ use the TALLER of the two columns
+    const bottomEdgeForDivider = Math.max(c1.bottomMax, c2.bottomMax);
+
+    const h = bottomEdgeForDivider - topEdge;
+    if (h <= 0) continue;
 
     const line = document.createElement("div");
     line.className = "vertical-grid-line";
     line.style.position = "absolute";
-    line.style.top = `${topEdge - 15}px`;
+    line.style.top = `${topEdge - 15}px`;      // keep your vertical padding
     line.style.left = `${midX}px`;
-    line.style.height = `${gridHeight + 30}px`;
+    line.style.height = `${h + 30}px`;         // +30 (15 top + 15 bottom) padding
     line.style.width = "1px";
-    line.style.backgroundImage = "repeating-linear-gradient(to bottom, #ccc 0, #ccc 4px, transparent 5px, transparent 9px)";
+    line.style.backgroundImage =
+      "repeating-linear-gradient(to bottom, #ccc 0, #ccc 4px, transparent 5px, transparent 9px)";
     line.style.pointerEvents = "none";
-    line.style.zIndex = "10";
+    line.style.zIndex = "1";
 
     document.body.appendChild(line);
   }

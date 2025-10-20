@@ -1,6 +1,6 @@
 title: Cité manifeste
 location: Mulhouse, France
-category: collective
+category: cooperative
 description:
 These 14 single-family houses designed by Lacaton & Vassal are part of Cite Manifeste, a collection of 61 high-quality apartments constructed for average-income residents. Cite Manifeste was commissioned by SOMCO, an organization founded during the industrial revolution to address poor living conditions of urban workers. Their solution was a residential complex based on the English “garden city” model. Five teams of architects were invited to contribute to this project, including Jean Nouvel, Poitevin & Raynaud, Lewis + Block, Lacaton & Vassal, Shigeru Ban, and De Gastines.
 
