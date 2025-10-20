@@ -122,7 +122,9 @@ async function loadProject() {
   const res2 = await fetch("json_projects.json");
   const allProjects = await res2.json();
   const relatedPool = allProjects.filter(
-    p => p.category.toLowerCase() === project.category.toLowerCase() && p.slug !== project.slug
+    p => p.category && project.category && 
+         p.category.toLowerCase() === project.category.toLowerCase() && 
+         p.slug !== project.slug
   );
 
   const related = relatedPool
