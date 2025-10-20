@@ -125,22 +125,29 @@ async function loadProject() {
   }
 
   // Add related projects after all main tiles
+  console.log("Fetching related projects...");
   const res2 = await fetch("json_projects.json");
   const allProjects = await res2.json();
-  const relatedPool = allProjects.filter(
-    p => p.category && project.category && 
-         p.category.toLowerCase() === project.category.toLowerCase() && 
-         p.slug !== project.slug
-  );
+  console.log("All projects loaded:", allProjects.length);
+  console.log("Model category:", project.category);
+  
+  const relatedPool = allProjects.filter(p => {
+    if (!p || !p.category || !project.category) return false;
+    return p.category.toLowerCase() === project.category.toLowerCase() && p.slug !== project.slug;
+  });
+  
+  console.log("Related projects found:", relatedPool.length);
 
   const related = relatedPool
     .sort(() => 0.5 - Math.random()) // shuffle
     .slice(0, 2); // take 2
+  
+  console.log("Selected related projects:", related.length);
 
   related.forEach((p, idx) => {
     const div = document.createElement('div');
     div.className = "tile full-bleed";
-    div.style = `grid-column: ${idx + 1} / ${idx + 2}; grid-row: 3;`;
+    div.style.cssText = `grid-column: ${idx + 1} / ${idx + 2}; grid-row: 3;`;
 
     div.innerHTML = `
       <a href="page_project.html?slug=${p.slug}">
@@ -149,6 +156,7 @@ async function loadProject() {
     `;
 
     grid.appendChild(div);
+    console.log("Added related project tile:", p.title);
   });
   
     // ⬇️ Enforce 1:0.85 aspect ratio for all tiles
@@ -176,8 +184,10 @@ async function loadProject() {
   }
 
     setTimeout(() => {
+      console.log("Drawing dashed lines...");
       drawDashedLinesBetweenTileRows();
       drawVerticalDashedLines();
+      console.log("Dashed lines complete");
     }, 100);
   } catch (error) {
     console.error("Error loading project:", error);
@@ -218,7 +228,9 @@ window.onload = async () => {
 
 
 function drawDashedLinesBetweenTileRows() {
+  console.log("drawDashedLinesBetweenTileRows called");
   const tiles = Array.from(document.querySelectorAll('.tile, .project-page .description'));
+  console.log("Found tiles:", tiles.length);
   if (tiles.length === 0) return;
 
   const rowThreshold = 10; // Allow up to 10px difference in top values to group tiles in same row
