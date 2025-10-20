@@ -573,6 +573,19 @@ body {
     margin: 0 auto;
   }
   
+  /* Model page specific - 4 columns */
+  .model-page .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-auto-rows: auto;
+    gap: 13px;
+    padding: 80px 240px;
+    position: relative;
+    align-items: stretch;
+    width: 68%;
+    margin: 0 auto;
+  }
+  
   .project-page .tile {
     background-color: none;
     color: white;
