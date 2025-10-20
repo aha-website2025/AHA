@@ -18,17 +18,23 @@ function getImagePath(slug, filenameBase) {
 
 // 📦 Load and render a project grid
 async function loadProject() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const slug = urlParams.get("slug");
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const slug = urlParams.get("slug");
+    
+    console.log("Loading model with slug:", slug);
 
   const res = await fetch("json_models.json");
   const projects = await res.json();
   const project = projects.find(p => p.slug === slug);
 
   if (!project) {
+    console.error("Project not found for slug:", slug);
     document.body.innerHTML = "<h1>Project not found</h1>";
     return;
   }
+  
+  console.log("Found project:", project);
 
   const grid = document.getElementById("grid-container");
 
@@ -170,10 +176,13 @@ async function loadProject() {
   }
 
     setTimeout(() => {
-    drawDashedLinesBetweenTileRows();
-    drawVerticalDashedLines();
-  }, 100);
-
+      drawDashedLinesBetweenTileRows();
+      drawVerticalDashedLines();
+    }, 100);
+  } catch (error) {
+    console.error("Error loading project:", error);
+    console.error("Error stack:", error.stack);
+  }
 }
 
 
