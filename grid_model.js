@@ -83,31 +83,6 @@ async function loadProject() {
 
     grid.appendChild(div);
 
-    const res2 = await fetch("https://aha-website2025.github.io/AHA/json_projects.json");
-    const allProjects = await res2.json();
-    const relatedPool = allProjects.filter(
-      p => p.category.toLowerCase() === project.category.toLowerCase() && p.slug !== project.slug
-    );
-
-    const related = relatedPool
-      .sort(() => 0.5 - Math.random()) // shuffle
-      .slice(0, 2); // take 2
-
-    related.forEach((p, idx) => {
-      const div = document.createElement('div');
-      div.className = "tile full-bleed";
-      div.style = `grid-column: ${idx + 1} / ${idx + 2}; grid-row: 3;`;
-
-      div.innerHTML = `
-        <a href="page_project.html?slug=${p.slug}">
-          <img src="projects/${p.slug}/image.jpg" alt="${p.title}" style="width: 100%; height: 100%; object-fit: cover;" />
-        </a>
-      `;
-
-  grid.appendChild(div);
-});
-
-
     const img = div.querySelector("img");
     if (img) {
       img.style.cursor = "pointer";
@@ -115,29 +90,53 @@ async function loadProject() {
     }
     
     if (tile.class.includes("description")) {
-  div.addEventListener("click", () => {
-    const overlay = document.createElement("div");
-    overlay.className = "description-popup-overlay";
+      div.addEventListener("click", () => {
+        const overlay = document.createElement("div");
+        overlay.className = "description-popup-overlay";
 
-    const popup = document.createElement("div");
-    popup.className = "description-popup";
-    popup.innerHTML = `
-      <div class="description-popup-close">×</div>
-      ${tile.html}
+        const popup = document.createElement("div");
+        popup.className = "description-popup";
+        popup.innerHTML = `
+          <div class="description-popup-close">×</div>
+          ${tile.html}
+        `;
+
+        overlay.appendChild(popup);
+        document.body.appendChild(overlay);
+        document.body.style.overflow = "hidden";
+
+        overlay.addEventListener("click", () => {
+          document.body.removeChild(overlay);
+          document.body.style.overflow = "";
+        });
+      });
+    }
+  }
+
+  // Add related projects after all main tiles
+  const res2 = await fetch("https://aha-website2025.github.io/AHA/json_projects.json");
+  const allProjects = await res2.json();
+  const relatedPool = allProjects.filter(
+    p => p.category.toLowerCase() === project.category.toLowerCase() && p.slug !== project.slug
+  );
+
+  const related = relatedPool
+    .sort(() => 0.5 - Math.random()) // shuffle
+    .slice(0, 2); // take 2
+
+  related.forEach((p, idx) => {
+    const div = document.createElement('div');
+    div.className = "tile full-bleed";
+    div.style = `grid-column: ${idx + 1} / ${idx + 2}; grid-row: 3;`;
+
+    div.innerHTML = `
+      <a href="page_project.html?slug=${p.slug}">
+        <img src="https://aha-website2025.github.io/AHA/projects/${p.slug}/image.jpg" alt="${p.title}" style="width: 100%; height: 100%; object-fit: cover;" />
+      </a>
     `;
 
-    overlay.appendChild(popup);
-    document.body.appendChild(overlay);
-    document.body.style.overflow = "hidden";
-
-    overlay.addEventListener("click", () => {
-      document.body.removeChild(overlay);
-      document.body.style.overflow = "";
-    });
+    grid.appendChild(div);
   });
-}
-
-  }
   
     // ⬇️ Enforce 1:0.85 aspect ratio for all tiles
   const allTiles = document.querySelectorAll(".project-page .tile, .project-page .tile.hatch");
