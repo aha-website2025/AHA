@@ -77,7 +77,7 @@ async function loadProject() {
         <p><strong>Total floor space: </strong>${project.floor_space_sqft}</p>
         <p><strong># of units: </strong>${project.units}</p>
         <p><strong>Unit distribution: </strong>${project.unit_distribution}</p>
-        <p><strong># of inhabitants: </strong>${project.inhabitants_per_unit}</p>`
+        <p><strong># of inhabitants: </strong>${project.number_of_inhabitants}</p>`
     },
     {
       class: "tile hatch",
