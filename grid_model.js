@@ -146,15 +146,54 @@ async function loadProject() {
 
   // Add related projects after all main tiles
   console.log("Fetching related projects...");
+  
+  // Fetch model's info.txt to get the title
+  let modelTitle = project.title;
+  try {
+    const modelInfoRes = await fetch(`models/${slug}/info.txt`);
+    const modelInfoText = await modelInfoRes.text();
+    const lines = modelInfoText.split(/\r?\n/);
+    for (const line of lines) {
+      const match = line.match(/^\s*title\s*:\s*(.+)\s*$/i);
+      if (match) {
+        modelTitle = match[1].trim();
+        break;
+      }
+    }
+  } catch (e) {
+    console.log("Could not load model info.txt, using title from JSON:", modelTitle);
+  }
+  
+  console.log("Model title from info.txt:", modelTitle);
+  
+  // Remove trailing 's' for plural handling (e.g., "Cooperatives" -> "Cooperative")
+  const searchTerm = modelTitle.toLowerCase().replace(/s$/, '');
+  console.log("Search term (singular form):", searchTerm);
+  
   const res2 = await fetch("json_projects.json");
   const allProjects = await res2.json();
   console.log("All projects loaded:", allProjects.length);
-  console.log("Model category:", project.category);
   
-  const relatedPool = allProjects.filter(p => {
-    if (!p || !p.category || !project.category) return false;
-    return p.category.toLowerCase() === project.category.toLowerCase() && p.slug !== project.slug;
+  // Function to check if project's info.txt contains the model title
+  async function projectMatchesModel(projectSlug) {
+    try {
+      const infoRes = await fetch(`projects/${encodeURIComponent(projectSlug)}/info.txt`);
+      const infoText = await infoRes.text();
+      const lowerInfo = infoText.toLowerCase();
+      return lowerInfo.includes(searchTerm);
+    } catch (e) {
+      return false;
+    }
+  }
+  
+  // Filter projects that match the model title
+  const matchPromises = allProjects.map(async p => {
+    const matches = await projectMatchesModel(p.slug);
+    return matches ? p : null;
   });
+  
+  const relatedResults = await Promise.all(matchPromises);
+  const relatedPool = relatedResults.filter(p => p !== null && p.slug !== slug);
   
   console.log("Related projects found:", relatedPool.length);
 

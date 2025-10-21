@@ -17,7 +17,7 @@ coordinates: 34.04352, -118.24780
 development_cost_per_unit: $450,000
 average_rent_per_unit: $500-$700/mo
 housing_cost_ratio: 30-35% of income
-material_1: Reinforced cast-in-place concrete
-material_2: Prefab. steel-framed modular units
+material_1: Reinforced concrete
+material_2: Modular units (Prefabricated steel-framed modular units)
 material_3: 
 material_4: 
