@@ -17,5 +17,5 @@ development_cost_per_unit: $245,000 (2025 USD)
 average_rent_per_unit: $1,000-1,400/mo
 housing_cost_ratio: 20-25% of income
 material_1: Reinforced concrete
-material_2: Precast concrete panels
+material_2: Concrete (Precast concrete panels)
 material_3: 

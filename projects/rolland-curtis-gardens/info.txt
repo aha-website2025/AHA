@@ -1,17 +1,20 @@
 title: Rolland Curtis Gardens
 location: Los Angeles, USA
-category: cooperative
 description:
-Rolland Curtis Gardens is a community-serving development that incorporates the concept of mixed-use that opens doors to affordable housing through not only the sustainably responsible design but also through the community-driven development process. This development is also one of the few large-scale affordable housing that is transit oriented in the area surrounding Downtown Los Angeles.
-
-
-T.R.U.S.T. South LA alongside Abode Communities, bought what was originally owned by Wisconsin Gardens Development Co. after a long conflict between the (at the time) owner, Jeffrey Greene, and his plans to rent the space to the USC student population. This displacement of low income families, made T.R.U.S.T South LA begin a campaign that resulted in the protection of the tenants. This resulted in T.R.U.S.T South LA and Abode Communities purchasing the space and beginning their community-oriented six-month planning and development process, leading to a finished renovation by 2017.
-
-
-Rolland Curtis Gardens embodies the goals not only of the stakeholders but also of the tenants and surrounding community, these include affordable housing through creative designs, mobility and access around site, parking, commercial space that addresses the commercial gap in the community, green gathering spaces and safety. The result was an organized combination of residences including multiple community rooms and on-site facilities, programmable and green open spaces, and commercial retail and services. 
+Rolland Curtis Gardens in South Los Angeles is a community-driven, mixed-use, and transit-oriented development that demonstrates how affordable housing can integrate sustainability and social equity. Located near the Expo Line, the project provides 140 affordable apartments alongside 8,000 square feet of ground-floor retail and community-serving spaces. Originally built in the 1980s, the property faced threats of displacement when the previous owner sought to convert it into student housing. In response, T.R.U.S.T. South LA partnered with Abode Communities to purchase and redevelop the site through a collaborative six-month planning process that placed tenants and neighbors at the center of decision-making. Completed in 2017, the revitalized complex offers family-oriented apartments, shared courtyards, community rooms, and gardens that promote mobility, safety, and belonging. Green building strategies such as energy-efficient systems, drought-tolerant landscaping, and stormwater management reduce environmental impact while lowering utility costs for residents. Rolland Curtis Gardens exemplifies inclusive urban development in Los Angeles by preserving affordability, enhancing access to public transit, and ensuring that long-term residents remain active participants in shaping their neighborhood’s future.
 year_completed: 1981 (remodeled in 2017)
 owner: Abode Communities and T.R.U.S.T. South LA
 lot_size_sqft: 196,377 sqft
 units: 140
+number_of_inhabitants: ~500
 address: 1077 West 38th St., Los Angeles CA
 coordinates: 34.01783, -118.29372
+typology: apartment
+model: Non-profit development
+development_cost_per_unit: ~$420,000
+average_rent_per_unit: $500–$1,200/mo
+housing_cost_ratio: ≤30% of income
+material_1: Reinforced concrete (Reinforced concrete foundation and podium)
+material_2: Wood framing (Wood-frame upper levels)
+material_3: 
+material_4: 

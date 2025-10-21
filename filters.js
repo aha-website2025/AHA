@@ -53,7 +53,7 @@
           }
           return norm(trimmed);
         });
-        p._model    = toArr(meta.model || meta.category).map(norm);
+        p._model    = toArr(meta.model).map(norm);
       } catch {
         p._typology = []; p._material = []; p._model = [];
       }

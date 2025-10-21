@@ -14,7 +14,7 @@ outdoor_area: 15,650 sqft
 address: HCMP+78C, Ave Abdelkader Torres, Casablanca 20570, Morocco
 coordinates: 33.583000, -7.564000
 typology: apartment
-model: cooperative
+model: Public housing
 development_cost_per_unit: ~$5–7,000 (1950s USD)
 average_rent_per_unit: subsidized/minimal
 housing_cost_ratio: <20% of income

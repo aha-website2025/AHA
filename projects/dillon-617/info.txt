@@ -17,7 +17,7 @@ model: private development
 development_cost_per_unit: $300,000
 average_rent_per_unit: $2,500+/mo
 housing_cost_ratio: 35% of income
-material_1: Corrugated metal panels
+material_1: Corrugated metal (Corrugated metal panels)
 material_2: Plaster
 material_3: Wood framing
 material_4: 

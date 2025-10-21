@@ -1,14 +1,7 @@
 title: La Borda
 location: Barcelona, Spain
-category: cooperative
 description:
-La Borda is a cooperative housing project in Barcelona developed in response to the region's housing shortage. The cooperative is built on land owned by the City Council, granted for 75 years for state-subsidized housing. This arrangement allowed local residents to collaborate with architects from Lacol and other consultants to establish a 28-unit sustainable housing complex. The community prioritized three core principles in its development--economic and environmental sustainability, cooperation through community participation, and the advancement of communal living.
-
-
-To enhance sustainability, the project incorporates multi-purpose common areas to reduce the overall environmental footprint. The building is designed with a high number of south-facing units to maximize heat gain and lower energy costs. Additionally, a central atrium features operable openings that adjust to seasonal changes—promoting compactness in winter and openness in summer.
-
-
-Affordability and sustainability in communal housing require active and ongoing resident participation. From the outset, the project was shaped by the ideas of its residents, brought to life by architects and engineers. The initial phase included construction workshops, enabling the community to collectively apply their knowledge and skills to complete the building. The cooperative also emphasizes shared public spaces, centering them around a communal courtyard. While each resident has a private space, the courtyard fosters a sense of belonging by providing a shared, open environment that encourages interaction within the community. 
+La Borda is a cooperative housing project in Barcelona created as a grassroots response to the city’s housing crisis and rising cost of living. Developed by the residents’ cooperative in collaboration with the architectural collective Lacol, the project occupies land leased from the Barcelona City Council for 75 years under a public and cooperative partnership. It provides 28 affordable, energy-efficient units organized around shared spaces that promote collective life. From its inception, La Borda was guided by three core principles: economic and environmental sustainability, participatory design, and community-based living. The six-story timber structure is among the tallest wooden buildings in Spain, using cross-laminated timber (CLT) to reduce embodied carbon and simplify construction. A central atrium functions as a climatic mediator, using natural ventilation and solar gain to minimize energy demand throughout the year. Multi-purpose communal areas such as a laundry room, kitchen, workshops, and rooftop terrace reduce redundancy and foster daily interaction. Every decision, from material choice to governance, emerged through resident assemblies and collective labor. La Borda stands as a model of cooperative urbanism, proving that democratic design can produce affordable, low-carbon housing rooted in solidarity and shared stewardship.
 year_completed: 2018
 owner: The City Council of Barcelona
 architect: LACOL
@@ -16,6 +9,15 @@ lot_size_sqft: 7300
 floor_space_sqft: 9842.52
 units: 28
 unit_distribution: 3 different sizes (131/164/249 sqft)
-inhabitants_per_unit: 1-5
+number_of_inhabitants: 60-65
 address: Carrer de la Constitucio, 85, 89, Sants-Montjuic, 08014 Barcelona, Spain
 coordinates: 41.36961, 2.13478
+typology: apartment
+model: Public housing
+development_cost_per_unit: €90,000
+average_rent_per_unit: €450–600/mo
+housing_cost_ratio: ~25% of income
+material_1: Reinforced concrete (Reinforced concrete basement slab)
+material_2: CLT (CLT structure)
+material_3: Wood (Pine façade panels)
+material_4: 
