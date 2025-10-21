@@ -15,31 +15,27 @@
   },
   {
     "title": "Model A",
-    "category": "cooperative",
-    "description": "Cooperative housing is a resident-owned and democratically governed model where individuals hold shares in a cooperative corporation that owns the entire property. Members gain the right to occupy specific units and participate in governance through a general assembly operating on a one-member-one-vote basis. The assembly elects a board of directors to oversee policy, finances, and management, while committees address areas like maintenance, sustainability, or community events. This structure promotes collective ownership, shared responsibility, and long-term affordability, emphasizing cooperation, stability, and community well-being over profit.",
+    "description": "Model A is a mixed-equity financing model that blends public subsidies with member investment to ensure long-term affordability. Under this system, the initial development is funded through a combination of low-interest public loans, municipal land leases, and resident share purchases that grant occupancy and voting rights. Members pay monthly fees covering operating costs and debt service, while equity growth is limited to prevent speculation. This structure stabilizes housing costs and keeps units permanently affordable, even as market prices rise. By aligning collective ownership with financial sustainability, Model A enables residents to build community wealth without privatizing shared assets.",
     "slug": "model-a",
     "logo_image": "models/model-a/logo.png",
     "diagram_image": "models/model-a/diagram.png"
   },
   {
     "title": "Model B",
-    "category": "cooperative",
-    "description": "Cooperative housing is a resident-owned and democratically governed model where individuals hold shares in a cooperative corporation that owns the entire property. Members gain the right to occupy specific units and participate in governance through a general assembly operating on a one-member-one-vote basis. The assembly elects a board of directors to oversee policy, finances, and management, while committees address areas like maintenance, sustainability, or community events. This structure promotes collective ownership, shared responsibility, and long-term affordability, emphasizing cooperation, stability, and community well-being over profit.",
+    "description": "Model B is a mixed-equity financing model that blends public subsidies with member investment to ensure long-term affordability. Under this system, the initial development is funded through a combination of low-interest public loans, municipal land leases, and resident share purchases that grant occupancy and voting rights. Members pay monthly fees covering operating costs and debt service, while equity growth is limited to prevent speculation. This structure stabilizes housing costs and keeps units permanently affordable, even as market prices rise. By aligning collective ownership with financial sustainability, Model A enables residents to build community wealth without privatizing shared assets.",
     "slug": "model-b",
     "logo_image": "models/model-b/logo.png",
     "diagram_image": "models/model-b/diagram.png"
   },
   {
     "title": "Model C",
-    "category": "cooperative",
-    "description": "Cooperative housing is a resident-owned and democratically governed model where individuals hold shares in a cooperative corporation that owns the entire property. Members gain the right to occupy specific units and participate in governance through a general assembly operating on a one-member-one-vote basis. The assembly elects a board of directors to oversee policy, finances, and management, while committees address areas like maintenance, sustainability, or community events. This structure promotes collective ownership, shared responsibility, and long-term affordability, emphasizing cooperation, stability, and community well-being over profit.",
+    "description": "Model C is a mixed-equity financing model that blends public subsidies with member investment to ensure long-term affordability. Under this system, the initial development is funded through a combination of low-interest public loans, municipal land leases, and resident share purchases that grant occupancy and voting rights. Members pay monthly fees covering operating costs and debt service, while equity growth is limited to prevent speculation. This structure stabilizes housing costs and keeps units permanently affordable, even as market prices rise. By aligning collective ownership with financial sustainability, Model A enables residents to build community wealth without privatizing shared assets.",
     "slug": "model-c",
     "logo_image": "models/model-c/logo.png",
     "diagram_image": "models/model-c/diagram.png"
   },
   {
     "title": "Syndicate Model",
-    "category": "syndicate",
     "description": "The syndicate model is a federated approach to cooperative housing that links individual housing cooperatives through a shared legal and financial framework. Each housing project is independently self-managed by its residents while collectively connected to a broader network that owns a small share in every member co-op. This shared ownership structure allows the syndicate to safeguard affordability, prevent speculative resale, and redistribute resources between established and emerging projects. Through mutual support and cross-subsidization, the model builds long-term resilience, ensuring that housing remains collectively governed, socially oriented, and permanently removed from market speculation.",
     "slug": "syndicate-model",
     "logo_image": "models/syndicate-model/logo.png",

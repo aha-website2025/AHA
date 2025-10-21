@@ -1,3 +1,2 @@
 title: Syndicate Model
-category: syndicate
 description: The syndicate model is a federated approach to cooperative housing that links individual housing cooperatives through a shared legal and financial framework. Each housing project is independently self-managed by its residents while collectively connected to a broader network that owns a small share in every member co-op. This shared ownership structure allows the syndicate to safeguard affordability, prevent speculative resale, and redistribute resources between established and emerging projects. Through mutual support and cross-subsidization, the model builds long-term resilience, ensuring that housing remains collectively governed, socially oriented, and permanently removed from market speculation.

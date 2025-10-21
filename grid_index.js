@@ -62,6 +62,47 @@ function createTile(type, project = null, modelImage = null) {
 
   return div;
 }
+
+function filterModelsBasedOnProjects(filteredProjects) {
+  if (!filteredProjects || filteredProjects.length === 0) {
+    return [];
+  }
+  
+  // Collect all unique typologies, materials, and model types from filtered projects
+  const projectTypologies = new Set();
+  const projectMaterials = new Set();
+  const projectModelTypes = new Set();
+  
+  filteredProjects.forEach(project => {
+    if (project._typology) project._typology.forEach(t => projectTypologies.add(t));
+    if (project._material) project._material.forEach(m => projectMaterials.add(m));
+    if (project._model) project._model.forEach(m => projectModelTypes.add(m));
+  });
+  
+  // Filter models that match any of the attributes from filtered projects
+  return allModels.filter(model => {
+    // Check if model title (lowercased) matches any project attributes
+    const modelTitleLower = model.title.toLowerCase();
+    const modelDescLower = (model.description || '').toLowerCase();
+    
+    // Check against project model types
+    for (const modelType of projectModelTypes) {
+      if (modelTitleLower.includes(modelType) || modelDescLower.includes(modelType)) {
+        return true;
+      }
+    }
+    
+    // Check against project typologies
+    for (const typology of projectTypologies) {
+      if (modelTitleLower.includes(typology) || modelDescLower.includes(typology)) {
+        return true;
+      }
+    }
+    
+    return false;
+  });
+}
+
 function renderGrid(projects) {
   const container = document.getElementById("grid");
   container.innerHTML = "";
@@ -69,7 +110,14 @@ function renderGrid(projects) {
   if (projects.length < allProjects.length) {
     // FILTERED MODE (keep order as-is)
     container.classList.add('filtered');
+    
+    // Render filtered projects
     projects.forEach(project => container.appendChild(createTile("data", project)));
+    
+    // Also filter and render models based on the same filtered project attributes
+    const filteredModels = filterModelsBasedOnProjects(projects);
+    filteredModels.forEach(model => container.appendChild(createTile("model", null, model)));
+    
     return;
   }
 
@@ -112,19 +160,45 @@ function renderGrid(projects) {
 function handleSearch() {
   const keyword = document.getElementById("searchInput").value.toLowerCase();
 
-  const filtered = allProjects.filter(project =>
+  // Search through projects
+  const filteredProjects = allProjects.filter(project =>
     Object.values(project).some(value =>
       String(value).toLowerCase().includes(keyword)
     )
   );
 
-  renderGrid(filtered);
+  // Search through models
+  const filteredModels = allModels.filter(model =>
+    Object.values(model).some(value =>
+      String(value).toLowerCase().includes(keyword)
+    )
+  );
+
+  // If no keyword, show everything
+  if (!keyword.trim()) {
+    renderGrid(allProjects);
+  } else {
+    // Show filtered results (projects and models)
+    renderFilteredResults(filteredProjects, filteredModels);
+  }
 
   // draw BOTH kinds of guides for search results, just like filters
   setTimeout(() => {
     drawDashedLinesBetweenTileRows();  // rows - 1
     drawVerticalDashedLines();         // stop where the row stops
   }, 100);
+}
+
+function renderFilteredResults(projects, models) {
+  const container = document.getElementById("grid");
+  container.innerHTML = "";
+  container.classList.add('filtered');
+
+  // Render projects first
+  projects.forEach(project => container.appendChild(createTile("data", project)));
+  
+  // Then render models
+  models.forEach(model => container.appendChild(createTile("model", null, model)));
 }
 
 
