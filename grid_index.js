@@ -68,33 +68,26 @@ function filterModelsBasedOnProjects(filteredProjects) {
     return [];
   }
   
-  // Collect all unique typologies, materials, and model types from filtered projects
-  const projectTypologies = new Set();
-  const projectMaterials = new Set();
+  // Collect only model types from filtered projects (NOT materials or typologies)
   const projectModelTypes = new Set();
   
   filteredProjects.forEach(project => {
-    if (project._typology) project._typology.forEach(t => projectTypologies.add(t));
-    if (project._material) project._material.forEach(m => projectMaterials.add(m));
     if (project._model) project._model.forEach(m => projectModelTypes.add(m));
   });
   
-  // Filter models that match any of the attributes from filtered projects
+  // If no specific model types in filtered projects, return empty
+  if (projectModelTypes.size === 0) {
+    return [];
+  }
+  
+  // Filter models that match the model types from filtered projects
   return allModels.filter(model => {
-    // Check if model title (lowercased) matches any project attributes
     const modelTitleLower = model.title.toLowerCase();
     const modelDescLower = (model.description || '').toLowerCase();
     
-    // Check against project model types
+    // Only check against project model types (not materials or typologies)
     for (const modelType of projectModelTypes) {
       if (modelTitleLower.includes(modelType) || modelDescLower.includes(modelType)) {
-        return true;
-      }
-    }
-    
-    // Check against project typologies
-    for (const typology of projectTypologies) {
-      if (modelTitleLower.includes(typology) || modelDescLower.includes(typology)) {
         return true;
       }
     }

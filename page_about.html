@@ -6,24 +6,12 @@
   <title>About - Affordable Housing Atlas</title>
   <link rel="stylesheet" href="css_style.css">
   <style>
-    /* Updated style for About page */
-    .about-wrapper {
-      max-width: 800px;
-      margin: 100px 50px; /* Top and left margin */
-      text-align: left; /* Align text to the left */
-    }
-    .about-title {
-      font-size: 64px;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
-    .about-content {
-      font-size: 18px;
-      line-height: 1.6;
+    #grid-container {
+      position: relative;
     }
   </style>
 </head>
-<body class="about-page">
+<body class="model-page">
 
   <header class="site-header">
     <a href="index.html">
@@ -44,14 +32,214 @@
   </nav>
 
   <main>
-    <div class="about-wrapper">
-      <div class="about-title">About</div>
-      <div class="about-content">
-        Welcome to the Affordable Housing Atlas.<br>
+    <div id="grid-container">
+      <div class="grid">
+        <!-- Row 1 -->
+        <div class="tile title" style="grid-column: 1 / 2; grid-row: 1;">About</div>
+        <div class="tile blank" style="grid-column: 2 / 3; grid-row: 1;"></div>
+        <div class="description" style="grid-column: 3 / 5; grid-row: 1;">
+          <p>The Affordable Housing Atlas is a growing digital catalogue that documents innovative housing projects from around the world, highlighting alternative models of affordability, ownership, and community building. It serves as a research and educational platform that visualizes how design, policy, and collective organization intersect to create more equitable forms of housing. Through interactive mapping and comparative analysis, the Atlas aims to expand public understanding of housing beyond market frameworks, showcasing projects that prioritize sustainability, cooperation, and social inclusion as foundations for rethinking the future of urban living.</p>
+        </div>
+        
+        <!-- Row 2 -->
+        <div class="tile blank" style="grid-column: 1 / 2; grid-row: 2;"></div>
+        <div class="tile hatch" style="grid-column: 2 / 3; grid-row: 2;"></div>
+        <div class="tile" style="grid-column: 3 / 4; grid-row: 2;"></div>
+        <div class="tile blank" style="grid-column: 4 / 5; grid-row: 2;"></div>
+        
+        <!-- Row 3 -->
+        <div class="tile" style="grid-column: 1 / 2; grid-row: 3;"></div>
+        <div class="tile blank" style="grid-column: 2 / 3; grid-row: 3;"></div>
+        <div class="tile" style="grid-column: 3 / 4; grid-row: 3;"></div>
+        <div class="tile blank" style="grid-column: 4 / 5; grid-row: 3;"></div>
       </div>
     </div>
   </main>
 
-  <script src="grid_index.js"></script> 
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menuItems");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
+    // Draw horizontal dashed lines between rows
+    function drawDashedLinesBetweenTileRows() {
+      const tiles = Array.from(document.querySelectorAll('.tile, .description'));
+      if (tiles.length === 0) return;
+
+      // Remove any existing horizontal lines
+      document.querySelectorAll('.horizontal-dashed-line').forEach(line => line.remove());
+
+      const rowThreshold = 10; // Allow up to 10px difference in top values to group tiles in same row
+      const rows = [];
+
+      // Group tiles into rows based on vertical position (within threshold)
+      tiles.forEach(tile => {
+        const rect = tile.getBoundingClientRect();
+        const top = rect.top;
+
+        let foundRow = false;
+        for (let row of rows) {
+          if (Math.abs(row.top - top) < rowThreshold) {
+            row.tiles.push(tile);
+            foundRow = true;
+            break;
+          }
+        }
+
+        if (!foundRow) {
+          rows.push({ top, tiles: [tile] });
+        }
+      });
+
+      // Sort rows by top position
+      rows.sort((a, b) => a.top - b.top);
+
+      // Compute max horizontal span across all rows
+      let maxLeft = Infinity;
+      let maxRight = -Infinity;
+
+      rows.forEach(row => {
+        row.tiles.forEach(tile => {
+          const rect = tile.getBoundingClientRect();
+          maxLeft = Math.min(maxLeft, rect.left);
+          maxRight = Math.max(maxRight, rect.right);
+        });
+      });
+
+      const totalLineWidth = maxRight - maxLeft;
+      const container = document.getElementById("grid-container");
+      const containerRect = container.getBoundingClientRect();
+
+      // Draw lines between each row
+      for (let i = 0; i < rows.length - 1; i++) {
+        const row1 = rows[i];
+        const row2 = rows[i + 1];
+
+        const rect1 = row1.tiles[0].getBoundingClientRect();
+        const rect2 = row2.tiles[0].getBoundingClientRect();
+
+        const bottom = rect1.bottom;
+        const top = rect2.top;
+
+        const middleY = (bottom + top) / 2;
+
+        const line = document.createElement('div');
+        line.className = 'horizontal-dashed-line';
+        line.style.position = 'absolute';
+        line.style.left = `${maxLeft - containerRect.left}px`;
+        line.style.top = `${middleY - containerRect.top}px`;
+        line.style.width = `${totalLineWidth}px`;
+        line.style.height = '1px';
+        line.style.backgroundImage = `repeating-linear-gradient(
+          to right,
+          #ccc 0,
+          #ccc 4px,
+          transparent 5px,
+          transparent 9px
+        )`;
+        line.style.pointerEvents = 'none';
+        line.style.zIndex = '10';
+
+        container.appendChild(line);
+      }
+    }
+
+    // Draw vertical dashed lines between columns
+    function drawVerticalDashedLines() {
+      const container = document.getElementById("grid-container");
+      if (!container) return;
+
+      // Remove old lines
+      document.querySelectorAll(".vertical-grid-line").forEach(line => line.remove());
+
+      const tiles = Array.from(container.querySelectorAll(".tile, .description")).filter(el => el.offsetParent !== null);
+      if (tiles.length === 0) return;
+
+      // Group by column (left edge)
+      const columns = new Map();
+      tiles.forEach(tile => {
+        const r = tile.getBoundingClientRect();
+        const left = Math.round(r.left + window.scrollX);
+        if (!columns.has(left)) columns.set(left, { rects: [], width: r.width });
+        columns.get(left).rects.push(r);
+      });
+
+      const colList = [...columns.entries()]
+        .sort((a, b) => a[0] - b[0])
+        .map(([left, info]) => {
+          const tops = info.rects.map(rr => rr.top + window.scrollY);
+          const bottoms = info.rects.map(rr => rr.bottom + window.scrollY);
+          return {
+            left,
+            width: info.width,
+            topMin: Math.min(...tops),
+            bottomMax: Math.max(...bottoms)
+          };
+        });
+
+      if (colList.length < 2) return;
+
+      const topEdge = Math.min(...colList.map(c => c.topMin));
+
+      // Calculate tile width and gap from first two columns
+      const tileWidth = colList[0].width;
+      const firstColRight = colList[0].left + colList[0].width;
+      const secondColLeft = colList[1].left;
+      const gap = secondColLeft - firstColRight;
+      
+      // Position of first divider (midway between columns 1 and 2)
+      const firstDividerX = firstColRight + (gap / 2);
+      
+      // Increment for each subsequent divider (tile width + gap)
+      const increment = tileWidth + gap;
+
+      for (let i = 0; i < colList.length - 1; i++) {
+        const c1 = colList[i];
+        const c2 = colList[i + 1];
+
+        // Calculate X position: first divider + (i * increment)
+        const midX = firstDividerX + (i * increment);
+
+        // Use the TALLER of the two columns
+        const bottomEdgeForDivider = Math.max(c1.bottomMax, c2.bottomMax);
+
+        const h = bottomEdgeForDivider - topEdge;
+        if (h <= 0) continue;
+
+        const line = document.createElement("div");
+        line.className = "vertical-grid-line";
+        line.style.position = "absolute";
+        line.style.top = `${topEdge - 15}px`;
+        line.style.left = `${midX}px`;
+        line.style.height = `${h + 30}px`;
+        line.style.width = "1px";
+        line.style.backgroundImage =
+          "repeating-linear-gradient(to bottom, #ccc 0, #ccc 4px, transparent 5px, transparent 9px)";
+        line.style.pointerEvents = "none";
+        line.style.zIndex = "1";
+
+        document.body.appendChild(line);
+      }
+    }
+
+    // Draw lines after page loads
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        drawDashedLinesBetweenTileRows();
+        drawVerticalDashedLines();
+      }, 100);
+    });
+
+    // Redraw on window resize
+    window.addEventListener('resize', () => {
+      // Remove existing dashed lines
+      document.querySelectorAll(".vertical-grid-line, .horizontal-grid-line").forEach(line => line.remove());
+      
+      // Redraw
+      drawDashedLinesBetweenTileRows();
+      drawVerticalDashedLines();
+    });
+  </script>
 </body>
 </html>
