@@ -1,31 +1,23 @@
 title: Star Apartments
 location: Los Angeles, USA
-category: public/social housing
+model: public housing
 description:
-The six-story, 95,000 sf Star Apartments expands upon the “the idea providing permanent supportive housing within the downtown core of Los Angeles, specifically the Skid Row Housing.” The building is organized around “three principal spatial zones”, stacked one upon the other: a commercial/retail zone at street level; a second level for community programs; and four terraced floors of residences above.
-
-
-The building design allows for a “recovery process” for homeless residents based on positive re-socialization, healthy interdependent relationships, and wellness. The project seeks to not only improve the quality of life for residents but to inspire a sense of pride, independence, and dignity.
-
-
-This design focuses on creation of multiple terraces for communal activities maximising air flow and sunlight. This indoor/outdoor solid/void relationship that it creates plays well against the density and urbanism in downtown Los Angeles.
-
-
-The LEED for Homes Platinum development was constructed with “prefabricated modular housing units that are cantilevered” on a 2 story concrete superstructure. Individual apartment units were built off-site using prefabricated materials and delivered to the project site and craned into place on the structural podium. These units are spacious and designed to promote independent and healthy living. Individual studio apartments include an eat-in kitchen, bedroom, and bathroom.
-
-
-As the project had limited budget, the design team used prefabricated modules which were lifted into place over a new structural podium (acting at times like a courtyard). By doing so they were able to meet tighter construction tolerances and sustainability goals while increasing not only the construction quality, but also the quality of living.
-
-
-The project is the first mixed-use, affordable housing project in Los Angeles to employ this construction method.
+Star Apartments in downtown Los Angeles, designed by Michael Maltzan Architecture for the Skid Row Housing Trust, is a pioneering model of permanent supportive housing that redefines urban density and social care. Completed in 2014, the six-story, 95,000-square-foot development provides 102 modular units for formerly homeless residents alongside spaces for health services, recreation, and community engagement. The prefabricated housing modules were constructed off-site and craned onto a concrete podium that houses retail, offices, and a health clinic, reducing construction waste and time. Above, a series of terraced roofs and shared courtyards create open-air gathering spaces that promote physical activity, social interaction, and emotional well-being. The building’s striking, cantilevered form symbolizes the uplifting mission of the Skid Row Housing Trust—to replace isolation with dignity and community. Achieving LEED Platinum certification, Star Apartments integrates sustainable materials, efficient systems, and natural ventilation, demonstrating how innovative architecture can merge modular construction, social infrastructure, and design excellence to foster inclusive, resilient urban living.
 year_completed: 2014
 owner: Skid Row Housing Trust
 architect: Michael Maltzan
 lot_size_sqft: 653,400 sqft
 floor_space_sqft: 95,000 sqft
-#_of_units: 102
-#_of_inhabitants: 153
+units: 102
+number_of_inhabitants: 153
 density: 0.001 inhabitant per sqft
 outdoor_area: 15,000 sqft
 address: 240 E 6th St, Los Angeles, CA 90014, USA
 coordinates: 34.04352, -118.24780
+development_cost_per_unit: $450,000
+average_rent_per_unit: $500-$700/mo
+housing_cost_ratio: 30-35% of income
+material_1: Reinforced cast-in-place concrete
+material_2: Prefab. steel-framed modular units
+material_3: 
+material_4: 

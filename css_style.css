@@ -652,9 +652,9 @@ body {
 }
 
 .project-page .tile.text-left p {
-  margin: 0 0 0.4rem 0;
-  line-height: 2.0;
-  font-size: 0.8rem
+  margin: 0 0 0.2rem 0;
+  line-height: 1.6;
+  font-size: 0.8rem;
 }
   
 .project-page .tile.double {

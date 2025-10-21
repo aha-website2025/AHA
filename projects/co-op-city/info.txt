@@ -1,23 +1,21 @@
 title: Co-op City
 location: Bronx, USA
-category: cooperative
 description:
-This housing co-op was based on Rochdale Principles of Cooperation (1844), which was later adopted by the International Cooperative Alliance in 1937 and implemented as a basis for many cooperative housing projects around the world.
-The area began as marshland, until it was converted into a Freedomland USA amusement park in 1960. By 1966, construction for Co-op city began. When it concluded in 1973, there were 35 high-rise buildings with seven clusters of townhouses, totaling over 15,000 units. All of these buildings sit on a site of 320 acres, but occupy only about 20%, leaving the rest as green space. This development is known as the largest housing cooperative in the world, and was sponsored by the United Housing Foundation, an allegiance responsible for many large scale projects intended to meet the need for low priced housing in New York. In addition, the Mitchell-Lama program promised to develop and build affordable housing for middle-income families.
-
-
-In this district, less people live in poverty, are unemployed, and feel rent burdened than those in the greater Bronx and New York City.
-To acquire an apartment, buyers had to purchase eighteen shares of stock for each room desired, at about $25 per share. Thanks to large, cheap, and vacant parcels of land, tall buildings, and large single-family apartments, the density levels per person were very low.
-Demographics have changed, in the beginning, many west Bronx (concourse, westchester, coming from projects in the west bx) moved to co-op city – lots of jewish and old people, many synagogues, as those people passed on the demographics drastically changed.
+Co-op City in the Bronx, New York, stands as the largest cooperative housing development in the world and a lasting embodiment of the Rochdale Principles of Cooperation (1844), later formalized by the International Cooperative Alliance in 1937. The site, once marshland and later the short-lived Freedomland U.S.A. amusement park, was redeveloped beginning in 1966 by the United Housing Foundation under the state’s Mitchell-Lama program to provide affordable housing for middle-income families. Completed in 1973, the project consists of 35 high-rise towers and seven clusters of townhouses totaling more than 15,000 units. Occupying only about 20% of its 320-acre site, the development reserves extensive green space, parks, and pedestrian networks between buildings. To secure an apartment, residents purchased cooperative shares—approximately eighteen shares per room at $25 each—granting ownership and participation in governance. With its efficient land use, large apartment layouts, and accessible ownership model, Co-op City became a prototype for socially inclusive urban housing, maintaining lower poverty and rent-burden rates than the rest of the Bronx while demonstrating how large-scale cooperative planning could balance affordability, community, and livability.
 year_completed: 1973
 owner: Riverbay Corporation
 architect: Abraham Kaza & Herman J Jessoe
 units: 1,328
-unit_distribution: 3 different sizes (131/164/249 sqft)
-inhabitants: +43,000
+unit_distribution: 1–4 bedrooms
+number_of_inhabitants: +43,000
 density: 51 people/acre
 address: 177 Dreiser Loop, Bronx, NY 10475 USA
 coordinates: 40.87539, -73.8257
 typology: apartment
-material: reinforced concrete
 model: cooperative
+development_cost_per_unit: $245K (2025 USD)
+average_rent_per_unit: $1,000-1,400/mo
+housing_cost_ratio: 20-25% of income
+material_1: Reinforced concrete
+material_2: Precast concrete panels
+material_3: 

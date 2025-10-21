@@ -93,10 +93,12 @@ async function loadProject() {
       class: "tile text-left",
       style: "grid-column: 3 / 4; grid-row: 4 / 5;",
       html: `
-        <p><strong>Development cost/unit: </strong>${project.development_cost_per_unit || 'N/A'}</p>
-        <p><strong>Average rent/unit: </strong>${project.average_rent_per_unit || 'N/A'}</p>
-        <p><strong>Median tenant income: </strong>${project.median_tenant_income || 'N/A'}</p>
-        <p><strong>Housing cost ratio: </strong>${project.housing_cost_ratio || 'N/A'}</p>`
+        <p><strong>Development cost/unit:</strong></p>
+        <p>${project.development_cost_per_unit || 'N/A'}</p>
+        <p><strong>Average rent/unit:</strong></p>
+        <p>${project.average_rent_per_unit || 'N/A'}</p>
+        <p><strong>Housing cost ratio:</strong></p>
+        <p>${project.housing_cost_ratio || 'N/A'}</p>`
     },
     {
       class: "tile text-left",
