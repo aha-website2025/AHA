@@ -1,19 +1,26 @@
 title: Cité manifeste
 location: Mulhouse, France
-category: cooperative
 description:
-These 14 single-family houses designed by Lacaton & Vassal are part of Cite Manifeste, a collection of 61 high-quality apartments constructed for average-income residents. Cite Manifeste was commissioned by SOMCO, an organization founded during the industrial revolution to address poor living conditions of urban workers. Their solution was a residential complex based on the English “garden city” model. Five teams of architects were invited to contribute to this project, including Jean Nouvel, Poitevin & Raynaud, Lewis + Block, Lacaton & Vassal, Shigeru Ban, and De Gastines.
-
-
-Of the five architects, the 14 dwellings by Lacaton & Vassal gained the most international recognition for its efficient use of space and radical design. Lacaton & Vassal aimed to design quality houses that are larger, more comfortable, more flexible, and cost-effective than conventional social housing. As a result, the volume of the space is almost double that of the usual standard in social housing. The loft-like layout of the units offer a high degree of flexibility and customization. The structure is a simple reinforced concrete post and beam structure which supports an elevated platform at 3 meters height. Horticultural greenhouses with galvanized steel frames and transparent polycarbonate walls are then fixed on the platform. The greenhouses are split into isolated and heated indoor sections and semi-outdoor “winter gardens”.
+The fourteen single-family houses by Lacaton & Vassal form part of Cité Manifeste in Mulhouse, France, a development of sixty-one dwellings commissioned by SOMCO, a historic social housing association originally founded during the industrial revolution to improve workers’ living conditions. Conceived as a contemporary reinterpretation of the English “garden city,” the project invited five architectural teams—Jean Nouvel, Poitevin & Raynaud, Lewis + Block, Shigeru Ban and De Gastines, and Lacaton & Vassal—to explore new models for affordable yet generous housing. Lacaton & Vassal’s contribution stands out for its radical spatial economy and human-centered design. Each dwelling combines the scale of a house with the affordability of social housing, doubling the typical living volume without increasing cost. The units employ a simple reinforced-concrete frame that supports an elevated platform three meters above grade. Prefabricated horticultural greenhouses with galvanized steel structures and translucent polycarbonate cladding are attached to create adaptable spaces that function as extensions of the home. These winter gardens blur the boundary between interior and exterior, offering flexibility, daylight, and energy efficiency while redefining what low-cost housing can achieve.
 year_completed: 2005
 owner: SOMCO
 architect: Lacaton & Vassal
 lot_size_sqft: 2,014 sqft
 floor_space_sqft: 24,348 sqft
 units: 14
-unit_distribution: 2 stories
+number_of_inhabitants: 45-50
+unit_distribution: 2 stories + winter garden
 inhabitants_per_unit: 1.5 people/bedroom
 density: 678 sqft per person
 address: 54 Rue Lavoisier, 68200 Mulhouse, France
 coordinates: 47.7565, 7.3207
+typology: Single-family house
+model: Social housing
+development_cost_per_unit: €130,000
+average_rent_per_unit: €600–€750/mo
+housing_cost_ratio: 25-30% of income
+material_1: Reinforced concrete
+material_2: Polycarbonate roofs
+material_3: Steel framing
+material_4: 
+

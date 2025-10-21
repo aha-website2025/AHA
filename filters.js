@@ -25,7 +25,13 @@
         const txt  = await (await fetch(infoPath(p.slug))).text();
         const meta = parseInfoTxt(txt);
         p._typology = toArr(meta.typology).map(norm);
-        p._material = toArr(meta.material).map(norm);
+        // Collect all material_1, material_2, material_3, material_4 values
+        p._material = [
+          meta.material_1,
+          meta.material_2,
+          meta.material_3,
+          meta.material_4
+        ].filter(Boolean).map(v => norm(v.trim()));
         p._model    = toArr(meta.model || meta.category).map(norm);
       } catch {
         p._typology = []; p._material = []; p._model = [];
