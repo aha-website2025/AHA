@@ -5,20 +5,85 @@ body {
 }
 
 .map {
-  /* This is the key part. It sets the div to 80% of its parent's width */
-  width: 75%;
+  /* Narrower map container */
+  width: 70%;
   
-  /* And this centers the div by automatically distributing the remaining 20%
-      as equal left and right margins. */
+  /* Center the div */
   margin: 0 auto;
-  margin-top: 100px;
+  margin-top: 30px;
   margin-bottom: 100px;
   /* Add some visual styling to the container itself */
   border: none; 
   position: relative;
 
-  overflow: hidden; /* This ensures the map's rounded corners match the container */
+  overflow: visible; /* Allow dashed lines to extend beyond */
   padding: 10px;
+}
+
+/* Dashed border lines using same style as index grid */
+.map .corner {
+  position: absolute;
+  pointer-events: none;
+}
+
+/* Top horizontal line */
+.map .corner-top-left {
+  top: 0px;
+  left: -10px;
+  right: -10px;
+  height: 1px;
+  background-image: repeating-linear-gradient(
+    to right,
+    #ccc 0,
+    #ccc 4px,
+    transparent 5px,
+    transparent 9px
+  );
+}
+
+/* Right vertical line */
+.map .corner-top-right {
+  top: -10px;
+  right: 0px;
+  bottom: -10px;
+  width: 1px;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    #ccc 0,
+    #ccc 4px,
+    transparent 5px,
+    transparent 9px
+  );
+}
+
+/* Bottom horizontal line */
+.map .corner-bottom-left {
+  bottom: 0px;
+  left: -10px;
+  right: -10px;
+  height: 1px;
+  background-image: repeating-linear-gradient(
+    to right,
+    #ccc 0,
+    #ccc 4px,
+    transparent 5px,
+    transparent 9px
+  );
+}
+
+/* Left vertical line */
+.map .corner-bottom-right {
+  top: -10px;
+  left: 0px;
+  bottom: -10px;
+  width: 1px;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    #ccc 0,
+    #ccc 4px,
+    transparent 5px,
+    transparent 9px
+  );
 }
 
 
@@ -41,106 +106,7 @@ header {
   max-width: 300px;
 }
 
-.menu {
-  position: absolute;
-  top: 40px;
-  right: 40px;
-  z-index: 10;
-}
-
-.hamburger {
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.hamburger span {
-  width: 25px;
-  height: 3px;
-  background: black;
-}
-
-.menu-items {
-  display: none;
-  list-style: none;
-  background: #fff;
-  padding: 1rem;
-  border: 1px solid #ccc;
-  position: absolute;
-  right: 0;
-  top: 2.5rem;
-}
-
-.menu-items li {
-  margin: 0.5rem 0;
-}
-
-.marker {
-  background-color: #e74c3c;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-
-
-
-.menu {
-  position: absolute;
-  top: 100px;
-  right: 40px;
-  z-index: 1000;
-}
-
-.hamburger {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 30px;
-  height: 16px;
-  cursor: pointer;
-}
-
-.hamburger span {
-  display: block;
-  height: 2px;
-  background-color: #555;
-  border-radius: 1px;
-}
-
-.menu-items {
-  display: none;
-  position: absolute;
-  top: 0;
-  right: 50px;
-  list-style: none;
-  padding: 0;
-  margin: 10;
-  background: none;
-  border: none;
-  transform: translateY(-90px);
-}
-
-.menu-items li {
-  padding: 8px 0;
-  text-align: right;
-}
-
-.menu-items li a {
-  text-decoration: none;
-  color: #111;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-}
-
-.menu-items li a:hover {
-  color: #666;
-}
-
-
+/* Menu styles removed - using styles from css_style.css */
 
 /* Hide the close ("X") button on Google Maps InfoWindows */
 .gm-ui-hover-effect {

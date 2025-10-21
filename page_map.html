@@ -4,14 +4,96 @@
   <meta charset="utf-8" />
   <title>Map | Affordable Housing Atlas</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css_style.css" />
   <link rel="stylesheet" href="css_map.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
-    #map { height: 80vh; width: 100%; }
-    #filter-box { margin: 1rem; text-align: center; }
-    select { padding: 0.5rem; font-size: 1rem; }
+    #map { 
+      height: 80vh; 
+      width: 100%; 
+    }
+    
+    /* Ensure controls and menu are above map */
+    .map-page .controls {
+      position: relative;
+      z-index: 2000;
+    }
+    
+    .map-page .menu {
+      z-index: 2000;
+    }
+    
+    .map-page .filter-menu {
+      z-index: 2001;
+    }
+    
+    .leaflet-popup-content-wrapper {
+      border-radius: 0;
+      box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+    }
+    .leaflet-popup-content {
+      margin: 18px;
+      max-width: 320px;
+      font-family: sans-serif;
+      width: 320px;
+    }
+    .leaflet-popup-content h3 {
+      margin: 0 0 6px 0;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .leaflet-popup-content p {
+      margin: 0 0 12px 0;
+      font-size: 14px;
+      color: #666;
+    }
+    .leaflet-popup-content img {
+      width: 100%;
+      border-radius: 0;
+      display: block;
+    }
+    .leaflet-popup-tip {
+      border-radius: 0;
+    }
+    .close-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      border: none;
+      background: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #333;
+      line-height: 1;
+      padding: 0;
+      width: 24px;
+      height: 24px;
+    }
+    
+    .reset-view-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      z-index: 1000;
+      background: white;
+      border: 2px solid rgba(0,0,0,0.2);
+      padding: 8px 16px;
+      font-size: 14px;
+      cursor: pointer;
+      font-family: sans-serif;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+    }
+    
+    .reset-view-btn:hover {
+      background: #f4f4f4;
+    }
+    
+    .leaflet-control-layers {
+      margin-top: 50px !important;
+    }
   </style>
 </head>
-<body class="map-page">
+<body class="map-page home-page">
   <header class="site-header">
     <a href="index.html">
       <img src="graphics/Logo.png" alt="Affordable Housing Atlas Logo" class="logo" />
@@ -21,11 +103,7 @@
   
 
   <nav class="menu">
-    <div class="hamburger black" onclick="toggleMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+    <div class="hamburger black" onclick="toggleMenu()"></div>
     <ul class="menu-items" id="menuItems">
       <li><a href="index.html">Projects</a></li>
       <li><a href="page_models.html">Models</a></li>
@@ -34,14 +112,38 @@
     </ul>
   </nav>
 
-  <div id="filter-box">
-    <label for="categoryFilter">Filter by category: </label>
-    <select id="categoryFilter">
-      <option value="all">All</option>
-      <option value="co-op">Co-op</option>
-      <option value="public">Public</option>
-      <option value="utopian">Utopian</option>
-    </select>
+  <!-- Controls: filters and search -->
+  <div class="controls">
+    <!-- Filter Bar -->
+    <div id="filters" class="filters">
+      <div class="filters-primary">
+        <div class="filter-group" data-key="typology">
+          <button class="filter-toggle" type="button">Typology</button>
+          <div class="filter-menu"></div>
+        </div>
+
+        <div class="filter-group" data-key="material">
+          <button class="filter-toggle" type="button">Material</button>
+          <div class="filter-menu"></div>
+        </div>
+
+        <div class="filter-group" data-key="model">
+          <button class="filter-toggle" type="button">Model</button>
+          <div class="filter-menu"></div>
+        </div>
+      </div>
+
+      <button id="clearFilters" class="clear-filters" type="button">Clear</button>
+    </div>
+
+    <!-- Search (now under the filters) -->
+    <div class="search-row">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search"
+      />
+    </div>
   </div>
 
   <div class="map">
@@ -50,197 +152,196 @@
     <div class="corner corner-top-right"></div>
     <div class="corner corner-bottom-left"></div>
     <div class="corner corner-bottom-right"></div>
+    <button class="reset-view-btn" onclick="resetMapView()">Reset View</button>
     <div id="map"></div>
   </div> 
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="filters.js"></script>
   <script>
     let map;
     let allMarkers = [];
+    let currentPopup = null;
+    let allProjects = [];
 
-    function initMap() {
-      const categoryIcons = {
-      "public/social housing": {
-        url: "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14">
-            <circle cx="7" cy="7" r="6" fill="#00cc44" />
-          </svg>
-        `),
-        scaledSize: new google.maps.Size(14, 14),
-        anchor: new google.maps.Point(7, 7)
-      },
-      "co-operative": {
-        url: "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14">
-            <circle cx="7" cy="7" r="6" fill="#8000ff" />
-          </svg>
-        `),
-        scaledSize: new google.maps.Size(14, 14),
-        anchor: new google.maps.Point(7, 7)
-      },
-      "utopian": {
-        url: "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14">
-            <circle cx="7" cy="7" r="6" fill="#ff8800" />
-          </svg>
-        `),
-        scaledSize: new google.maps.Size(14, 14),
-        anchor: new google.maps.Point(7, 7)
-      }
+    // Create marker icons with different colors (squares)
+    const createMarkerIcon = (color) => {
+      return L.divIcon({
+        className: 'custom-marker',
+        html: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14">
+                 <rect x="1" y="1" width="12" height="12" fill="${color}" stroke="#fff" stroke-width="1"/>
+               </svg>`,
+        iconSize: [14, 14],
+        iconAnchor: [7, 7],
+      });
     };
 
-    const transparentIcon = {
-        url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII="
-      };
+    function initMap() {
+      // Initialize map with world view (will auto-fit to markers after load)
+      map = L.map('map', {
+        layers: [] // Start with no layers
+      }).setView([0, 0], 2);
 
-      map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 34.0522, lng: -118.2437 },
-        zoom: 3 ,
-        mapTypeId: 'roadmap',
-        gestureHandling: 'greedy',
-        styles: [
-        {
-          featureType: "all",
-          elementType: "geometry.fill",
-          stylers: [{ color: "#f8f8f8" }]
-        },
-        {
-          featureType: "landscape",
-          elementType: "geometry.fill",
-          stylers: [{ color: "#f8f8f8" }]
-        },
-        {
-          featureType: "transit",
-          elementType: "geometry.fill",
-          stylers: [{ color: "#f8f8f8" }]
-        },
-    
-        {
-          featureType: "building",
-          elementType: "geometry.stroke",
-          stylers: [{ color: "#444444" }]
-        },
-        {
-          featureType: "road",
-          elementType: "geometry",
-          stylers: [{ color: "#d6d6d6" }]
-        },
-        {
-          featureType: "water",
-          elementType: "geometry.fill",
-          stylers: [{ color: "#CCCCCC" }]
-        },
-        {
-          featureType: "poi",
-          elementType: "labels.icon",
-          stylers: [
-            { saturation: -100 },
-            { lightness: 0 },
-            { color: "#999999" } // medium grey
-          ]
-        },
-
-        {
-          featureType: "poi",
-          elementType: "labels.text.fill",
-          stylers: [{ color: "#888888" }]
-        },
-        {
-          featureType: "poi",
-          elementType: "geometry",
-          stylers: [{ color: "#e5e5e5" }]
-        },
-        {
-          featureType: "all",
-          elementType: "labels",
-          stylers: [{ visibility: "off" }]
-        },
-        {
-          featureType: "poi",
-          elementType: "labels",
-          stylers: [{ visibility: "on" }]
-        }
-      ]
+      // Base layers
+      const streetMap = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 20
       });
 
+      const satelliteMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+        maxZoom: 19
+      });
+
+      // Add street map by default
+      streetMap.addTo(map);
+
+      // Layer control
+      const baseMaps = {
+        "Street": streetMap,
+        "Satellite": satelliteMap
+      };
+
+      L.control.layers(baseMaps, null, {
+        position: 'topright'
+      }).addTo(map);
+      
+      const darkGreyIcon = createMarkerIcon("#4a4a4a");
+
+      // Load projects from JSON
       fetch("json_projects.json")
         .then(response => response.json())
         .then(data => {
+          allProjects = data;
+          
+          console.log("Loaded projects:", allProjects.length);
+          console.log("Projects with coordinates:", allProjects.filter(p => p.coordinates).length);
+          
+          // Initialize filters if available
+          if (typeof initAHAFilters === 'function') {
+            initAHAFilters({
+              projects: allProjects,
+              renderGrid: filterMapMarkers,
+              gridSelector: "#map",
+              infoPath: (slug) => `projects/${encodeURIComponent(slug)}/info.txt`
+            });
+          } else {
+            console.warn("initAHAFilters not found, filters may not work");
+          }
+          
           data.forEach(project => {
-          if (!project.coordinates) return; // skip unbuilt or coordinate-less projects
+            if (!project.coordinates) {
+              console.log("No coordinates for:", project.title);
+              return;
+            }
 
-          const [lat, lng] = project.coordinates.split(",").map(Number);
+            const [lat, lng] = project.coordinates.split(",").map(Number);
+            console.log("Creating marker for:", project.title, "at", lat, lng);
 
-          const marker = new google.maps.Marker({
-            position: { lat, lng },
-            map: map,
-            icon: categoryIcons[project.category], 
-          });
+            const marker = L.marker([lat, lng], {
+              icon: darkGreyIcon
+            }).addTo(map);
 
+            const popupContent = `
+              <button class="close-btn" onclick="if(currentPopup) currentPopup.remove();">×</button>
+              <h3>${project.title}</h3>
+              <p>${project.category}</p>
+              <a href="page_project.html?slug=${project.slug}">
+                <img src="${project.image}" alt="${project.title}" />
+              </a>
+            `;
 
-          const infoWindow = new google.maps.InfoWindow({
-            content: `
-                <div style="padding: 12px; max-width: 220px; font-family: sans-serif;">
-                    <button class="close-btn" onclick="map.currentInfoWindow?.close(); map.currentInfoWindow = null;" 
-              style="position: absolute; top: 6px; right: 6px; border: none; background: none; font-size: 20px; cursor: pointer;">×</button>
-                  <h3 style="margin: 0 0 4px 0; font-size: 16px;">${project.title}</h3>
-                  <p style="margin: 0 0 8px 0; font-size: 13px; color: #666;">${project.category}</p>
-                  <a href="project.html?slug=${project.slug}">
-                    <img src="${project.image}" alt="${project.title}" style="width: 100%; border-radius: 4px;" />
-                  </a>
-                </div>
-              `,
-             disableAutoPan: true,
-              shouldFocus: false,
-              pixelOffset: new google.maps.Size(0, -2),
-              // ✅ hide the close button:
-          });
+            marker.bindPopup(popupContent, {
+              maxWidth: 350,
+              minWidth: 320,
+              closeButton: false
+            });
 
-          let currentInfoWindow = null;
-
-          marker.addListener("click", () => {
-            // If this infoWindow is already open, close it
-            if (map.currentInfoWindow === infoWindow) {
-              infoWindow.close();
-              map.currentInfoWindow = null;
-            } else {
-              if (map.currentInfoWindow) {
-                map.currentInfoWindow.close();
+            marker.on('click', function(e) {
+              // Close previous popup
+              if (currentPopup && currentPopup !== e.target.getPopup()) {
+                currentPopup.remove();
               }
-              infoWindow.open(map, marker);
-              map.currentInfoWindow = infoWindow;
-            }
+              currentPopup = e.target.getPopup();
+              
+              // Zoom into the neighborhood
+              map.flyTo(e.latlng, 15, {
+                duration: 1.0 // Smooth animation over 1 second
+              });
+            });
+
+            marker.projectData = project;
+            marker.projectCategory = project.category;
+            allMarkers.push(marker);
           });
-
-          map.addListener("click", () => {
-            if (map.currentInfoWindow) {
-              map.currentInfoWindow.close();
-              map.currentInfoWindow = null;
-            }
-          });
-
-          marker.projectCategory = project.category;
-          allMarkers.push(marker);
+          
+          // Fit map to show all markers
+          if (allMarkers.length > 0) {
+            const bounds = L.latLngBounds(allMarkers.map(m => m.getLatLng()));
+            map.fitBounds(bounds, { padding: [50, 50] });
+          }
         });
 
-        });
-
-      document.getElementById("categoryFilter").addEventListener("change", function () {
-        const selected = this.value;
-        allMarkers.forEach(marker => {
-          const show = selected === "all" || marker.projectCategory === selected;
-          marker.setVisible(show);
-        });
+      // Close popup on map click
+      map.on('click', function() {
+        if (currentPopup) {
+          currentPopup.remove();
+          currentPopup = null;
+        }
       });
-    };
+    }
+
+    // Filter markers based on filtered projects from the filter system
+    function filterMapMarkers(filteredProjects) {
+      console.log("Filtering markers, filtered projects:", filteredProjects ? filteredProjects.length : "all");
+      
+      // If no filtered list provided OR all projects are included (no active filter)
+      if (!filteredProjects || filteredProjects.length === allProjects.length) {
+        allMarkers.forEach(marker => {
+          marker.setIcon(createMarkerIcon("#4a4a4a"));
+        });
+        return;
+      }
+      
+      // Create a Set of slugs from filtered projects for fast lookup
+      const filteredSlugs = new Set(filteredProjects.map(p => p.slug));
+      
+      // Change marker colors based on filter status
+      allMarkers.forEach(marker => {
+        if (filteredSlugs.has(marker.projectData.slug)) {
+          // Filtered projects: salmon-red
+          marker.setIcon(createMarkerIcon("#fa8072"));
+        } else {
+          // Non-filtered projects: darker grey
+          marker.setIcon(createMarkerIcon("#a0a0a0"));
+        }
+      });
+    }
 
     function toggleMenu() {
-  const menu = document.getElementById("menuItems");
-  menu.style.display = menu.style.display === "block" ? "none" : "block";
-  }
-  window.initMap = initMap;
-  </script>
+      const menu = document.getElementById("menuItems");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
 
-  <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCl1LcKsZZ_av4zVMVRe6hDLCiTVDRmePA&callback=initMap"></script>
+    function resetMapView() {
+      // Close any open popup
+      if (currentPopup) {
+        currentPopup.remove();
+        currentPopup = null;
+      }
+      // Fit map to show all markers
+      if (allMarkers.length > 0) {
+        const bounds = L.latLngBounds(allMarkers.map(m => m.getLatLng()));
+        map.flyToBounds(bounds, { 
+          padding: [50, 50],
+          duration: 1.5
+        });
+      }
+    }
+
+    // Initialize map when page loads
+    window.addEventListener('DOMContentLoaded', initMap);
+  </script>
 </body>
 </html>
