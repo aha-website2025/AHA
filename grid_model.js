@@ -145,145 +145,196 @@ async function loadProject() {
   }
 
   // Add related projects after all main tiles
-  console.log("Fetching related projects...");
-  
-  // Fetch model's info.txt to get the title
-  let modelTitle = project.title;
-  try {
-    const modelInfoRes = await fetch(`models/${slug}/info.txt`);
-    const modelInfoText = await modelInfoRes.text();
-    const lines = modelInfoText.split(/\r?\n/);
-    for (const line of lines) {
-      const match = line.match(/^\s*title\s*:\s*(.+)\s*$/i);
-      if (match) {
-        modelTitle = match[1].trim();
-        break;
-      }
-    }
-  } catch (e) {
-    console.log("Could not load model info.txt, using title from JSON:", modelTitle);
-  }
-  
-  console.log("Model title from info.txt:", modelTitle);
-  
-  // Remove trailing 's' for plural handling (e.g., "Cooperatives" -> "Cooperative")
-  const searchTerm = modelTitle.toLowerCase().replace(/s$/, '');
-  console.log("Search term (singular form):", searchTerm);
+  console.log("Fetching all housing examples...");
   
   const res2 = await fetch("json_projects.json");
   const allProjects = await res2.json();
   console.log("All projects loaded:", allProjects.length);
   
-  // Function to check if project's info.txt contains the model title
-  async function projectMatchesModel(projectSlug) {
-    try {
-      const infoRes = await fetch(`projects/${encodeURIComponent(projectSlug)}/info.txt`);
-      const infoText = await infoRes.text();
-      const lowerInfo = infoText.toLowerCase();
-      return lowerInfo.includes(searchTerm);
-    } catch (e) {
-      return false;
-    }
-  }
+  // Show all projects as related examples
+  const relatedPool = allProjects.filter(p => p.slug !== slug);
   
-  // Filter projects that match the model title
-  const matchPromises = allProjects.map(async p => {
-    const matches = await projectMatchesModel(p.slug);
-    return matches ? p : null;
-  });
-  
-  const relatedResults = await Promise.all(matchPromises);
-  const relatedPool = relatedResults.filter(p => p !== null && p.slug !== slug);
-  
-  console.log("Related projects found:", relatedPool.length);
+  console.log("Projects to display:", relatedPool.length);
 
   const related = relatedPool
-    .sort(() => 0.5 - Math.random()) // shuffle
-    .slice(0, 6); // take 6 for more examples
+    .sort(() => 0.5 - Math.random()); // shuffle all projects
   
   console.log("Selected related projects:", related.length);
 
   // Row 3: 2 related projects (columns 1-2)
-  related.slice(0, 2).forEach((p, idx) => {
-    const div = document.createElement('div');
-    div.className = "tile flip-card";
-    div.style.cssText = `grid-column: ${idx + 1} / ${idx + 2}; grid-row: 3;`;
+  if (related.length >= 2) {
+    related.slice(0, 2).forEach((p, idx) => {
+      const div = document.createElement('div');
+      div.className = "tile flip-card";
+      div.style.cssText = `grid-column: ${idx + 1} / ${idx + 2}; grid-row: 3;`;
 
-    div.innerHTML = `
-      <a href="page_project.html?slug=${p.slug}" class="project-card">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <img src="${p.image}" alt="${p.title}" />
-          </div>
-          <div class="flip-back">
-            <div class="flip-text">
-              <h4>${p.title}</h4>
-              <p>${p.location || ''}</p>
+      div.innerHTML = `
+        <a href="page_project.html?slug=${p.slug}" class="project-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <img src="${p.image}" alt="${p.title}" />
+            </div>
+            <div class="flip-back">
+              <div class="flip-text">
+                <h4>${p.title}</h4>
+                <p>${p.location || ''}</p>
+              </div>
             </div>
           </div>
-        </div>
-      </a>
-    `;
+        </a>
+      `;
 
-    grid.appendChild(div);
-    console.log("Added related project tile (row 3):", p.title);
-  });
+      grid.appendChild(div);
+      console.log("Added related project tile (row 3):", p.title);
+    });
+  }
 
-  // Row 4: 2 related projects (columns 2, 4)
-  const row4Positions = [2, 4];
-  related.slice(2, 4).forEach((p, idx) => {
-    const div = document.createElement('div');
-    div.className = "tile flip-card";
-    const col = row4Positions[idx];
-    div.style.cssText = `grid-column: ${col} / ${col + 1}; grid-row: 4;`;
-
-    div.innerHTML = `
-      <a href="page_project.html?slug=${p.slug}" class="project-card">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <img src="${p.image}" alt="${p.title}" />
-          </div>
-          <div class="flip-back">
-            <div class="flip-text">
-              <h4>${p.title}</h4>
-              <p>${p.location || ''}</p>
+  // Rows 4 onwards: Repeat pattern with hatches and blanks
+  // Row 4 pattern: hatch (col 1), data (col 2), blank (col 3), data (col 4)
+  // Row 5 pattern: data (col 1), blank (col 2), data (col 3), hatch (col 4)
+  let projectIndex = 2; // Start after the first 2 projects in row 3
+  let currentRow = 4;
+  
+  while (projectIndex < related.length) {
+    const isEvenRow = (currentRow % 2) === 0;
+    
+    if (isEvenRow) {
+      // Even row pattern: hatch, data, blank, data (cols 1, 2, 3, 4)
+      
+      // Hatch at column 1
+      const hatchDiv = document.createElement('div');
+      hatchDiv.className = "tile hatch";
+      hatchDiv.style.cssText = `grid-column: 1 / 2; grid-row: ${currentRow};`;
+      grid.appendChild(hatchDiv);
+      
+      // Data at column 2
+      if (projectIndex < related.length) {
+        const p = related[projectIndex];
+        const div = document.createElement('div');
+        div.className = "tile flip-card";
+        div.style.cssText = `grid-column: 2 / 3; grid-row: ${currentRow};`;
+        div.innerHTML = `
+          <a href="page_project.html?slug=${p.slug}" class="project-card">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <img src="${p.image}" alt="${p.title}" />
+              </div>
+              <div class="flip-back">
+                <div class="flip-text">
+                  <h4>${p.title}</h4>
+                  <p>${p.location || ''}</p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </a>
-    `;
-
-    grid.appendChild(div);
-    console.log("Added related project tile (row 4):", p.title);
-  });
-
-  // Row 5: 2 related projects (columns 1, 3)
-  const row5Positions = [1, 3];
-  related.slice(4, 6).forEach((p, idx) => {
-    const div = document.createElement('div');
-    div.className = "tile flip-card";
-    const col = row5Positions[idx];
-    div.style.cssText = `grid-column: ${col} / ${col + 1}; grid-row: 5;`;
-
-    div.innerHTML = `
-      <a href="page_project.html?slug=${p.slug}" class="project-card">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <img src="projects/${p.slug}/image.jpg" alt="${p.title}" />
-          </div>
-          <div class="flip-back">
-            <div class="flip-text">
-              <h4>${p.title}</h4>
-              <p>${p.location || ''}</p>
+          </a>
+        `;
+        grid.appendChild(div);
+        console.log(`Added related project tile (row ${currentRow}, col 2):`, p.title);
+        projectIndex++;
+      }
+      
+      // Blank at column 3
+      const blankDiv = document.createElement('div');
+      blankDiv.className = "tile blank";
+      blankDiv.style.cssText = `grid-column: 3 / 4; grid-row: ${currentRow};`;
+      grid.appendChild(blankDiv);
+      
+      // Data at column 4
+      if (projectIndex < related.length) {
+        const p = related[projectIndex];
+        const div = document.createElement('div');
+        div.className = "tile flip-card";
+        div.style.cssText = `grid-column: 4 / 5; grid-row: ${currentRow};`;
+        div.innerHTML = `
+          <a href="page_project.html?slug=${p.slug}" class="project-card">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <img src="${p.image}" alt="${p.title}" />
+              </div>
+              <div class="flip-back">
+                <div class="flip-text">
+                  <h4>${p.title}</h4>
+                  <p>${p.location || ''}</p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </a>
-    `;
-
-    grid.appendChild(div);
-    console.log("Added related project tile (row 5):", p.title);
-  });
+          </a>
+        `;
+        grid.appendChild(div);
+        console.log(`Added related project tile (row ${currentRow}, col 4):`, p.title);
+        projectIndex++;
+      }
+      
+    } else {
+      // Odd row pattern: data, blank, data, hatch (cols 1, 2, 3, 4)
+      
+      // Data at column 1
+      if (projectIndex < related.length) {
+        const p = related[projectIndex];
+        const div = document.createElement('div');
+        div.className = "tile flip-card";
+        div.style.cssText = `grid-column: 1 / 2; grid-row: ${currentRow};`;
+        div.innerHTML = `
+          <a href="page_project.html?slug=${p.slug}" class="project-card">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <img src="${p.image}" alt="${p.title}" />
+              </div>
+              <div class="flip-back">
+                <div class="flip-text">
+                  <h4>${p.title}</h4>
+                  <p>${p.location || ''}</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        `;
+        grid.appendChild(div);
+        console.log(`Added related project tile (row ${currentRow}, col 1):`, p.title);
+        projectIndex++;
+      }
+      
+      // Blank at column 2
+      const blankDiv = document.createElement('div');
+      blankDiv.className = "tile blank";
+      blankDiv.style.cssText = `grid-column: 2 / 3; grid-row: ${currentRow};`;
+      grid.appendChild(blankDiv);
+      
+      // Data at column 3
+      if (projectIndex < related.length) {
+        const p = related[projectIndex];
+        const div = document.createElement('div');
+        div.className = "tile flip-card";
+        div.style.cssText = `grid-column: 3 / 4; grid-row: ${currentRow};`;
+        div.innerHTML = `
+          <a href="page_project.html?slug=${p.slug}" class="project-card">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <img src="${p.image}" alt="${p.title}" />
+              </div>
+              <div class="flip-back">
+                <div class="flip-text">
+                  <h4>${p.title}</h4>
+                  <p>${p.location || ''}</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        `;
+        grid.appendChild(div);
+        console.log(`Added related project tile (row ${currentRow}, col 3):`, p.title);
+        projectIndex++;
+      }
+      
+      // Hatch at column 4
+      const hatchDiv = document.createElement('div');
+      hatchDiv.className = "tile hatch";
+      hatchDiv.style.cssText = `grid-column: 4 / 5; grid-row: ${currentRow};`;
+      grid.appendChild(hatchDiv);
+    }
+    
+    currentRow++;
+  }
   
     // ⬇️ Enforce 1:0.85 aspect ratio for all tiles
   const allTiles = document.querySelectorAll(".project-page .tile, .project-page .tile.hatch");

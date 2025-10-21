@@ -3,46 +3,46 @@
     "title": "Community Land Trust",
     "description": "Community Land Trusts (CLTs) are nonprofit, community-based organizations that acquire and hold land in trust to ensure long-term affordability and local stewardship. In this model, the land is owned collectively by the trust, while individuals or families own or lease the homes built on it. Homeowners can build equity through limited resale prices that keep homes affordable for future residents. A tripartite board, typically made up of residents, community members, and public representatives, governs the trust and balances individual and collective interests. CLTs prevent displacement, stabilize neighborhoods, and preserve affordability across generations.",
     "slug": "community-land-trust",
-    "logo_image": "https://aha-website2025.github.io/AHA/models/community-land-trust/logo.png",
-    "diagram_image": "https://aha-website2025.github.io/AHA/models/community-land-trust/diagram.png"
+    "logo_image": "models/community-land-trust/logo.png",
+    "diagram_image": "models/community-land-trust/diagram.png"
   },
   {
-    "title": "Cooperatives",
+    "title": "Cooperative",
     "description": "Cooperative housing is a resident-owned and democratically governed model where individuals hold shares in a cooperative corporation that owns the entire property. Members gain the right to occupy specific units and participate in governance through a general assembly operating on a one-member-one-vote basis. The assembly elects a board of directors to oversee policy, finances, and management, while committees address areas like maintenance, sustainability, or community events. This structure promotes collective ownership, shared responsibility, and long-term affordability, emphasizing cooperation, stability, and community well-being over profit.",
-    "slug": "cooperatives",
-    "diagram_image": "https://aha-website2025.github.io/AHA/models/cooperatives/diagram.jpg",
-    "logo_image": "https://aha-website2025.github.io/AHA/models/cooperatives/logo.png"
+    "slug": "cooperative",
+    "diagram_image": "models/cooperative/diagram.jpg",
+    "logo_image": "models/cooperative/logo.png"
   },
   {
     "title": "Model A",
     "category": "cooperative",
     "description": "Cooperative housing is a resident-owned and democratically governed model where individuals hold shares in a cooperative corporation that owns the entire property. Members gain the right to occupy specific units and participate in governance through a general assembly operating on a one-member-one-vote basis. The assembly elects a board of directors to oversee policy, finances, and management, while committees address areas like maintenance, sustainability, or community events. This structure promotes collective ownership, shared responsibility, and long-term affordability, emphasizing cooperation, stability, and community well-being over profit.",
     "slug": "model-a",
-    "logo_image": "https://aha-website2025.github.io/AHA/models/model-a/logo.png",
-    "diagram_image": "https://aha-website2025.github.io/AHA/models/model-a/diagram.png"
+    "logo_image": "models/model-a/logo.png",
+    "diagram_image": "models/model-a/diagram.png"
   },
   {
     "title": "Model B",
     "category": "cooperative",
     "description": "Cooperative housing is a resident-owned and democratically governed model where individuals hold shares in a cooperative corporation that owns the entire property. Members gain the right to occupy specific units and participate in governance through a general assembly operating on a one-member-one-vote basis. The assembly elects a board of directors to oversee policy, finances, and management, while committees address areas like maintenance, sustainability, or community events. This structure promotes collective ownership, shared responsibility, and long-term affordability, emphasizing cooperation, stability, and community well-being over profit.",
     "slug": "model-b",
-    "logo_image": "https://aha-website2025.github.io/AHA/models/model-b/logo.png",
-    "diagram_image": "https://aha-website2025.github.io/AHA/models/model-b/diagram.png"
+    "logo_image": "models/model-b/logo.png",
+    "diagram_image": "models/model-b/diagram.png"
   },
   {
     "title": "Model C",
     "category": "cooperative",
     "description": "Cooperative housing is a resident-owned and democratically governed model where individuals hold shares in a cooperative corporation that owns the entire property. Members gain the right to occupy specific units and participate in governance through a general assembly operating on a one-member-one-vote basis. The assembly elects a board of directors to oversee policy, finances, and management, while committees address areas like maintenance, sustainability, or community events. This structure promotes collective ownership, shared responsibility, and long-term affordability, emphasizing cooperation, stability, and community well-being over profit.",
     "slug": "model-c",
-    "logo_image": "https://aha-website2025.github.io/AHA/models/model-c/logo.png",
-    "diagram_image": "https://aha-website2025.github.io/AHA/models/model-c/diagram.png"
+    "logo_image": "models/model-c/logo.png",
+    "diagram_image": "models/model-c/diagram.png"
   },
   {
     "title": "Syndicate Model",
     "category": "syndicate",
     "description": "The syndicate model is a federated approach to cooperative housing that links individual housing cooperatives through a shared legal and financial framework. Each housing project is independently self-managed by its residents while collectively connected to a broader network that owns a small share in every member co-op. This shared ownership structure allows the syndicate to safeguard affordability, prevent speculative resale, and redistribute resources between established and emerging projects. Through mutual support and cross-subsidization, the model builds long-term resilience, ensuring that housing remains collectively governed, socially oriented, and permanently removed from market speculation.",
     "slug": "syndicate-model",
-    "logo_image": "https://aha-website2025.github.io/AHA/models/syndicate-model/logo.png",
-    "diagram_image": "https://aha-website2025.github.io/AHA/models/syndicate-model/diagram.png"
+    "logo_image": "models/syndicate-model/logo.png",
+    "diagram_image": "models/syndicate-model/diagram.png"
   }
 ]

@@ -5,7 +5,7 @@ from unidecode import unidecode
 
 MODELS_DIR = "models"
 OUTPUT_FILE = "json_models.json"
-BASE_URL = "https://aha-website2025.github.io/AHA"
+BASE_URL = ""  # Use relative paths for local hosting
 
 def slugify(text):
     text = unidecode(text).lower()
@@ -65,9 +65,15 @@ def read_model_data(model_path, folder_name):
         logo_file = f"logo.{ext}"
         diagram_file = f"diagram.{ext}"
         if os.path.exists(os.path.join(model_path, logo_file)):
-            model_data["logo_image"] = f"{BASE_URL}/{MODELS_DIR}/{folder_name}/{logo_file}"
+            if BASE_URL:
+                model_data["logo_image"] = f"{BASE_URL}/{MODELS_DIR}/{folder_name}/{logo_file}"
+            else:
+                model_data["logo_image"] = f"{MODELS_DIR}/{folder_name}/{logo_file}"
         if os.path.exists(os.path.join(model_path, diagram_file)):
-            model_data["diagram_image"] = f"{BASE_URL}/{MODELS_DIR}/{folder_name}/{diagram_file}"
+            if BASE_URL:
+                model_data["diagram_image"] = f"{BASE_URL}/{MODELS_DIR}/{folder_name}/{diagram_file}"
+            else:
+                model_data["diagram_image"] = f"{MODELS_DIR}/{folder_name}/{diagram_file}"
 
 
     return model_data
