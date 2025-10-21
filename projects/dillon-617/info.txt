@@ -1,12 +1,12 @@
 title: Dillon 617
 location: Los Angeles, CA
 description:
-Over the past two decades, Silverlake has transformed into a dense, socially diverse neighborhood, creating demand for affordable housing. The Dillon 617 apartments address this through architecture that blends communal and private spaces within a compact urban form. A dark metal exterior contrasts with a bright white interior centered around a “paseo” walkway that links terraces, multi-tenant units, amenities, and green communal areas. Adapting to a tight infill site, the design maximizes openness and interaction, offering residents a strong sense of community and connection to the environment.
+Located in Silver Lake, Dillon 617 by Lorcan O’Herlihy Architects transforms a narrow infill site into a dense yet livable community. Two parallel building bars are linked by a bright, open paseo that encourages social interaction while providing light and ventilation. A dark metal exterior contrasts with luminous white interiors, defining a rhythm of private and communal spaces. Within its compact footprint, the project balances affordability, spatial efficiency, and design clarity, demonstrating how thoughtful architecture can foster community, sustainability, and urban density without sacrificing livability.
 year_completed: 2019
 owner: CIM Group
 architect: Lorcan O'Herlihy Architect
 lot_size_sqft: 29,000 sqft
-#_of_units: 49
+   units: 49
 unit_distribution: Two-row layout
 #_of_inhabitants: 114
 outdoor area: 11,000 sqft

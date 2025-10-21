@@ -32,23 +32,25 @@
       box-shadow: 0 3px 14px rgba(0,0,0,0.4);
     }
     .leaflet-popup-content {
-      margin: 18px;
-      max-width: 320px;
+      margin: 12px;
+      max-width: 220px;
       font-family: sans-serif;
-      width: 320px;
+      width: 220px;
     }
     .leaflet-popup-content h3 {
-      margin: 0 0 6px 0;
-      font-size: 18px;
+      margin: 0 0 4px 0;
+      font-size: 15px;
       font-weight: bold;
     }
     .leaflet-popup-content p {
-      margin: 0 0 12px 0;
-      font-size: 14px;
+      margin: 0 0 8px 0;
+      font-size: 13px;
       color: #666;
     }
     .leaflet-popup-content img {
       width: 100%;
+      height: 140px;
+      object-fit: cover;
       border-radius: 0;
       display: block;
     }
@@ -90,6 +92,58 @@
     
     .leaflet-control-layers {
       margin-top: 50px !important;
+    }
+    
+    /* Hover preview card styling */
+    .hover-preview-card .leaflet-popup-content-wrapper {
+      background: white;
+      border-radius: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      padding: 0;
+    }
+    
+    .hover-preview-card .leaflet-popup-content {
+      margin: 0;
+      padding: 0;
+      width: 200px;
+      max-width: 200px;
+    }
+    
+    .hover-preview-card .leaflet-popup-tip {
+      border-radius: 0;
+    }
+    
+    .hover-card-content {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    
+    .hover-card-content img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .hover-card-info {
+      padding: 8px 12px;
+      background: white;
+    }
+    
+    .hover-card-info h4 {
+      margin: 0 0 4px 0;
+      font-size: 14px;
+      font-weight: bold;
+      color: #333;
+      font-family: sans-serif;
+    }
+    
+    .hover-card-info p {
+      margin: 0;
+      font-size: 12px;
+      color: #666;
+      font-family: sans-serif;
     }
   </style>
 </head>
@@ -253,8 +307,8 @@
             `;
 
             marker.bindPopup(popupContent, {
-              maxWidth: 350,
-              minWidth: 320,
+              maxWidth: 220,
+              minWidth: 220,
               closeButton: false
             });
 
@@ -269,6 +323,31 @@
               map.flyTo(e.latlng, 15, {
                 duration: 1.0 // Smooth animation over 1 second
               });
+            });
+
+            // Hover preview card
+            const hoverCard = L.popup({
+              closeButton: false,
+              autoClose: false,
+              closeOnClick: false,
+              className: 'hover-preview-card',
+              offset: [0, -5]
+            }).setContent(`
+              <div class="hover-card-content">
+                <img src="${project.image}" alt="${project.title}" />
+                <div class="hover-card-info">
+                  <h4>${project.title}</h4>
+                  <p>${project.location || project.category}</p>
+                </div>
+              </div>
+            `);
+
+            marker.on('mouseover', function(e) {
+              hoverCard.setLatLng(e.latlng).openOn(map);
+            });
+
+            marker.on('mouseout', function(e) {
+              map.closePopup(hoverCard);
             });
 
             marker.projectData = project;

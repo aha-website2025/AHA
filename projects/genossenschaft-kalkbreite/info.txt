@@ -1,15 +1,23 @@
 title: Genossenschaft Kalkbreite
 location: Zurich, Switzerland
-category: cooperative
 description:
-Kalkbreite is a lively district center that stands in the center of three streets: Seebahnstraben, Badener and Kalkbreitestrasse. This multipurpose complex acts as an important landmark demarking the boundaries of different city districts. The complex contains residential, commercial and public service spaces that help create such dynamic relationships between it and the surrounding area. One of it’s public service uses is an entire floor dedicated to a tram depot that public transportation can utilize for seamless transitions between the two cities. Above this tram depot, there is a courtyard that is accessible by the public which contains various places in which people can just relax, taking them out of the busyness of the street. Also, since it is on such an important position between two cities and contains a tram depot, the outside perimeter acts as a huge commercial strip that contains commercial enterprises and restaurants creating a truly lively community in which a diverse group of people can all meet in a single complex. The building itself is a hybrid construction containing prefabricated wood elements on the façade and metal structural components as seen in the interior shots.
+Kalkbreite in Zurich is a mixed-use cooperative housing complex that functions as a lively district hub. Built above a tram depot, it integrates residential, commercial, and public spaces within a single urban block. The courtyard, accessible to the public, offers a green communal heart that connects residents and visitors while buffering noise from the streets. Prefabricated wood elements and exposed steel frames give the building a distinctive industrial character. With shared facilities, shops, and restaurants, Kalkbreite demonstrates how cooperative development can foster urban density, affordability, and community-oriented living in the center of the city.
 year_completed: 2014
 owner: City of Zurich
 architect: Muller Sigrist Architekten, Dr. Luchingerund Meyer
-lot_size_sqft: n/a
+lot_size_sqft: 68,340 sqft
 floor_space_sqft: 246,494 sqft
 units: 97
-number of inhabitants:
+number of inhabitants:~250
 density: 1 habitant per 540 sqft
 address: Kalkbreitestrasse 6, 8003 Zürich, Switzerland
 coordinates: 47.37436, 8.52061
+model: cooperative
+development_cost_per_unit: CHF 980,000
+average_rent_per_unit: CHF 1,450/mo
+median_tenant_income: CHF 70,000/year
+housing_cost_ratio: 25%
+material_1: Reinforced concrete
+material_2: CLT
+material_3: Steel framing
+material_4: 

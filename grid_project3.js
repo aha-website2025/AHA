@@ -78,7 +78,10 @@ async function loadProject() {
       class: "tile text-left",
       style: "grid-column: 2 / 3; grid-row: 3 / 4;",
       html: `
-        <p><strong>Finance</strong></p>`
+        <p><strong>Development cost/unit: </strong>${project.development_cost_per_unit || 'N/A'}</p>
+        <p><strong>Average rent/unit: </strong>${project.average_rent_per_unit || 'N/A'}</p>
+        <p><strong>Median tenant income: </strong>${project.median_tenant_income || 'N/A'}</p>
+        <p><strong>Housing cost ratio: </strong>${project.housing_cost_ratio || 'N/A'}</p>`
     },
     {
       class: "description",
@@ -121,7 +124,11 @@ async function loadProject() {
       class: "tile text-left",
       style: "grid-column: 1 / 2; grid-row: 6 / 7;",
       html: `
-        <p><strong>Materials Used</strong></p>`
+        <p><strong>Materials Used:</strong></p>
+        <p>${project.material_1 || ''}</p>
+        <p>${project.material_2 || ''}</p>
+        <p>${project.material_3 || ''}</p>
+        <p>${project.material_4 || ''}</p>`
     },
     {
       class: "tile full-bleed double",
