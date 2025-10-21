@@ -174,7 +174,7 @@ async function loadProject() {
       <a href="page_project.html?slug=${p.slug}" class="project-card">
         <div class="flip-inner">
           <div class="flip-front">
-            <img src="projects/${p.slug}/image.jpg" alt="${p.title}" />
+            <img src="${p.image}" alt="${p.title}" />
           </div>
           <div class="flip-back">
             <div class="flip-text">
@@ -202,7 +202,7 @@ async function loadProject() {
       <a href="page_project.html?slug=${p.slug}" class="project-card">
         <div class="flip-inner">
           <div class="flip-front">
-            <img src="projects/${p.slug}/image.jpg" alt="${p.title}" />
+            <img src="${p.image}" alt="${p.title}" />
           </div>
           <div class="flip-back">
             <div class="flip-text">
