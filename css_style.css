@@ -53,7 +53,7 @@ body {
   margin: 10;
   background: none;
   border: none;
-  transform: translateY(-28px);
+  transform: translateY(-20px);
 }
 
 .menu-items li {
@@ -63,10 +63,10 @@ body {
 
 .menu-items li a {
   text-decoration: none;
-  color: #111;
-  font-family: Calibri, sans-serif;
+  color: #4a4a4a;
+  font-family: Arial, sans-serif;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 13px;
 }
 
 .menu-items li a:hover {

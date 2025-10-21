@@ -16,6 +16,13 @@ function getImagePath(slug, filenameBase) {
   });
 }
 
+// Extract material description from "Material (Description)" format
+function extractMaterialDescription(materialValue) {
+  if (!materialValue) return '';
+  const match = materialValue.match(/\(([^)]+)\)/);
+  return match ? match[1].trim() : materialValue.trim();
+}
+
 // 📦 Load and render a project grid
 async function loadProject() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -127,10 +134,10 @@ async function loadProject() {
       style: "grid-column: 1 / 2; grid-row: 6 / 7;",
       html: `
         <p><strong>Materials Used:</strong></p>
-        <p>${project.material_1 || ''}</p>
-        <p>${project.material_2 || ''}</p>
-        <p>${project.material_3 || ''}</p>
-        <p>${project.material_4 || ''}</p>`
+        <p>${extractMaterialDescription(project.material_1)}</p>
+        <p>${extractMaterialDescription(project.material_2)}</p>
+        <p>${extractMaterialDescription(project.material_3)}</p>
+        <p>${extractMaterialDescription(project.material_4)}</p>`
     },
     {
       class: "tile full-bleed double",

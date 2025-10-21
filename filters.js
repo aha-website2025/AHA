@@ -26,12 +26,33 @@
         const meta = parseInfoTxt(txt);
         p._typology = toArr(meta.typology).map(norm);
         // Collect all material_1, material_2, material_3, material_4 values
+        // Format: "Material (Description)" - extract only "Material" for filter
         p._material = [
           meta.material_1,
           meta.material_2,
           meta.material_3,
           meta.material_4
-        ].filter(Boolean).map(v => norm(v.trim()));
+        ].filter(Boolean).map(v => {
+          const trimmed = v.trim();
+          // Extract text before parenthesis if present
+          const match = trimmed.match(/^([^(]+)/);
+          if (match) {
+            const materialName = match[1].trim().toLowerCase();
+            
+            // Special case: "CLT" - all caps
+            if (materialName === 'clt') {
+              return 'CLT';
+            }
+            
+            // Special case: "reinforced concrete" - keep full phrase
+            if (materialName === 'reinforced concrete') {
+              return 'reinforced concrete';
+            }
+            
+            return materialName;
+          }
+          return norm(trimmed);
+        });
         p._model    = toArr(meta.model || meta.category).map(norm);
       } catch {
         p._typology = []; p._material = []; p._model = [];

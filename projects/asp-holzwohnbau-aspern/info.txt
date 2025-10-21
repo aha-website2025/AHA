@@ -1,18 +1,23 @@
 title: ASP Holzwohnbau Aspern
 location: Vienna, Austria
-category: cooperative
 description:
-ASP holzwohnnbau aspern is a mixed-use development with an emphasis on sustainability. The architects of this project integrated sustainable practices economically, socially, and environmentally. Economically, the rent for the units is about half of the area’s average rental price. The construction of this building was highly prefabricated, which makes for a speedy site assembly, reduction in fumes, dust, and sound pollution. ASP holzwohnnbau aspern is articulated into seven different buildings and parts ranging from 4–7 floors above ground. They are connected by three rows of access decks that run in the north and south directions. The north and south orientations force circulation routes that offer varied spatial experiences because of the light-flooded staircases and open deck access to communal terraces. This linear and serial organization provides great flexibility in laying out different types of apartments. This project was designed for everyone in mind meaning it is accessible for disabled and low-income persons making it socially sustainable. Wood is the primary material; the architects enjoyed that wood is renewable, compostable, deliberately aging, graying. These qualities of the material help create identity in an urban context.
-
-
-Along with sustainability, ASP holzwohnnbau aspern pushes the idea of a community with a staggered layout to make different kinds of courtyards and various visual relationships. Paths are intentionally cut out to prevent the development of corridor-like routes. It is designed for the community to meet one another. Ultimately, the paths create a space in the heart of the project, which they call the canyon. The canyon has a two-story multifunctional ring which offers all the residents the opportunity to mingle and experience community. The Holzwohnnbau co-op encourages communal interactions with a beautifully designed landscape and an abundant amount of shared spaces.
-
-
-The client for this project, EBG, is a company that solely builds co-ops. EBG is committed to social and socio-political responsibility to shape the future of living actively. Their mission is “to develop, build, maintain and administrate accessible, high quality and safe living space.” The goal is social justice, not profit. With the idea of each tenant in mind, EBG is just the framework. They want to encourage the tenants to fill the space with personality, wishes and concerns.
+ASP Holzwohnbau Aspern in Vienna is a mixed-use cooperative housing project that integrates sustainability at economic, social, and environmental levels. Developed by EBG, a non-profit cooperative dedicated to socially responsible housing, the project offers units at roughly half the area’s average rent, ensuring accessibility for low-income and disabled residents. The development is composed of seven buildings ranging from four to seven stories, connected by open decks running north–south that encourage daylight, cross-ventilation, and social exchange. Prefabricated timber construction allowed for efficient assembly, reduced waste, and minimal site disturbance. Wood serves as the defining material—renewable, compostable, and gracefully aging—imbuing the ensemble with warmth and identity within the urban context. A staggered arrangement of volumes creates diverse courtyards and visual connections, while carefully cut pathways prevent monotonous corridors. At the heart of the project lies “the canyon,” a two-story communal ring hosting shared facilities, workshops, and gathering spaces that foster interaction among residents. ASP Holzwohnbau Aspern demonstrates how cooperative design can blend affordability, ecological responsibility, and collective life into a contemporary model for sustainable urban housing.
 year_completed: 2015
 owner: EBG Wohnen
 architect: querkraft
+lot_size_sqft: 54,000 sqft
+floor_space_sqft: 203,000 sqft
 units: 213
 unit_distribution: 1-5 bedrooms (452-1184 sqft)
+number_of_inhabitants: ~550–600
 address: Maria-Tusch-Straße 6, 1220 Wien, Austria
 coordinates: 48.2242, 16.4990
+typology: apartment
+model: cooperative
+development_cost_per_unit: €200,000
+average_rent_per_unit: ~€650/mo
+housing_cost_ratio: 25-30% of income
+material_1: Reinforced concrete (Concrete core base)
+material_2: CLT 
+material_3: Wood (Prefabricated wood facade panels)
+material_4: 

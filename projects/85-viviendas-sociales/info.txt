@@ -19,5 +19,5 @@ average_rent_per_unit: €400–600/mo
 housing_cost_ratio: 25-30% of income
 material_1: Reinforced concrete
 material_2: CLT
-material_3: Polycarbonate panels
+material_3: Polycarbonate (Polycarbonate panels)
 material_4: 

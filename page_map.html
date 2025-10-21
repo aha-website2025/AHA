@@ -74,16 +74,18 @@
     
     .reset-view-btn {
       position: absolute;
-      top: 15px;
+      top: 20px;
       right: 20px;
       z-index: 1000;
-      background: white;
+      background: rgba(255, 255, 255, 0.8);
       border: 2px solid rgba(0,0,0,0.2);
+      border-radius: 4px;
       padding: 8px 16px;
       font-size: 14px;
+      color: #4a4a4a;
       cursor: pointer;
       font-family: sans-serif;
-      box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+      backdrop-filter: blur(5px);
     }
     
     .reset-view-btn:hover {
@@ -127,7 +129,7 @@
     }
     
     .hover-card-info {
-      padding: 8px 12px;
+      padding: 6px 10px;
       background: white;
     }
     
@@ -222,11 +224,11 @@
     const createMarkerIcon = (color) => {
       return L.divIcon({
         className: 'custom-marker',
-        html: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14">
-                 <rect x="1" y="1" width="12" height="12" fill="${color}" stroke="#fff" stroke-width="1"/>
+        html: `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12">
+                 <rect x="1" y="1" width="10" height="10" fill="${color}" stroke="#fff" stroke-width="1"/>
                </svg>`,
-        iconSize: [14, 14],
-        iconAnchor: [7, 7],
+        iconSize: [12, 12],
+        iconAnchor: [6, 6],
       });
     };
 
@@ -284,7 +286,22 @@
             console.warn("initAHAFilters not found, filters may not work");
           }
           
-          data.forEach(project => {
+          // Function to parse info.txt
+          const parseInfoTxt = (text) => {
+            const lines = text.split(/\r?\n/);
+            const info = {};
+            lines.forEach(line => {
+              const match = line.match(/^\s*([^:]+)\s*:\s*(.+)\s*$/);
+              if (match) {
+                const key = match[1].trim().toLowerCase().replace(/\s+/g, "_");
+                info[key] = match[2].trim();
+              }
+            });
+            return info;
+          };
+
+          // Create markers with model info
+          data.forEach(async project => {
             if (!project.coordinates) {
               console.log("No coordinates for:", project.title);
               return;
@@ -293,6 +310,17 @@
             const [lat, lng] = project.coordinates.split(",").map(Number);
             console.log("Creating marker for:", project.title, "at", lat, lng);
 
+            // Fetch model info from info.txt
+            let modelInfo = '';
+            try {
+              const infoResponse = await fetch(`projects/${encodeURIComponent(project.slug)}/info.txt`);
+              const infoText = await infoResponse.text();
+              const parsedInfo = parseInfoTxt(infoText);
+              modelInfo = parsedInfo.model || '';
+            } catch (e) {
+              console.log("Could not load info for:", project.title);
+            }
+
             const marker = L.marker([lat, lng], {
               icon: darkGreyIcon
             }).addTo(map);
@@ -300,7 +328,7 @@
             const popupContent = `
               <button class="close-btn" onclick="if(currentPopup) currentPopup.remove();">×</button>
               <h3>${project.title}</h3>
-              <p>${project.category}</p>
+              <p>${modelInfo}</p>
               <a href="page_project.html?slug=${project.slug}">
                 <img src="${project.image}" alt="${project.title}" />
               </a>
@@ -337,7 +365,7 @@
                 <img src="${project.image}" alt="${project.title}" />
                 <div class="hover-card-info">
                   <h4>${project.title}</h4>
-                  <p>${project.location || project.category}</p>
+                  <p>${modelInfo}</p>
                 </div>
               </div>
             `);

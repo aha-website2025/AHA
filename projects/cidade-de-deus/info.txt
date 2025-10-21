@@ -1,20 +1,22 @@
 title: Cidade de Deus
 location: Rio de Janeiro, Brazil
-category: public/social housing
 description:
-Cidade de Deus, or “City of God,” began as a predefined, mass housing project built in Rio de Janeiro in the 1960s with the aim to promote economic growth and political reform in Latin America. The formerly sterile, uniform layout has informally grown over the span of multiple decades to accommodate a growing population, activating the spaces between and around the original housing units and apartment blocks. The informal construction undertaken by its citizens has generated a heterogeneous structure that, although it is recognizable as a whole, is composed of hyper-specific, continuously transforming space. Rather than creating specific structures to mold into specific categories, an open catalog of construction technologies, production modes, financial means, programmatic evolution, popular aesthetics, etc., has been and is being employed on a regular basis to conscientiously evolve with Cidade de Deus’s residents.
-
-
-Although this basis of the city was composed of similar housing and apartment units arranged in neat rows and blocks, they are now barely recognizable — or even visible — within the informally built extensions. Originally, 3,053 units were built to house a planned 10,000 people. Because the initial structures were not properly suited towards holding this many citizens, much less acting as collective housing, Cidade de Deus’s residents modified their spatial configuration on their own. They filled in the space between the early housing units with layered commercial and social spaces and structures and transformed the single family homes into multi-story, multi-generational ones, eventually building the city into one of the most famous favelas and urban sub-centers of Rio de Janeiro.
+Cidade de Deus, or “City of God,” was established in the 1960s as part of a state-led housing initiative in Rio de Janeiro intended to spur economic growth and social reform in Latin America. Conceived as a modernist mass-housing project of 3,053 units designed for around 10,000 residents, it initially featured uniform apartment blocks and neat rows of single-family homes. Over time, however, these planned structures proved inadequate for the community’s growing needs, prompting residents to transform the neighborhood through informal construction. Incremental additions filled the gaps between buildings, creating commercial, social, and residential layers that redefined both form and function. What began as a rigid, state-imposed grid has evolved into a complex and dynamic urban fabric—an ecosystem of self-built structures, evolving property boundaries, and adaptive infrastructures. This process of spontaneous densification, driven by necessity and community agency, produced a heterogeneous landscape that continuously adapts to the lives within it. Cidade de Deus now stands as one of Rio’s most emblematic favelas, a living record of resilience and self-determination that challenges conventional models of top-down urban planning.
 year_completed: 1966
 owner: Rio de Janeiro
 architect: Guanabara State Affordable
 lot_size_sqft: 1.2 sqkm
-#_of_units: 3053
-#_of_inhabitants: 10,000
+units: 3053
+number_of_inhabitants: 10,000
 density: 26,270 inhabitant per sqkm
 address: R. Zilá, 23 - Cidade de Deus, Rio de Janeiro - RJ, 22773-180, Brazil
 coordinates: -22.94903, -43.36691
-typology: single family house
-material: concrete
-model: private ownership
+typology: Single-family house
+model: Public housing
+development_cost_per_unit: $3,000 (1966 USD)
+average_rent_per_unit: Subsidized
+housing_cost_ratio: ~20-25% of income
+material_1: Reinforced concrete (Reinforced concrete foundation)
+material_2: Clay brick walls
+material_3: Corrugated metal (Corrugated metal roofs)
+material_4: Concrete (Concrete block additions)
