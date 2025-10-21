@@ -1,11 +1,17 @@
 [
   {
-    "title": "CLT Model",
-    "category": "cooperative",
+    "title": "Community Land Trust",
     "description": "Community Land Trusts (CLTs) are nonprofit, community-based organizations that acquire and hold land in trust to ensure long-term affordability and local stewardship. In this model, the land is owned collectively by the trust, while individuals or families own or lease the homes built on it. Homeowners can build equity through limited resale prices that keep homes affordable for future residents. A tripartite board, typically made up of residents, community members, and public representatives, governs the trust and balances individual and collective interests. CLTs prevent displacement, stabilize neighborhoods, and preserve affordability across generations.",
-    "slug": "clt-model",
-    "logo_image": "https://aha-website2025.github.io/AHA/models/clt-model/logo.png",
-    "diagram_image": "https://aha-website2025.github.io/AHA/models/clt-model/diagram.png"
+    "slug": "community-land-trust",
+    "logo_image": "https://aha-website2025.github.io/AHA/models/community-land-trust/logo.png",
+    "diagram_image": "https://aha-website2025.github.io/AHA/models/community-land-trust/diagram.png"
+  },
+  {
+    "title": "Cooperatives",
+    "description": "Cooperative housing is a resident-owned and democratically governed model where individuals hold shares in a cooperative corporation that owns the entire property. Members gain the right to occupy specific units and participate in governance through a general assembly operating on a one-member-one-vote basis. The assembly elects a board of directors to oversee policy, finances, and management, while committees address areas like maintenance, sustainability, or community events. This structure promotes collective ownership, shared responsibility, and long-term affordability, emphasizing cooperation, stability, and community well-being over profit.",
+    "slug": "cooperatives",
+    "diagram_image": "https://aha-website2025.github.io/AHA/models/cooperatives/diagram.jpg",
+    "logo_image": "https://aha-website2025.github.io/AHA/models/cooperatives/logo.png"
   },
   {
     "title": "Model A",

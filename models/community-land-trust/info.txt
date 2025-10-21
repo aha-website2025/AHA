@@ -1,3 +1,2 @@
-title: CLT Model
-category: cooperative
+title: Community Land Trust
 description: Community Land Trusts (CLTs) are nonprofit, community-based organizations that acquire and hold land in trust to ensure long-term affordability and local stewardship. In this model, the land is owned collectively by the trust, while individuals or families own or lease the homes built on it. Homeowners can build equity through limited resale prices that keep homes affordable for future residents. A tripartite board, typically made up of residents, community members, and public representatives, governs the trust and balances individual and collective interests. CLTs prevent displacement, stabilize neighborhoods, and preserve affordability across generations.

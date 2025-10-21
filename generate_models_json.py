@@ -58,9 +58,6 @@ def read_model_data(model_path, folder_name):
     if current_key and buffer:
         model_data[current_key] = ''.join(buffer).strip()
 
-    if 'category' not in model_data:
-        return None
-
     model_data["slug"] = slugify(folder_name)
 
     # Include logo and diagram image URLs
