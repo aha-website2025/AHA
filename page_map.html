@@ -325,10 +325,14 @@
               icon: darkGreyIcon
             }).addTo(map);
 
+            const streetViewUrl = `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${lat},${lng}`;
             const popupContent = `
               <button class="close-btn" onclick="if(currentPopup) currentPopup.remove();">×</button>
               <h3>${project.title}</h3>
-              <p>${modelInfo}</p>
+              <p style="display: flex; justify-content: space-between; align-items: center;">
+                <span>${modelInfo}</span>
+                ${modelInfo ? '<a href="' + streetViewUrl + '" target="_blank" style="font-size: 12px; color: #666; text-decoration: underline; white-space: nowrap;">Street View</a>' : ''}
+              </p>
               <a href="page_project.html?slug=${project.slug}">
                 <img src="${project.image}" alt="${project.title}" />
               </a>
