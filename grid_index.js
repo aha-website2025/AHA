@@ -107,9 +107,15 @@ function renderGrid(projects) {
     // Render filtered projects
     projects.forEach(project => container.appendChild(createTile("data", project)));
     
-    // Also filter and render models based on the same filtered project attributes
-    const filteredModels = filterModelsBasedOnProjects(projects);
-    filteredModels.forEach(model => container.appendChild(createTile("model", null, model)));
+    // Only show models if there are model-specific filters active
+    // Check if any Model filters are selected in the filter system
+    const modelFilterActive = document.querySelector('.filter-group[data-key="model"] .filter-chip.active');
+    
+    if (modelFilterActive) {
+      // Only filter and show models when Model filter is explicitly selected
+      const filteredModels = filterModelsBasedOnProjects(projects);
+      filteredModels.forEach(model => container.appendChild(createTile("model", null, model)));
+    }
     
     return;
   }

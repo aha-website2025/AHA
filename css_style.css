@@ -753,11 +753,34 @@ body {
     padding: 0.5rem 0.7rem 0.1rem 0.7rem;
     font-size: 0.85rem;
     line-height: 1.4;
-    max-height: none;
+    max-height: 100%;
     min-height: 0;
     position: relative;
-    overflow: hidden;
+    overflow-y: auto;
     z-index: 20;
+  }
+  
+  /* Subtle scrollbar styling for description */
+  .project-page .description::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .project-page .description::-webkit-scrollbar-track {
+    background: transparent;
+    margin-right: 2px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+  
+  .project-page .description::-webkit-scrollbar-thumb {
+    background: #c5c5c5;
+    border-radius: 3px;
+    border-right: 4px solid #d6d6d6;
+  }
+  
+  .project-page .description::-webkit-scrollbar-thumb:hover {
+    background: #b5b5b5;
+    border-right: 4px solid #d6d6d6;
   }
 
   .project-page .description p {
@@ -1267,12 +1290,35 @@ body {
   padding: 0.5rem 0.7rem 0.1rem 0.7rem;
   font-size: 0.85rem;
   line-height: 1.4;
-  max-height: none;
+  max-height: 100%;
   min-height: 0;
   position: relative;
   overflow-y: auto;
   z-index: 20;
   height: 100%;
+}
+
+/* Subtle scrollbar styling for model page description */
+.model-page .description::-webkit-scrollbar {
+  width: 8px;
+}
+
+.model-page .description::-webkit-scrollbar-track {
+  background: transparent;
+  margin-right: 2px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.model-page .description::-webkit-scrollbar-thumb {
+  background: #c5c5c5;
+  border-radius: 3px;
+  border-right: 4px solid #d6d6d6;
+}
+
+.model-page .description::-webkit-scrollbar-thumb:hover {
+  background: #b5b5b5;
+  border-right: 4px solid #d6d6d6;
 }
 
 .model-page .description p {
