@@ -111,11 +111,23 @@ async function loadProject() {
       html: ""
     },
     {
-      class: "tile full-bleed",
+      class: "tile text-left",
       style: "grid-column: 2 / 3; grid-row: 4 / 5;",
+      html: `
+        <p><strong>Materials Used:</strong></p>
+        <p>${extractMaterialDescription(project.material_1)}</p>
+        <p>${extractMaterialDescription(project.material_2)}</p>
+        <p>${extractMaterialDescription(project.material_3)}</p>
+        <p>${extractMaterialDescription(project.material_4)}</p>`
+    },
+    {
+      class: "tile full-bleed",
+      style: "grid-column: 1 / 2; grid-row: 5 / 6;",
       image: "1",
       alt: "Photo 2"
     },
+    
+    
     {
       class: "tile full-bleed",
       style: "grid-column: 2 / 4; grid-row: 5 / 6; span 2;",
@@ -128,16 +140,10 @@ async function loadProject() {
       image: "big2",
       alt: "Photo 5"
     },
-    
     {
-      class: "tile text-left",
-      style: "grid-column: 1 / 2; grid-row: 6 / 7;",
-      html: `
-        <p><strong>Materials Used:</strong></p>
-        <p>${extractMaterialDescription(project.material_1)}</p>
-        <p>${extractMaterialDescription(project.material_2)}</p>
-        <p>${extractMaterialDescription(project.material_3)}</p>
-        <p>${extractMaterialDescription(project.material_4)}</p>`
+      class: "tile hatch",
+      style: "grid-column: 1 / 2; grid-row: 7 / 8;",
+      html: ""
     },
     {
       class: "tile full-bleed double",
@@ -146,10 +152,13 @@ async function loadProject() {
       alt: "Photo 8"
     },
     {
-      class: "tile hatch",
+      class: "tile text-left",
       style: "grid-column: 4 / 5; grid-row: 7 / 8;",
-      html: ""
+      html: `
+        <p><strong>Attribution</strong></p>
+        <p>Student Name</p>`
     }
+    
     
   ];
 

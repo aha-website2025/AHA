@@ -69,7 +69,6 @@ async function loadProject() {
         <p><strong>Unit distribution: </strong>${project.unit_distribution}</p>
         <p><strong># of inhabitants: </strong>${project.number_of_inhabitants}</p>`
     },
-   
     {
       class: "description",
       style: "grid-column: 4 / 6; grid-row: 2 / 4; span 2;",
@@ -118,13 +117,6 @@ async function loadProject() {
         <p>${extractMaterialDescription(project.material_4)}</p>`
     },
     {
-      class: "tile full-bleed",
-      style: "grid-column: 5 / 6; grid-row: 4 / 5;",
-      image: "1",
-      alt: "Photo 3"
-    },
-   
-    {
       class: "tile full-bleed double",
       style: "grid-column: 3 / 5; grid-row: 5 / 6; span 2;",
       image: "big3",
@@ -135,16 +127,19 @@ async function loadProject() {
       style: "grid-column: 5 / 6; grid-row: 5;",
       image: "2",
       alt: "Photo 9"
-    },{
-      class: "tile hatch",
-      style: "grid-column: 2 / 3; grid-row: 6;",
-      html: ""
-    },
-    
+    },   
     {
-      class: "tile hatch",
+      class: "tile full-bleed",
+      style: "grid-column: 2 / 3; grid-row: 6;",
+      image: "1",
+      alt: "Photo 3"
+    },
+       {
+      class: "tile text-left",
       style: "grid-column: 5 / 6; grid-row: 6;",
-      html: ""
+      html: `
+        <p><strong>Attribution</strong></p>
+        <p>Student Name</p>`
     }
     
   ];

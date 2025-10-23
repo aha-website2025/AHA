@@ -140,7 +140,7 @@ async function loadProject() {
     },
     {
       class: "tile text-left",
-      style: "grid-column: 5 / 6; grid-row: 6;",
+      style: "grid-column: 2 / 3; grid-row: 6;",
       html: `
         <p><strong>Materials Used:</strong></p>
         <p>${extractMaterialDescription(project.material_1)}</p>
@@ -149,9 +149,11 @@ async function loadProject() {
         <p>${extractMaterialDescription(project.material_4)}</p>`
     },
     {
-      class: "tile hatch",
-      style: "grid-column: 2 / 3; grid-row: 6;",
-      html: ""
+      class: "tile text-left",
+      style: "grid-column: 5 / 6; grid-row: 6;",
+      html: `
+        <p><strong>Attribution</strong></p>
+        <p>Student Name</p>`
     }
     
   ];

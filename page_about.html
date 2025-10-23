@@ -9,6 +9,83 @@
     #grid-container {
       position: relative;
     }
+
+    /* About page specific flip card overrides */
+    .model-page .flip-card .flip-back {
+      background-color: #000000;
+      cursor: pointer;
+    }
+
+    .model-page .flip-card .flip-back p {
+      font-weight: bold;
+      font-size: 1rem;
+      color: #ffffff;
+    }
+
+    /* Bio Popup Styles */
+    .bio-popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
+
+    .bio-popup-overlay.active {
+      display: flex;
+    }
+
+    .bio-popup-content {
+      background-color: #000000;
+      color: #ffffff;
+      padding: 3rem;
+      max-width: 600px;
+      width: 80%;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    .bio-close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: #ffffff;
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0;
+      width: 30px;
+      height: 30px;
+    }
+
+    .bio-close-btn:hover {
+      opacity: 0.7;
+    }
+
+    .bio-popup-content h2 {
+      margin: 0 0 1.5rem 0;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #ffffff;
+    }
+
+    .bio-popup-content #bioText {
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+
+    .bio-popup-content #bioText p {
+      margin-bottom: 1rem;
+    }
   </style>
 </head>
 <body class="model-page">
@@ -35,32 +112,136 @@
     <div id="grid-container">
       <div class="grid">
         <!-- Row 1 -->
-        <div class="tile title" style="grid-column: 1 / 2; grid-row: 1;">About</div>
+        <div class="tile title" style="grid-column: 1 / 2; grid-row: 1;">ABOUT</div>
         <div class="tile blank" style="grid-column: 2 / 3; grid-row: 1;"></div>
-        <div class="description" style="grid-column: 3 / 5; grid-row: 1;">
-          <p>The Affordable Housing Atlas is a growing digital catalogue that documents innovative housing projects from around the world, highlighting alternative models of affordability, ownership, and community building. It serves as a research and educational platform that visualizes how design, policy, and collective organization intersect to create more equitable forms of housing. Through interactive mapping and comparative analysis, the Atlas aims to expand public understanding of housing beyond market frameworks, showcasing projects that prioritize sustainability, cooperation, and social inclusion as foundations for rethinking the future of urban living.</p>
+        <div class="description" id="about-description" style="grid-column: 3 / 5; grid-row: 1;">
+          <!-- Content will be loaded from about/about.txt -->
         </div>
         
         <!-- Row 2 -->
         <div class="tile blank" style="grid-column: 1 / 2; grid-row: 2;"></div>
-        <div class="tile hatch" style="grid-column: 2 / 3; grid-row: 2;"></div>
-        <div class="tile" style="grid-column: 3 / 4; grid-row: 2;"></div>
-        <div class="tile blank" style="grid-column: 4 / 5; grid-row: 2;"></div>
-        
-        <!-- Row 3 -->
-        <div class="tile" style="grid-column: 1 / 2; grid-row: 3;"></div>
-        <div class="tile blank" style="grid-column: 2 / 3; grid-row: 3;"></div>
-        <div class="tile" style="grid-column: 3 / 4; grid-row: 3;"></div>
-        <div class="tile blank" style="grid-column: 4 / 5; grid-row: 3;"></div>
+        <div class="tile flip-card" style="grid-column: 2 / 3; grid-row: 2;">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <img src="about/SD.jpg" alt="SD" />
+            </div>
+            <div class="flip-back" onclick="openBioPopup('about/SD.md', 'Dr. Sascha Delz')">
+              <p>Dr. Sascha Delz</p>
+            </div>
+          </div>
+        </div>
+        <div class="tile hatch" style="grid-column: 3 / 4; grid-row: 2;"></div>
+        <div class="tile flip-card" style="grid-column: 4 / 5; grid-row: 2;">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <img src="about/GS.jpg" alt="GS" />
+            </div>
+            <div class="flip-back" onclick="openBioPopup('about/GS.txt', 'Gio Shin')">
+              <p>Gio Shin</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </main>
+
+  <!-- Bio Popup -->
+  <div id="bioPopup" class="bio-popup-overlay">
+    <div class="bio-popup-content">
+      <button class="bio-close-btn" onclick="closeBioPopup()">×</button>
+      <h2 id="bioName"></h2>
+      <div id="bioText"></div>
+    </div>
+  </div>
 
   <script>
     function toggleMenu() {
       const menu = document.getElementById("menuItems");
       menu.style.display = menu.style.display === "block" ? "none" : "block";
     }
+
+    // Simple markdown parser for basic formatting
+    function parseMarkdown(text) {
+      // Convert bold FIRST (to avoid conflicts with italic): **text** or __text__ to <strong>text</strong>
+      text = text.replace(/\*\*(.+?)\*\*/gs, '<strong>$1</strong>');
+      text = text.replace(/__(.+?)__/gs, '<strong>$1</strong>');
+      
+      // Convert italic: *text* or _text_ to <em>text</em>
+      text = text.replace(/\*(.+?)\*/gs, '<em>$1</em>');
+      text = text.replace(/_(.+?)_/gs, '<em>$1</em>');
+      
+      return text;
+    }
+
+    // Bio Popup Functions
+    async function openBioPopup(txtFile, name) {
+      try {
+        const response = await fetch(txtFile);
+        const text = await response.text();
+        
+        console.log('Loaded text:', text);
+        
+        document.getElementById('bioName').textContent = name;
+        
+        // Split by double newlines to create paragraphs
+        const paragraphs = text.split(/\n\s*\n/).filter(p => p.trim());
+        console.log('Paragraphs:', paragraphs);
+        
+        const processedHTML = paragraphs.map(p => {
+          const processed = parseMarkdown(p.trim());
+          console.log('Original:', p.trim());
+          console.log('Processed:', processed);
+          return `<p>${processed}</p>`;
+        }).join('');
+        
+        console.log('Final HTML:', processedHTML);
+        document.getElementById('bioText').innerHTML = processedHTML;
+        
+        document.getElementById('bioPopup').classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+      } catch (error) {
+        console.error('Error loading bio text:', error);
+        document.getElementById('bioText').innerHTML = '<p>Content could not be loaded.</p>';
+        document.getElementById('bioPopup').classList.add('active');
+      }
+    }
+
+    function closeBioPopup() {
+      document.getElementById('bioPopup').classList.remove('active');
+      document.body.style.overflow = ''; // Restore scrolling
+    }
+
+    // Close popup when clicking outside the content
+    document.getElementById('bioPopup').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeBioPopup();
+      }
+    });
+
+    // Load about text from file
+    async function loadAboutText() {
+      try {
+        const response = await fetch('about/about.txt');
+        const text = await response.text();
+        const descriptionDiv = document.getElementById('about-description');
+        
+        // Split by double newlines to create paragraphs
+        const paragraphs = text.split(/\n\s*\n/).filter(p => p.trim());
+        descriptionDiv.innerHTML = paragraphs.map(p => `<p>${p.trim()}</p>`).join('');
+        
+        // Redraw lines after content is loaded
+        setTimeout(() => {
+          drawDashedLinesBetweenTileRows();
+          drawVerticalDashedLines();
+        }, 100);
+      } catch (error) {
+        console.error('Error loading about text:', error);
+        document.getElementById('about-description').innerHTML = '<p>Content could not be loaded.</p>';
+      }
+    }
+
+    // Load content on page load
+    loadAboutText();
 
     // Draw horizontal dashed lines between rows
     function drawDashedLinesBetweenTileRows() {

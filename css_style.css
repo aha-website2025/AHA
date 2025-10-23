@@ -566,7 +566,7 @@ body {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-auto-rows: auto;
     gap: 13px;
-    padding: 80px 260px;
+    padding: 80px 220px;
     position: relative;
     align-items: stretch;
     width: 60%;
@@ -627,7 +627,7 @@ body {
   text-align: center;
   line-height: 1.2;
   font-size: 0.85rem;
-  color: #929292;
+  color: #666666;
 }
 
 .project-page .tile,
@@ -655,6 +655,10 @@ body {
   margin: 0 0 0.2rem 0;
   line-height: 1.6;
   font-size: 0.8rem;
+}
+
+.project-page .tile.text-left strong {
+  color: #4a4a4a;
 }
   
 .project-page .tile.double {
@@ -980,16 +984,6 @@ body {
   border: none;
 }
 
-.model-page .nav-arrow .preview-card::before {
-  content: '';
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  right: 5px;
-  bottom: 5px;
-  border: 1px solid #666;
-  pointer-events: none;
-}
 
 /* start slightly offset so it "slides" in */
 .model-page .left-arrow  .preview-card { left: 100%;  transform: translate(24px, -50%); }
@@ -1093,7 +1087,7 @@ body {
    grid-template-columns: 1fr 1fr 1fr 1fr;
    grid-auto-rows: auto;
    gap: 13px;
-   padding: 80px 100px;
+   padding: 80px 40px;
    position: relative;
    align-items: stretch;
    width: 50%;
@@ -1130,6 +1124,8 @@ body {
    overflow: hidden; 
    width: 100%;
    position: relative;
+   font-weight: bold;
+   font-size: 1.3rem;
  }
 
 .model-page .tile-label {
