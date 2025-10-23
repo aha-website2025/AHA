@@ -1331,6 +1331,38 @@ body {
   margin-top: 0;
 }
 
+/* About page description - fixed height with scrollbar */
+#about-description {
+  height: 200px !important;
+  min-height: 200px !important;
+  max-height: 200px !important;
+  overflow-y: auto !important;
+  box-sizing: border-box !important;
+}
+
+/* Subtle scrollbar for about page description */
+#about-description::-webkit-scrollbar {
+  width: 8px;
+}
+
+#about-description::-webkit-scrollbar-track {
+  background: transparent;
+  margin-right: 2px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+#about-description::-webkit-scrollbar-thumb {
+  background: #c5c5c5;
+  border-radius: 3px;
+  border-right: 4px solid #d6d6d6;
+}
+
+#about-description::-webkit-scrollbar-thumb:hover {
+  background: #b5b5b5;
+  border-right: 4px solid #d6d6d6;
+}
+
 .model-page .back {
   margin-bottom: 2rem;
 }
